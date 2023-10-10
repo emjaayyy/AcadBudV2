@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">AcadBudV2</string>
+
+    <string-array name="Channels">
+        <item>Math</item>
+        <item>Science</item>
+        <item>English</item>
+        <item>Filipino</item>
+        <item>ESP</item>
+        <item>TLE</item>
+        <item>AP</item>
+        <item>MAPEH</item>
+        <item>Research</item>
+        <item>Religion</item>
+        <item>Mental Health</item>
+
+    </string-array>
+
 </resources>
