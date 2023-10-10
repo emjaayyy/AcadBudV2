@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_signup">
+
+
+    <ImageView
+        android:id="@+id/LogoIcon_signup_ssg"
+        android:layout_width="108dp"
+        android:layout_height="101dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="154dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="148dp"
+        android:background="@drawable/school_logo" />
+
+    <!-- Text View for "AcadBud" -->
+
+    <ImageView
+        android:id="@+id/group_ssg"
+        android:layout_width="302dp"
+        android:layout_height="223dp"
+        android:layout_below="@+id/LogoIcon_signup_ssg"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="-25dp"
+        android:layout_marginEnd="49dp"
+        android:background="@drawable/group" />
+
+    <TextView
+        android:id="@+id/AcadBudTxtShadow_signup_ssg"
+        android:layout_width="wrap_content"
+        android:layout_height="56dp"
+        android:layout_below="@+id/group_ssg"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="-62dp"
+        android:layout_marginEnd="55dp"
+        android:fontFamily="@font/gatwick"
+        android:text="AcadBud"
+        android:textColor="#000000"
+        android:textSize="50dp" />
+
+    <TextView
+        android:id="@+id/AcadBudTxt_signup_ssg"
+        android:layout_width="wrap_content"
+        android:layout_height="58dp"
+        android:layout_below="@+id/group_ssg"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="-61dp"
+        android:layout_marginEnd="50dp"
+        android:fontFamily="@font/gatwick"
+        android:text="AcadBud"
+        android:textColor="#ffffff"
+        android:textSize="50dp" />
+
+    <TextView
+        android:id="@+id/Already_registered_signup_ssg"
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:layout_below="@+id/AcadBudTxtShadow_signup_ssg"
+        android:layout_alignEnd="@+id/AcadBudTxtShadow_signup_ssg"
+        android:layout_marginTop="9dp"
+        android:layout_marginEnd="85dp"
+        android:fontFamily="@font/font"
+        android:text="Already registered?"
+        android:textColor="#ffffff"
+        android:textSize="20sp"
+        android:textStyle="normal" />
+
+    <Button
+        android:id="@+id/Login_Btn_signup_ssg"
+        android:layout_width="wrap_content"
+        android:layout_height="63dp"
+        android:layout_above="@+id/Input_ssg_signup"
+        android:layout_below="@+id/group_ssg"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="29dp"
+        android:layout_marginBottom="-5dp"
+        android:background="@drawable/rounded_corner_view"
+        android:backgroundTint="#00000000"
+        android:fontFamily="@font/poppins"
+        android:paddingTop="0dp"
+        android:text="Login"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="#ffffff"
+        android:textSize="20dp" />
+
+    <ImageView
+        android:id="@+id/ssg_icon"
+        android:layout_width="67dp"
+        android:layout_height="61dp"
+        android:layout_below="@+id/Already_registered_signup_ssg"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/ssg_position" />
+
+    <EditText
+        android:id="@+id/Input_ssg_signup"
+        android:layout_width="273dp"
+        android:layout_height="37dp"
+        android:layout_below="@+id/Already_registered_signup_ssg"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="-1dp"
+        android:layout_toEndOf="@+id/ssg_icon"
+        android:background="@drawable/rounded_corner_view"
+        android:backgroundTint="#ffffff"
+        android:hint="SSG Position"
+        android:inputType="textPersonName"
+        android:paddingLeft="10dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="10dp"
+        android:textColorHint="@color/color_border"
+        android:textSize="14sp" />
+
+    <ImageView
+        android:id="@+id/LrnIcon_signup_ssg"
+        android:layout_width="67dp"
+        android:layout_height="61dp"
+        android:layout_below="@+id/ssg_icon"
+        android:layout_alignStart="@+id/ssg_icon"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="1dp"
+        android:background="@drawable/lrn_signup" />
+
+    <EditText
+        android:id="@+id/Input_Lrn_signup_ssg"
+        android:layout_width="273dp"
+        android:layout_height="35dp"
+        android:layout_below="@+id/Input_ssg_signup"
+        android:layout_alignStart="@+id/Input_ssg_signup"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="31dp"
+        android:layout_marginEnd="-1dp"
+        android:background="@drawable/rounded_corner_view"
+        android:backgroundTint="#ffffff"
+        android:hint="LRN"
+        android:inputType="textPersonName"
+        android:paddingLeft="10dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="10dp"
+        android:textColorHint="@color/color_border"
+        android:textSize="14sp" />
+
+    <ImageView
+        android:id="@+id/NameIcon_signup_ssg"
+        android:layout_width="61dp"
+        android:layout_height="57dp"
+        android:layout_below="@+id/LrnIcon_signup_ssg"
+        android:layout_alignStart="@+id/LrnIcon_signup_ssg"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="11dp"
+        android:background="@drawable/fullname_signup" />
+
+    <EditText
+        android:id="@+id/Input_Name_ssg"
+        android:layout_width="273dp"
+        android:layout_height="37dp"
+        android:layout_below="@+id/Input_Lrn_signup_ssg"
+        android:layout_alignStart="@+id/Input_Lrn_signup_ssg"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/rounded_corner_view"
+        android:backgroundTint="#ffffff"
+        android:hint="Full name"
+        android:inputType="textPersonName"
+        android:paddingLeft="10dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="10dp"
+        android:textColorHint="@color/color_border"
+        android:textSize="14sp" />
+
+
+    <ImageView
+        android:id="@+id/EmailAddressIcon_ssg"
+        android:layout_width="65dp"
+        android:layout_height="60dp"
+        android:layout_below="@+id/NameIcon_signup_ssg"
+        android:layout_alignStart="@+id/NameIcon_signup_ssg"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/email_signup" />
+
+    <EditText
+        android:id="@+id/Input_Email_ssg"
+        android:layout_width="273dp"
+        android:layout_height="37dp"
+        android:layout_below="@+id/Input_Name_ssg"
+        android:layout_alignStart="@+id/Input_Name_ssg"
+        android:layout_alignEnd="@+id/Input_Name_ssg"
+        android:layout_marginStart="-1dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="0dp"
+        android:background="@drawable/rounded_corner_view"
+        android:backgroundTint="#ffffff"
+        android:hint="Email Address"
+        android:inputType="textEmailAddress"
+        android:paddingLeft="10dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="10dp"
+        android:textColorHint="@color/color_border"
+        android:textSize="14sp" />
+
+
+    <ImageView
+        android:id="@+id/PasswordIcon_signup_ssg"
+        android:layout_width="65dp"
+        android:layout_height="60dp"
+        android:layout_below="@+id/EmailAddressIcon_ssg"
+        android:layout_alignStart="@+id/EmailAddressIcon_ssg"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="7dp"
+        android:background="@drawable/password_signup" />
+
+    <EditText
+        android:id="@+id/Input_Password_signup_ssg"
+        android:layout_width="273dp"
+        android:layout_height="37dp"
+        android:layout_below="@+id/Input_Email_ssg"
+        android:layout_alignStart="@+id/Input_Email_ssg"
+        android:layout_alignEnd="@+id/Input_Email_ssg"
+        android:layout_marginStart="-1dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="0dp"
+        android:background="@drawable/rounded_corner_view"
+        android:backgroundTint="#ffffff"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:paddingLeft="10dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="10dp"
+        android:textColorHint="@color/color_border"
+        android:textSize="14sp" />
+
+    <Button
+        android:id="@+id/Signupbttn"
+        android:layout_width="137dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Input_Password_signup_ssg"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="154dp"
+        android:layout_marginTop="34dp"
+        android:layout_marginEnd="119dp"
+        android:layout_marginBottom="28dp"
+        android:background="@drawable/rounded_corner_view"
+        android:backgroundTint="@color/colorPrimary"
+        android:fontFamily="@font/poppins"
+        android:text="Sign Up"
+        android:textColor="#ffffff" />
+
+</RelativeLayout>

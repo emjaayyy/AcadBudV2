@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTheme.ToggleButton">
+        <item name="android:button">@drawable/eye_for_password</item>
+        <item name="android:textOn">@null</item> <!-- Remove "ON" text -->
+        <item name="android:textOff">@null</item> <!-- Remove "OFF" text -->
+    </style>
+
+    <style name="AppTheme">style</style>
+
+</resources>
