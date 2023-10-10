@@ -16,7 +16,7 @@
         android:layout_marginTop="61dp"
         android:layout_marginEnd="40dp"
         android:fontFamily="@font/poppins"
-        android:text="Choose your fighter"
+        android:text="Choose your role"
         android:textColor="#ffffff"
         android:textSize="35sp" />
 
