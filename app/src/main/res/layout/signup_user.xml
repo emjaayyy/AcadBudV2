@@ -222,7 +222,7 @@
         android:layout_marginEnd="137dp"
         android:layout_marginBottom="41dp"
         android:background="@drawable/rounded_corner_view"
-        android:backgroundTint="@color/colorPrimaryDark"
+        android:backgroundTint="@color/colorPrimary"
         android:fontFamily="@font/poppins"
         android:text="Sign Up"
         android:textColor="#000000" />

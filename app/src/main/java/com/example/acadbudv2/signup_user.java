@@ -1,5 +1,7 @@
 package com.example.acadbudv2;
 
+import android.util.Log; // Import Log class for debugging
+import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -7,8 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -61,7 +61,7 @@ public class signup_user extends AppCompatActivity {
                 MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
                 // Define the URL of your PHP script for registration
-                String phpScriptUrl = "https://192.168.74.238/www/register.php"; // Replace with your PHP script URL
+                String phpScriptUrl = "http://localhost/www/register.php"; // Replace with your PHP script URL
 
                 // Create a JSON object with the registration data
                 JSONObject json = new JSONObject();
@@ -69,6 +69,9 @@ public class signup_user extends AppCompatActivity {
                 json.put("name", name);
                 json.put("email", email);
                 json.put("password", password);
+
+                // Log the data being sent for debugging
+                Log.d("Registration", "Sending data: " + json.toString());
 
                 RequestBody requestBody = RequestBody.create(JSON, json.toString());
 
@@ -81,6 +84,9 @@ public class signup_user extends AppCompatActivity {
 
                 if (response.isSuccessful()) {
                     String responseData = response.body().string();
+
+                    // Log the response for debugging
+                    Log.d("Registration", "Response: " + responseData);
 
                     // Handle the response from your PHP script
                     if (responseData.equals("{\"success\": true}")) {
