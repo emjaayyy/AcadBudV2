@@ -1,9 +1,413 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".meeting_ssg">
+    android:background="#ffffff">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/Meeting_tv_user"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="166dp"
+        android:fontFamily="@font/poppins"
+        android:paddingLeft="13dp"
+        android:text="Meeting"
+        android:textColor="#004AAD"
+        android:textSize="35sp" />
+
+
+    <View
+        android:id="@+id/math_vw_1_user"
+        android:layout_width="9dp"
+        android:layout_height="104dp"
+        android:layout_below="@+id/Meeting_tv_user"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="20dp"
+        android:background="#9E96FF" />
+
+    <View
+        android:id="@+id/math_vw_2_user"
+        android:layout_width="344dp"
+        android:layout_height="103dp"
+        android:layout_alignTop="@+id/math_vw_1_user"
+        android:layout_alignBottom="@+id/math_vw_1_user"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="-1dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="0dp"
+        android:layout_toEndOf="@+id/math_vw_1_user"
+        android:background="#EFEEFF"
+        android:fontFamily="@font/poppins"
+        android:paddingLeft="1dp"
+        android:textColor="#003780"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/Math_tv_user"
+        android:layout_width="159dp"
+        android:layout_height="30dp"
+        android:layout_alignTop="@+id/math_vw_2_user"
+        android:layout_alignEnd="@+id/math_vw_2_user"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="177dp"
+        android:layout_toEndOf="@+id/math_vw_1_user"
+        android:fontFamily="@font/poppins"
+        android:text="Math: Algebra"
+        android:textColor="#003780"
+        android:textSize="19dp" />
+
+    <TextView
+        android:id="@+id/date_time_tv_1_user"
+        android:layout_width="220dp"
+        android:layout_height="21dp"
+        android:layout_below="@+id/Math_tv_user"
+        android:layout_alignStart="@+id/Math_tv_user"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="5dp"
+        android:gravity="left"
+        android:text="October 11, 2023 | 9:00 AM"
+        android:textColor="#535353"
+        android:textSize="18dp" />
+
+    <TextView
+        android:id="@+id/participant_tv_1_user"
+        android:layout_width="wrap_content"
+        android:layout_height="22dp"
+        android:layout_below="@+id/date_time_tv_1_user"
+        android:layout_alignStart="@+id/date_time_tv_1_user"
+        android:layout_alignBottom="@+id/math_vw_2_user"
+        android:layout_marginStart="-1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="18dp"
+        android:gravity="left"
+        android:text="Participant:"
+        android:textColor="#535353"
+        android:textSize="18dp" />
+
+    <TextView
+        android:id="@+id/participant_num_1_user"
+        android:layout_width="41dp"
+        android:layout_height="21dp"
+        android:layout_below="@+id/date_time_tv_1_user"
+        android:layout_alignEnd="@+id/date_time_tv_1_user"
+        android:layout_alignBottom="@+id/participant_tv_1_user"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="71dp"
+        android:layout_marginBottom="0dp"
+        android:layout_toEndOf="@+id/participant_tv_1_user"
+        android:gravity="center"
+        android:text="8/10"
+        android:textColor="#535353"
+        android:textSize="18dp" />
+
+    <Button
+        android:id="@+id/math_btn_meeting_user"
+        android:layout_width="102dp"
+        android:layout_height="24dp"
+        android:layout_alignTop="@+id/participant_num_1_user"
+        android:layout_alignEnd="@+id/math_vw_2_user"
+        android:layout_alignBottom="@+id/math_vw_2_user"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="0dp"
+        android:background="#003780"
+        android:fontFamily="@font/poppins"
+        android:gravity="center"
+        android:text="ADD"
+        android:textColor="#ffffff"
+        android:textSize="15dp" />
+
+    <View
+        android:id="@+id/science_vw_1_user"
+        android:layout_width="9dp"
+        android:layout_height="104dp"
+        android:layout_below="@+id/math_vw_1_user"
+        android:layout_alignStart="@+id/math_vw_1_user"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="12dp"
+        android:background="#FF7676" />
+
+    <View
+        android:id="@+id/science_vw_2_user"
+        android:layout_width="341dp"
+        android:layout_height="104dp"
+        android:layout_alignTop="@+id/science_vw_1_user"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="24dp"
+        android:layout_toEndOf="@+id/science_vw_1_user"
+        android:background="#FFF1F1" />
+
+    <TextView
+        android:id="@+id/Science_tv_user"
+        android:layout_width="232dp"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/science_vw_2_user"
+        android:layout_alignTop="@+id/science_vw_2_user"
+        android:layout_alignEnd="@+id/science_vw_2_user"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="117dp"
+        android:fontFamily="@font/poppins"
+        android:text="Science: Geopgraphy"
+        android:textColor="#003780"
+        android:textSize="19dp"/>
+
+    <TextView
+        android:id="@id/date_time_tv_2_user"
+        android:layout_width="225dp"
+        android:layout_height="21dp"
+        android:layout_below="@+id/Science_tv_user"
+        android:layout_alignStart="@+id/Science_tv_user"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="5dp"
+        android:gravity="left"
+        android:text="October 17, 2023 | 10:00 AM"
+        android:textColor="#535353"
+        android:textSize="18dp" />
+
+    <TextView
+        android:id="@+id/participant_tv_2_user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/date_time_tv_2_user"
+        android:layout_alignStart="@+id/date_time_tv_2_user"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:text="Participant:"
+        android:textColor="#535353"
+        android:textSize="18dp" />
+
+    <TextView
+        android:id="@+id/participant_num_2_user"
+        android:layout_width="41dp"
+        android:layout_height="21dp"
+        android:layout_below="@+id/date_time_tv_2_user"
+        android:layout_alignEnd="@+id/date_time_tv_2_user"
+        android:layout_alignBottom="@+id/participant_tv_2_user"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="73dp"
+        android:layout_marginBottom="1dp"
+        android:layout_toEndOf="@+id/participant_tv_2_user"
+        android:gravity="center"
+        android:text="10/10"
+        android:textColor="#535353"
+        android:textSize="18dp" />
+
+    <Button
+        android:id="@+id/science_btn_meeting_user"
+        android:layout_width="102dp"
+        android:layout_height="24dp"
+        android:layout_below="@+id/date_time_tv_2_user"
+        android:layout_alignEnd="@+id/science_vw_2_user"
+        android:layout_alignBottom="@+id/science_vw_2_user"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="1dp"
+        android:background="#FF3131"
+        android:fontFamily="@font/poppins"
+        android:gravity="center"
+        android:text="FULL"
+        android:textColor="#ffffff"
+        android:textSize="15dp" />
+
+    <View
+        android:id="@+id/filipino_vw_1_user"
+        android:layout_width="9dp"
+        android:layout_height="104dp"
+        android:layout_below="@+id/science_vw_1_user"
+        android:layout_alignStart="@+id/science_vw_1_user"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="12dp"
+        android:background="#2BC8D8" />
+
+    <View
+        android:id="@+id/filipino_vw_2_user"
+        android:layout_width="341dp"
+        android:layout_height="104dp"
+        android:background="#E5F7F8"
+        android:layout_alignTop="@+id/filipino_vw_1_user"
+        android:layout_alignBottom="@+id/filipino_vw_1_user"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="-1dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="0dp"
+        android:layout_toEndOf="@+id/filipino_vw_1_user" />
+
+    <TextView
+        android:id="@+id/Filipino_tv_user"
+        android:layout_width="159dp"
+        android:layout_height="30dp"
+        android:layout_alignTop="@+id/filipino_vw_2_user"
+        android:layout_alignEnd="@+id/filipino_vw_2_user"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="176dp"
+        android:layout_toEndOf="@+id/filipino_vw_1_user"
+        android:fontFamily="@font/poppins"
+        android:text="Filipino: Wika"
+        android:textColor="#003780"
+        android:textSize="19dp" />
+
+    <TextView
+        android:id="@+id/date_time_tv_3_user"
+        android:layout_width="220dp"
+        android:layout_height="21dp"
+        android:layout_below="@+id/Filipino_tv_user"
+        android:layout_alignStart="@+id/Filipino_tv_user"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="5dp"
+        android:gravity="left"
+        android:text="October 18, 2023 | 3:00 PM"
+        android:textColor="#535353"
+        android:textSize="18dp" />
+
+    <TextView
+        android:id="@+id/participant_tv_3_user"
+        android:layout_width="92dp"
+        android:layout_height="21dp"
+        android:layout_below="@+id/date_time_tv_3_user"
+        android:layout_alignStart="@+id/date_time_tv_3_user"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="1dp"
+        android:text="Participant:"
+        android:textColor="#535353"
+        android:textSize="18dp" />
+
+    <TextView
+        android:id="@+id/participant_num_3_user"
+        android:layout_width="41dp"
+        android:layout_height="21dp"
+        android:layout_alignTop="@+id/participant_tv_3_user"
+        android:layout_alignEnd="@+id/date_time_tv_3_user"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="87dp"
+        android:layout_toEndOf="@+id/participant_tv_3_user"
+        android:gravity="center"
+        android:text="7/10"
+        android:textColor="#535353"
+        android:textSize="18dp" />
+
+    <Button
+        android:id="@+id/filipino_btn_meeting_user"
+        android:layout_width="102dp"
+        android:layout_height="24dp"
+        android:layout_alignTop="@+id/participant_num_3_user"
+        android:layout_alignEnd="@+id/filipino_vw_2_user"
+        android:layout_alignBottom="@+id/filipino_vw_2_user"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="0dp"
+        android:background="#003780"
+        android:fontFamily="@font/poppins"
+        android:text="ADD"
+        android:textColor="#ffffff"
+        android:textSize="15dp" />
+
+    <View
+        android:id="@+id/english_vw_1_user"
+        android:layout_width="9dp"
+        android:layout_height="104dp"
+        android:layout_below="@+id/filipino_vw_1_user"
+        android:layout_alignStart="@+id/filipino_vw_1_user"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="12dp"
+        android:background="#FD9A2C" />
+
+    <View
+        android:id="@+id/english_vw_2_user"
+        android:layout_width="341dp"
+        android:layout_height="104dp"
+        android:layout_alignTop="@+id/english_vw_1_user"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="24dp"
+        android:background="#FCF0E4"/>
+
+    <TextView
+        android:id="@+id/Engslish_tv_user"
+        android:layout_width="159dp"
+        android:layout_height="30dp"
+        android:layout_alignTop="@+id/english_vw_2_user"
+        android:layout_alignEnd="@+id/english_vw_2_user"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="171dp"
+        android:layout_toEndOf="@+id/english_vw_1_user"
+        android:fontFamily="@font/poppins"
+        android:text="English: Noun words"
+        android:textColor="#003780"
+        android:textSize="18dp" />
+
+    <TextView
+        android:id="@+id/date_time_tv_4_user"
+        android:layout_width="226dp"
+        android:layout_height="21dp"
+        android:layout_below="@+id/Engslish_tv_user"
+        android:layout_alignStart="@+id/Engslish_tv_user"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="5dp"
+        android:gravity="left"
+        android:text="October 19, 2023 | 10:00 AM"
+        android:textColor="#535353"
+        android:textSize="18dp" />
+
+    <TextView
+        android:id="@+id/participant_tv_4_user"
+        android:layout_width="92dp"
+        android:layout_height="21dp"
+        android:layout_below="@+id/date_time_tv_4_user"
+        android:layout_alignStart="@+id/date_time_tv_4_user"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:gravity="center"
+        android:text="Participant:"
+        android:textColor="#535353"
+        android:textSize="18dp" />
+
+    <TextView
+        android:id="@+id/participant_num_4_user"
+        android:layout_width="48dp"
+        android:layout_height="21dp"
+        android:layout_below="@+id/date_time_tv_4_user"
+        android:layout_alignBottom="@+id/participant_tv_4_user"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="0dp"
+        android:layout_toEndOf="@+id/participant_tv_4_user"
+        android:gravity="center"
+        android:text="9/10"
+        android:textColor="#535353"
+        android:textSize="18dp" />
+
+    <Button
+        android:id="@+id/english_btn_meeting_user"
+        android:layout_width="102dp"
+        android:layout_height="24dp"
+        android:layout_below="@+id/date_time_tv_4_user"
+        android:layout_alignEnd="@+id/english_vw_2_user"
+        android:layout_alignBottom="@+id/english_vw_2_user"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="0dp"
+        android:background="#004AAD"
+        android:fontFamily="@font/poppins"
+        android:text="ADD"
+        android:textColor="#ffffff" />
+
+
+</RelativeLayout>

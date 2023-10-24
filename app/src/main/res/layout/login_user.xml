@@ -114,7 +114,7 @@
         android:background="@drawable/password_signup" />
 
     <EditText
-        android:id="@+id/Input_Password_signup_user"
+        android:id="@+id/Input_Password_login_user"
         android:layout_width="271dp"
         android:layout_height="37dp"
         android:layout_below="@+id/Input_Lrn_login_user"
@@ -138,12 +138,12 @@
         style="@style/AppTheme.ToggleButton"
         android:layout_width="41dp"
         android:layout_height="38dp"
-        android:layout_alignTop="@+id/Input_Password_signup_user"
-        android:layout_alignEnd="@+id/Input_Password_signup_user"
-        android:layout_alignBottom="@+id/Input_Password_signup_user"
-        android:layout_marginTop="-1dp"
-        android:layout_marginEnd="18dp"
-        android:layout_marginBottom="0dp"
+        android:layout_alignTop="@+id/Input_Password_login_user"
+        android:layout_alignEnd="@+id/Input_Password_login_user"
+        android:layout_alignBottom="@+id/Input_Password_login_user"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="13dp"
+        android:layout_marginBottom="-1dp"
         android:background="@drawable/eye_for_password"
         android:textColor="#ffffff" />
 
@@ -153,7 +153,7 @@
         android:layout_height="41dp"
         android:layout_below="@+id/PasswordIcon_login_user"
         android:layout_alignStart="@+id/PasswordIcon_login_user"
-        android:layout_alignEnd="@+id/Input_Password_signup_user"
+        android:layout_alignEnd="@+id/Input_Password_login_user"
         android:layout_marginStart="93dp"
         android:layout_marginTop="0dp"
         android:layout_marginEnd="103dp"

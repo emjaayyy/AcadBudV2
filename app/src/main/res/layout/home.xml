@@ -23,7 +23,7 @@
 
     <View
         android:id="@+id/home_divider"
-        android:layout_width="408dp"
+        android:layout_width="40dp"
         android:layout_height="2dp"
         android:layout_below="@+id/AcadBud_home"
         android:layout_alignParentStart="true"
@@ -97,7 +97,7 @@
         android:layout_below="@+id/channel_bg"
         android:layout_alignParentStart="true"
         android:layout_marginStart="14dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/math_channel" />
 
     <TextView
@@ -122,7 +122,7 @@
         android:layout_height="79dp"
         android:layout_below="@+id/channel_bg"
         android:layout_marginStart="39dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_toEndOf="@+id/btn_math_channel"
         android:background="@drawable/english_channel" />
 
@@ -149,7 +149,7 @@
         android:layout_below="@+id/channel_bg"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="39dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="28dp"
         android:layout_toEndOf="@+id/btn_english_channels"
         android:background="@drawable/science_channel" />
@@ -178,7 +178,7 @@
         android:layout_alignStart="@+id/btn_math_channel"
         android:layout_alignEnd="@+id/tv_math_channels"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="0dp"
         android:background="@drawable/filipino_channel" />
 
@@ -205,7 +205,7 @@
         android:layout_below="@+id/tv_english_channels"
         android:layout_alignStart="@+id/btn_english_channels"
         android:layout_marginStart="1dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/aralinpanlipunan_channel" />
 
     <TextView
@@ -232,7 +232,7 @@
         android:layout_alignStart="@+id/btn_science_channels"
         android:layout_alignEnd="@+id/tv_science_channels"
         android:layout_marginStart="1dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="0dp"
         android:background="@drawable/esp_channel" />
 
@@ -288,7 +288,7 @@
         android:layout_alignStart="@+id/btn_ap_channels"
         android:layout_alignEnd="@+id/btn_ap_channels"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="7dp"
+        android:layout_marginTop="4dp"
         android:layout_marginEnd="0dp"
         android:background="@drawable/research_channel" />
 
@@ -344,7 +344,7 @@
         android:layout_alignStart="@+id/btn_mapeh_channels"
         android:layout_alignEnd="@+id/btn_mapeh_channels"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="0dp"
         android:background="@drawable/religion_channel" />
 
@@ -372,7 +372,7 @@
         android:layout_alignStart="@+id/btn_research_channels"
         android:layout_alignEnd="@+id/btn_research_channels"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="13dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="0dp"
         android:background="@drawable/innerthoughts_channels" />
 
@@ -391,6 +391,64 @@
         android:text="Inner Thoughts"
         android:textColor="#4F4A7D"
         android:textSize="15sp" />
+
+    <View
+        android:id="@+id/home_vw"
+        android:layout_width="410dp"
+        android:layout_height="2dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="54dp"
+        android:background="#000000"/>
+
+    <Button
+        android:id="@+id/home_btn_home"
+        android:layout_width="52dp"
+        android:layout_height="46dp"
+        android:layout_alignTop="@+id/home_vw"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="9dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/home_button" />
+
+    <Button
+        android:id="@+id/meeting_btn_home"
+        android:layout_width="52dp"
+        android:layout_height="46dp"
+        android:layout_alignTop="@+id/home_btn_home"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="62dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="5dp"
+        android:layout_toEndOf="@+id/home_btn_home"
+        android:background="@drawable/meeting_button" />
+
+    <Button
+        android:id="@+id/notif_btn_home"
+        android:layout_width="52dp"
+        android:layout_height="46dp"
+        android:layout_alignTop="@+id/meeting_btn_home"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="62dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="5dp"
+        android:layout_toEndOf="@+id/meeting_btn_home"
+        android:background="@drawable/notification_button" />
+
+    <Button
+        android:id="@+id/profile_btn_home"
+        android:layout_width="52dp"
+        android:layout_height="46dp"
+        android:layout_alignTop="@+id/notif_btn_home"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="62dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="9dp"
+        android:layout_marginBottom="5dp"
+        android:layout_toEndOf="@+id/notif_btn_home"
+        android:background="@drawable/profile_button" />
 
 
 </RelativeLayout>

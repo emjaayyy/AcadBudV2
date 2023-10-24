@@ -186,8 +186,8 @@
         android:layout_height="60dp"
         android:layout_below="@+id/NameIcon_signup_ssg"
         android:layout_alignStart="@+id/NameIcon_signup_ssg"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="-3dp"
+        android:layout_marginTop="5dp"
         android:background="@drawable/email_signup" />
 
     <EditText
@@ -242,7 +242,7 @@
         android:textSize="14sp" />
 
     <Button
-        android:id="@+id/Signupbttn"
+        android:id="@+id/Signupbttn_ssg"
         android:layout_width="137dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/Input_Password_signup_ssg"
