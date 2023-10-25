@@ -2,7 +2,6 @@
 <resources>
     <color name="colorPrimary">#218dd9</color>
     <color name="colorPrimaryDark">#88cfeb</color>
-    <color name="colorAccent">#dcf4ff</color>
     <color name="colorSecondary">#71BBDD</color>
     <color name="color_border">#000000</color>
     <color name="tint">#A6A6A6</color>

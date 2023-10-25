@@ -22,6 +22,8 @@
         <activity
             android:name=".meeting_user"
             android:exported="false" />
+        <activity android:name=".signup_ssg"
+            android:exported="false"/>
         <activity
             android:name=".meeting_ssg"
             android:exported="false" />
