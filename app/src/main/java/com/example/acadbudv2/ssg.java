@@ -7,12 +7,13 @@ public class ssg {
     private String email;
     private String password;
 
-    public ssg (String lrn, String position, String name, String email, String password) {
+    public ssg() {
         // Default constructor required for Firebase
     }
 
-    public ssg (String lrn, String name, String email, String password) {
+    public ssg (String position, String lrn, String name, String email, String password) {
         this.lrn = lrn;
+        this.position = position;
         this.name = name;
         this.email = email;
         this.password = password;

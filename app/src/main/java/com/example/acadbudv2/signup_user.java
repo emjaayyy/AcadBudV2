@@ -37,7 +37,7 @@ public class signup_user extends AppCompatActivity {
 
         Button signUpButton = findViewById(R.id.Signupbttn_user);
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("users");
+        databaseReference = FirebaseDatabase.getInstance().getReference("Students");
         auth = FirebaseAuth.getInstance(); // Initialize Firebase Authentication
 
         signUpButton.setOnClickListener(new View.OnClickListener() {

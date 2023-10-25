@@ -36,7 +36,7 @@ public class signup_ssg extends AppCompatActivity {
 
         Button signUpButton = findViewById(R.id.Signupbttn_ssg);
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("ssg");
+        databaseReference = FirebaseDatabase.getInstance().getReference("SSG Students");
         auth = FirebaseAuth.getInstance();
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,7 +55,7 @@ public class signup_ssg extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
                                         // User account creation is successful, you can proceed with saving user data in the Realtime Database
-                                        student ssg = new student(position, lrn, name, email, password);
+                                        ssg ssg = new ssg(position, lrn, name, email, password);
                                         databaseReference.child(lrn).setValue(ssg);
 
                                         // Optional: You can sign in the user after successful registration

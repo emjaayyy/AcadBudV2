@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "715270409521",
+    "project_id": "acadbudv2-a17e9",
+    "storage_bucket": "acadbudv2-a17e9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:715270409521:android:a031eafd06eee9ad727410",
+        "android_client_info": {
+          "package_name": "com.example.acadbudv2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBvrpRvJqBXuqFg7nCtRfYSelMCZJ2uWRM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

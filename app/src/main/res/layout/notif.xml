@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff">
+
+
+    <TextView
+        android:id="@+id/notif_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="166dp"
+        android:fontFamily="@font/poppins"
+        android:paddingLeft="13dp"
+        android:text="Notification"
+        android:textColor="#004AAD"
+        android:textSize="35sp" />
+
+    <View
+        android:id="@+id/notif"
+        android:layout_width="363dp"
+        android:layout_height="596dp"
+        android:layout_below="@+id/notif_tv"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="23dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="62dp"
+        android:background="@drawable/rounded_corner_view"
+        android:backgroundTint="#EFEEFF"/>
+
+    <TextView
+        android:id="@+id/notif_tv_1"
+        android:layout_width="318dp"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/notif"
+        android:layout_alignTop="@+id/notif"
+        android:layout_alignEnd="@+id/notif"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="23dp"
+        android:text="Someone commented on your post."
+        android:textColor="#000000"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/notif_tv_2"
+        android:layout_width="321dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/notif_tv_1"
+        android:layout_alignStart="@+id/notif_tv_1"
+        android:layout_alignEnd="@+id/notif_tv_1"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="1dp"
+        android:text="SSG Officer added you to the meeting"
+        android:textColor="#000000"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/notif_tv_3"
+        android:layout_width="321dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/notif_tv_2"
+        android:layout_alignStart="@+id/notif_tv_2"
+        android:layout_alignEnd="@+id/notif_tv_2"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="0dp"
+        android:text="Your meeting will be at 7:00 a.m. at the San Jose Library."
+        android:textColor="#000000"
+        android:textSize="20dp"/>
+    
+
+
+</RelativeLayout>
