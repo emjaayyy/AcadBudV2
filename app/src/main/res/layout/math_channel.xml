@@ -1,0 +1,222 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff">
+
+    <TextView
+        android:id="@+id/AcadBud_math_channel"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="166dp"
+        android:fontFamily="@font/poppins"
+        android:paddingLeft="13dp"
+        android:text="AcadBud"
+        android:textColor="#004AAD"
+        android:textSize="35sp" />
+
+    <TextView
+        android:id="@+id/math_channel_tv_1"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_below="@+id/AcadBud_math_channel"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="36dp"
+        android:fontFamily="@font/poppins"
+        android:text="Shaine"
+        android:textColor="#000000"
+        android:textSize="18dp" />
+
+    <TextView
+        android:id="@+id/date_time_math_channel"
+        android:layout_width="wrap_content"
+        android:layout_height="21dp"
+        android:layout_alignTop="@+id/math_channel_tv_1"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_toEndOf="@+id/math_channel_tv_1"
+        android:fontFamily="@font/poppins"
+        android:text="10/08/2023"
+        android:textColor="#000000"
+        android:textSize="18dp" />
+
+    <Button
+        android:id="@+id/math_channel_add_btn"
+        android:layout_width="26dp"
+        android:layout_height="21dp"
+        android:layout_alignTop="@+id/math_channel_comment"
+        android:layout_alignEnd="@+id/math_channel_comment"
+        android:layout_marginTop="13dp"
+        android:layout_marginEnd="9dp"
+        android:background="@drawable/add_btn" />
+
+    <TextView
+        android:id="@+id/math_channel_tv_2"
+        android:layout_width="332dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/math_channel_tv_1"
+        android:layout_alignStart="@+id/math_channel_tv_1"
+        android:layout_alignEnd="@+id/date_time_math_channel"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="-168dp"
+        android:text="Patulong sa math."
+        android:textColor="#000000"
+        android:textSize="15dp" />
+
+    <View
+        android:id="@+id/math_channel_vw"
+        android:layout_width="wrap_content"
+        android:layout_height="26dp"
+        android:layout_below="@+id/math_channel_tv_2"
+        android:layout_alignStart="@+id/math_channel_tv_2"
+        android:layout_alignEnd="@+id/math_channel_tv_2"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="1dp"
+        android:background="@drawable/rounded_corner_view"
+        android:backgroundTint="#0E92C4" />
+
+
+    <EditText
+        android:id="@+id/math_channel_etv_1"
+        android:layout_width="wrap_content"
+        android:layout_height="27dp"
+        android:layout_below="@+id/math_channel_tv_2"
+        android:layout_alignStart="@+id/math_channel_tv_2"
+        android:layout_alignEnd="@+id/math_channel_tv_2"
+        android:layout_marginStart="-3dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/rounded_corner_view"
+        android:backgroundTint="#02408B"
+        android:fontFamily="@font/poppins"
+        android:paddingLeft="10dp"
+        android:text="Add your concern..."
+        android:textColor="#ffffff"
+        android:textSize="10dp" />
+
+    <View
+        android:id="@+id/math_channel_comment"
+        android:layout_width="wrap_content"
+        android:layout_height="53dp"
+        android:layout_below="@+id/math_channel_vw"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="54dp"
+        android:background="@drawable/rectangle" />
+
+    <TextView
+        android:id="@+id/math_channel_tv_name"
+        android:layout_width="51dp"
+        android:layout_height="12dp"
+        android:layout_alignTop="@+id/math_channel_comment"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="1dp"
+        android:fontFamily="@font/poppins"
+        android:text="Shaine"
+        android:textColor="#000000"
+        android:textSize="10dp" />
+
+    <EditText
+        android:id="@+id/math_channel_et_comment"
+        android:layout_width="201dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/math_channel_tv_name"
+        android:layout_alignStart="@+id/math_channel_tv_name"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="4dp"
+        android:background="#00000000"
+        android:paddingTop="1dp"
+        android:text="patulong ako sa math."
+        android:textColor="#000000"
+        android:textSize="12sp" />
+
+    <Button
+        android:id="@+id/math_channel_add_btn_2"
+        android:layout_width="26dp"
+        android:layout_height="21dp"
+        android:layout_alignTop="@+id/date_time_math_channel"
+        android:layout_alignEnd="@+id/date_time_math_channel"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="-30dp"
+        android:background="@drawable/add_btn" />
+
+    <Button
+        android:id="@+id/math_channel_post_btn"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_above="@+id/math_vw"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/post_btn" />
+
+    <View
+        android:id="@+id/math_vw"
+        android:layout_width="410dp"
+        android:layout_height="2dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="54dp"
+        android:background="#000000"/>
+
+    <Button
+        android:id="@+id/home_btn_math"
+        android:layout_width="52dp"
+        android:layout_height="46dp"
+        android:layout_alignTop="@+id/math_vw"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="9dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/home_button" />
+
+    <Button
+        android:id="@+id/meeting_btn_math"
+        android:layout_width="52dp"
+        android:layout_height="46dp"
+        android:layout_alignTop="@+id/home_btn_math"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="62dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="5dp"
+        android:layout_toEndOf="@+id/home_btn_math"
+        android:background="@drawable/meeting_button" />
+
+    <Button
+        android:id="@+id/notif_btn_math"
+        android:layout_width="52dp"
+        android:layout_height="46dp"
+        android:layout_alignTop="@+id/meeting_btn_math"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="62dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="5dp"
+        android:layout_toEndOf="@+id/meeting_btn_math"
+        android:background="@drawable/notification_button" />
+
+    <Button
+        android:id="@+id/profile_btn_math"
+        android:layout_width="52dp"
+        android:layout_height="46dp"
+        android:layout_alignTop="@+id/notif_btn_math"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="62dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="9dp"
+        android:layout_marginBottom="5dp"
+        android:layout_toEndOf="@+id/notif_btn_math"
+        android:background="@drawable/profile_button" />
+
+</RelativeLayout>

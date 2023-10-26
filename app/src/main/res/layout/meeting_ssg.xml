@@ -110,22 +110,7 @@
         android:textColor="#535353"
         android:textSize="18dp" />
 
-    <Button
-        android:id="@+id/math_btn_meeting_user"
-        android:layout_width="102dp"
-        android:layout_height="24dp"
-        android:layout_alignTop="@+id/participant_num_1_user"
-        android:layout_alignEnd="@+id/math_vw_2_user"
-        android:layout_alignBottom="@+id/math_vw_2_user"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginBottom="0dp"
-        android:background="#003780"
-        android:fontFamily="@font/poppins"
-        android:gravity="center"
-        android:text="ADD"
-        android:textColor="#ffffff"
-        android:textSize="15dp" />
+
 
     <View
         android:id="@+id/science_vw_1_user"
@@ -206,23 +191,6 @@
         android:textColor="#535353"
         android:textSize="18dp" />
 
-    <Button
-        android:id="@+id/science_btn_meeting_user"
-        android:layout_width="102dp"
-        android:layout_height="24dp"
-        android:layout_below="@+id/date_time_tv_2_user"
-        android:layout_alignEnd="@+id/science_vw_2_user"
-        android:layout_alignBottom="@+id/science_vw_2_user"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginBottom="1dp"
-        android:background="#FF3131"
-        android:fontFamily="@font/poppins"
-        android:gravity="center"
-        android:text="FULL"
-        android:textColor="#ffffff"
-        android:textSize="15dp" />
-
     <View
         android:id="@+id/filipino_vw_1_user"
         android:layout_width="9dp"
@@ -302,22 +270,6 @@
         android:textColor="#535353"
         android:textSize="18dp" />
 
-    <Button
-        android:id="@+id/filipino_btn_meeting_user"
-        android:layout_width="102dp"
-        android:layout_height="24dp"
-        android:layout_alignTop="@+id/participant_num_3_user"
-        android:layout_alignEnd="@+id/filipino_vw_2_user"
-        android:layout_alignBottom="@+id/filipino_vw_2_user"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginBottom="0dp"
-        android:background="#003780"
-        android:fontFamily="@font/poppins"
-        android:text="ADD"
-        android:textColor="#ffffff"
-        android:textSize="15dp" />
-
     <View
         android:id="@+id/english_vw_1_user"
         android:layout_width="9dp"
@@ -393,21 +345,4 @@
         android:text="9/10"
         android:textColor="#535353"
         android:textSize="18dp" />
-
-    <Button
-        android:id="@+id/english_btn_meeting_user"
-        android:layout_width="102dp"
-        android:layout_height="24dp"
-        android:layout_below="@+id/date_time_tv_4_user"
-        android:layout_alignEnd="@+id/english_vw_2_user"
-        android:layout_alignBottom="@+id/english_vw_2_user"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginBottom="0dp"
-        android:background="#004AAD"
-        android:fontFamily="@font/poppins"
-        android:text="ADD"
-        android:textColor="#ffffff" />
-
-
 </RelativeLayout>

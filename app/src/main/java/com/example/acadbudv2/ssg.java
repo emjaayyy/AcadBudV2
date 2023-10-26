@@ -51,6 +51,8 @@ public class ssg {
         return position;
     }
 
+
+
     public void setPosition(String position) {
         this.position = position;
     }

@@ -1,5 +1,6 @@
 package com.example.acadbudv2;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -35,9 +36,20 @@ public class signup_ssg extends AppCompatActivity {
         passwordSSG = findViewById(R.id.Input_Password_signup_ssg);
 
         Button signUpButton = findViewById(R.id.Signupbttn_ssg);
+        Button loginButton = findViewById(R.id.Login_Btn_signup_ssg);
 
         databaseReference = FirebaseDatabase.getInstance().getReference("SSG Students");
         auth = FirebaseAuth.getInstance();
+
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent login = new Intent(signup_ssg.this, login_ssg.class);
+                startActivity(login);
+            }
+        });
+
+
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
