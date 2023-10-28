@@ -1,8 +1,13 @@
 package com.example.acadbudv2;
 
 public class post_content {
+    public String getPosts() {
+        return posts;
+    }
 
-    String name, content, date;
+    public void setPosts(String posts) {
+        this.posts = posts;
+    }
 
     public String getName() {
         return name;
@@ -12,14 +17,6 @@ public class post_content {
         this.name = name;
     }
 
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
     public String getDate() {
         return date;
     }
@@ -27,4 +24,6 @@ public class post_content {
     public void setDate(String date) {
         this.date = date;
     }
+
+    String posts, name, date;
 }

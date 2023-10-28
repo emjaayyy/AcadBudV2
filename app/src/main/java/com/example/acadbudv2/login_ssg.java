@@ -1,20 +1,21 @@
 package com.example.acadbudv2;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.view.View;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.auth.FirebaseAuth;
 
 public class login_ssg extends AppCompatActivity {
 
@@ -56,6 +57,10 @@ public class login_ssg extends AppCompatActivity {
 
                     // Check if the saved SSG position matches the input
                     if (ssgPosition.equals(savedSSGPosition)) {
+                        // Valid SSG position and LRN
+                        // You can store the user's name and other information in SharedPreferences
+                        String userName = dataSnapshot.child("name").getValue(String.class);
+                        storeUserInfoInSharedPreferences(userName);
 
                         Intent homeIntent = new Intent(login_ssg.this, home_ssg.class);
                         startActivity(homeIntent);
@@ -70,7 +75,17 @@ public class login_ssg extends AppCompatActivity {
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 // Handle any database errors
+                Toast.makeText(login_ssg.this, "Database Error: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    // Store the user's name in SharedPreferences
+    private void storeUserInfoInSharedPreferences(String userName) {
+        // You can use SharedPreferences to store user information like name
+        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefsFile", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("userName", userName);
+        editor.apply();
     }
 }

@@ -1,13 +1,16 @@
 package com.example.acadbudv2;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -44,12 +47,13 @@ public class login_user extends AppCompatActivity {
                 String lrn = lrnEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
 
-                // Retrieve the user's email from the Realtime Database using the LRN
+                // Retrieve the user's email and name from the Realtime Database using the LRN
                 databaseReference.child(lrn).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         if (dataSnapshot.exists()) {
                             String email = dataSnapshot.child("email").getValue(String.class);
+                            String name = dataSnapshot.child("name").getValue(String.class);
 
                             // Sign in with the retrieved email and the provided password
                             auth.signInWithEmailAndPassword(email, password)
@@ -61,11 +65,13 @@ public class login_user extends AppCompatActivity {
                                                 if (user != null && user.isEmailVerified()) {
                                                     // User is logged in and their email is verified
 
+                                                    // Save the user's name in SharedPreferences
+                                                    saveNameInSharedPreferences(name);
+
                                                     // Redirect to the home_user activity
                                                     Intent intent = new Intent(login_user.this, home_user.class);
                                                     startActivity(intent);
                                                     finish(); // Finish the current activity
-
                                                 } else {
                                                     Toast.makeText(login_user.this, "Email not verified. Please check your email and verify your account.", Toast.LENGTH_SHORT).show();
                                                 }
@@ -87,5 +93,13 @@ public class login_user extends AppCompatActivity {
                 });
             }
         });
+    }
+
+    // Add this method to save the user's name in SharedPreferences
+    private void saveNameInSharedPreferences(String name) {
+        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefsFile", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("userName", name);
+        editor.apply();
     }
 }

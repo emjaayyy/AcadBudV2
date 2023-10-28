@@ -1,11 +1,11 @@
 package com.example.acadbudv2;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class home_user extends AppCompatActivity {
 
@@ -138,7 +138,7 @@ public class home_user extends AppCompatActivity {
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent me = new Intent(home_user.this, profile.class);
+                Intent me = new Intent(home_user.this, profile_ssg.class);
                 startActivity(me);
             }
         });
