@@ -114,7 +114,7 @@ public class math_channel extends AppCompatActivity {
         post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent write = new Intent(math_channel.this, post.class);
+                Intent write = new Intent(math_channel.this, post_math.class);
                 startActivity(write);
             }
         });

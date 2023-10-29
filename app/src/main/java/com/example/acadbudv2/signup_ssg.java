@@ -89,7 +89,7 @@ public class signup_ssg extends AppCompatActivity {
                                                     });
                                         }
 
-                                        // Redirect to a different activity or perform any post-registration actions
+                                        // Redirect to a different activity or perform any post_math-registration actions
                                     } else {
                                         // User account creation failed, show an error message
                                         Toast.makeText(signup_ssg.this, "User account creation failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();

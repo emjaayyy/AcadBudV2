@@ -21,7 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
 
-public class post extends AppCompatActivity {
+public class post_math extends AppCompatActivity {
     private DatabaseReference mPostReference;
     private int postCount = 0;
 
@@ -77,17 +77,17 @@ public class post extends AppCompatActivity {
 
                             newPost.setPosts(postText);
 
-                            // Calculate the next post key
+                            // Calculate the next post_math key
                             String postKey = "Post " + (postCount + 1);
 
-                            // Save the new post to the Firebase database under the user's UID
+                            // Save the new post_math to the Firebase database under the user's UID
                             mPostReference.push().setValue(newPost);
 
                             // Optionally, you can add a success message
-                            Toast.makeText(post.this, "Post saved successfully", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(post_math.this, "Post saved successfully", Toast.LENGTH_SHORT).show();
                         } else {
-                            // Handle empty post text
-                            Toast.makeText(post.this, "Please enter a post", Toast.LENGTH_SHORT).show();
+                            // Handle empty post_math text
+                            Toast.makeText(post_math.this, "Please enter a post_math", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
