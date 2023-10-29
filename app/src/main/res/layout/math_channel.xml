@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:background="#ffffff">
 
+
     <TextView
         android:id="@+id/AcadBud_math_channel"
         android:layout_width="wrap_content"
@@ -19,71 +20,13 @@
         android:text="Math"
         android:textColor="#9E96FF"
         android:textSize="35sp" />
-
-    <View
-        android:id="@+id/content_vw_math"
-        android:layout_width="378dp"
-        android:layout_height="72dp"
-        android:layout_above="@+id/math_vw"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="17dp"
-        android:layout_marginBottom="528dp"
-        android:background="@drawable/rectangle" />
-
-    <TextView
-        android:id="@+id/math_channel_tv_1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_below="@+id/AcadBud_math_channel"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="23dp"
-        android:layout_marginTop="36dp"
-        android:background="#ffffff"
-        android:fontFamily="@font/poppins"
-        android:paddingRight="120dp"
-        android:textColor="#000000"
-        android:textSize="18dp" />
-
-    <TextView
-        android:id="@+id/date_time_math_channel"
-        android:layout_width="148dp"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/math_channel_tv_1"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="0dp"
-        android:layout_toEndOf="@+id/math_channel_tv_1"
-        android:fontFamily="@font/poppins"
-        android:textColor="#000000"
-        android:textSize="18dp" />
-
-    <Button
-        android:id="@+id/math_channel_add_btn"
-        android:layout_width="62dp"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/content_vw_math"
-        android:layout_alignEnd="@+id/content_vw_math"
-        android:layout_alignBottom="@+id/content_vw_math"
-        android:layout_marginTop="23dp"
-        android:layout_marginEnd="12dp"
-        android:layout_marginBottom="15dp"
-        android:background="@drawable/rounded_corner_view"
-        android:backgroundTint="#FF3131"
-        android:fontFamily="@font/poppins"
-        android:text="ADD" />
-
-    <TextView
-        android:id="@+id/math_channel_tv_2"
-        android:layout_width="264dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/math_channel_tv_1"
-        android:layout_alignStart="@+id/math_channel_tv_1"
-        android:layout_alignEnd="@+id/date_time_math_channel"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="6dp"
-        android:background="#ffffff"
-        android:textColor="#000000"
-        android:textSize="15dp" />
+        android:layout_above="@+id/math_vw"
+        android:layout_marginTop="8dp" />
 
     <Button
         android:id="@+id/math_channel_post_btn"

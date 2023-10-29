@@ -7,23 +7,26 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.TimeZone;
+import java.util.ArrayList;
+import java.util.List;
 
 public class math_channel extends AppCompatActivity {
     private DatabaseReference mPostReference;
     private String userName;
-    private TextView dateTextView;
     private SharedPreferences sharedPreferences;
+    private RecyclerView recyclerView;
+    private post_adapter postAdapter;
 
     // Define a key for the user's name in shared preferences
     private static final String PREF_USER_NAME = "user_name";
@@ -53,86 +56,55 @@ public class math_channel extends AppCompatActivity {
         // Initialize Firebase Database reference
         mPostReference = FirebaseDatabase.getInstance().getReference("Channels/Math Channels/Post/lrn"); // Replace "lrn" with your specific database node
 
-        dateTextView = findViewById(R.id.date_time_math_channel);
-        TextView mathChannelTextView2 = findViewById(R.id.math_channel_tv_2);
-        TextView mathChannelTextView1 = findViewById(R.id.math_channel_tv_1);
+        // Initialize RecyclerView and its adapter
+        recyclerView = findViewById(R.id.recyclerView);
+        postAdapter = new post_adapter(new ArrayList<>());
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(postAdapter);
 
-        // Create a listener to retrieve and handle the "lrn" value
+        // Create a listener to retrieve and handle posts
         mPostReference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String previousChildName) {
                 if (dataSnapshot.exists()) {
-                    // Check if the data exists
-                    HashMap<String, Object> dataMap = (HashMap<String, Object>) dataSnapshot.getValue();
-                    if (dataMap != null) {
-                        // Make sure the dataMap is not null
-
-                        // Access the 'posts' field from the dataMap
-                        String postText = (String) dataMap.get("posts");
-                        String postUser = (String) dataMap.get("name"); // Get the user's name
-                        String postDate = (String) dataMap.get("date");
-
-                        // Set postText to math_channel_tv_2
-                        mathChannelTextView2.setText(postText);
-
-                        // Set postUser to math_channel_tv_1
-                        mathChannelTextView1.setText(postUser);
-
-                        // Display the postDate
-                        dateTextView.setText(postDate);
-
-                        // Handle the lrnValue as needed (e.g., store it, process it)
+                    post_content post = dataSnapshot.getValue(post_content.class);
+                    if (post != null) {
+                        postAdapter.addPost(post);
                     }
                 }
             }
 
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+
             // Implement other ChildEventListener methods as needed
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String previousChildName) {
-                // Handle changes to the "lrn" value if necessary
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-                // Handle removal of the "lrn" value if necessary
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String previousChildName) {
-                // Handle movement of the "lrn" value if necessary
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                // Handle database error if necessary
-            }
         });
 
         // Add a button click listener or any other functionality as needed
-        Button post = findViewById(R.id.math_channel_post_btn);
-        post.setOnClickListener(new View.OnClickListener() {
+        Button postButton = findViewById(R.id.math_channel_post_btn);
+        postButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent write = new Intent(math_channel.this, post_math.class);
                 startActivity(write);
             }
         });
-
-        // Display the current date in Manila's timezone
-        displayCurrentDateInManilaTimezone();
-    }
-
-    private void displayCurrentDateInManilaTimezone() {
-        // Create a SimpleDateFormat with the desired format and timezone
-        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy", Locale.getDefault());
-        sdf.setTimeZone(TimeZone.getTimeZone("Asia/Manila"));
-
-        // Get the current date and format it
-        Date date = new Date();
-        String formattedDate = sdf.format(date);
-
-        // Display the formatted date in the dateTextView
-        dateTextView.setText(formattedDate);
     }
 }
