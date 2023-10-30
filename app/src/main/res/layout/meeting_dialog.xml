@@ -1,0 +1,41 @@
+<!-- res/layout/meeting_dialog.xml -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/editTextDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Date"
+        android:inputType="date" />
+
+    <EditText
+        android:id="@+id/editTextTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Time"
+        android:inputType="time" />
+
+    <EditText
+        android:id="@+id/editTextSubject"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Subject" />
+
+
+    <EditText
+        android:id="@+id/editTextTopic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Topic" />
+
+    <Button
+        android:id="@+id/buttonCreateMeeting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create Meeting" />
+
+</LinearLayout>

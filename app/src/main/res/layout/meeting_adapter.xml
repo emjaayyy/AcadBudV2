@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff">
+
+    <TextView
+        android:id="@+id/Meeting_tv_user"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="166dp"
+        android:fontFamily="@font/poppins"
+        android:paddingLeft="13dp"
+        android:text="Meeting"
+        android:textColor="#004AAD"
+        android:textSize="35sp" />
+
+
+    <View
+        android:id="@+id/math_vw_1_user"
+        android:layout_width="9dp"
+        android:layout_height="104dp"
+        android:layout_below="@+id/Meeting_tv_user"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="20dp"
+        android:background="#9E96FF" />
+
+    <View
+        android:id="@+id/math_vw_2_user"
+        android:layout_width="344dp"
+        android:layout_height="103dp"
+        android:layout_alignTop="@+id/math_vw_1_user"
+        android:layout_alignBottom="@+id/math_vw_1_user"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="-1dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="0dp"
+        android:layout_toEndOf="@+id/math_vw_1_user"
+        android:background="#EFEEFF"
+        android:fontFamily="@font/poppins"
+        android:paddingLeft="1dp"
+        android:textColor="#003780"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/subject"
+        android:layout_width="159dp"
+        android:layout_height="30dp"
+        android:layout_alignTop="@+id/math_vw_2_user"
+        android:layout_alignEnd="@+id/math_vw_2_user"
+        android:layout_marginStart="180dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="4dp"
+        android:layout_toEndOf="@+id/math_vw_1_user"
+        android:fontFamily="@font/poppins"
+        android:text="Math: Algebra"
+        android:textColor="#003780"
+        android:textSize="19dp" />
+
+    <TextView
+        android:id="@+id/topi"
+        android:layout_width="159dp"
+        android:layout_height="30dp"
+        android:layout_alignTop="@+id/math_vw_2_user"
+        android:layout_alignEnd="@+id/math_vw_2_user"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="177dp"
+        android:layout_toEndOf="@+id/math_vw_1_user"
+        android:fontFamily="@font/poppins"
+        android:text="Math"
+        android:textColor="#003780"
+        android:textSize="19dp" />
+
+    <TextView
+        android:id="@+id/date_time_tv_1_user"
+        android:layout_width="220dp"
+        android:layout_height="21dp"
+        android:layout_below="@+id/Math_tv_user"
+        android:layout_alignStart="@+id/Math_tv_user"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="5dp"
+        android:gravity="left"
+        android:textColor="#535353"
+        android:textSize="18dp" />
+
+    <TextView
+        android:id="@+id/participantCountTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="22dp"
+        android:layout_below="@+id/date_time_tv_1_user"
+        android:layout_alignStart="@+id/date_time_tv_1_user"
+        android:layout_alignBottom="@+id/math_vw_2_user"
+        android:layout_marginStart="-1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="18dp"
+        android:gravity="left"
+        android:textColor="#535353"
+        android:textSize="18dp" />
+
+    <TextView
+        android:id="@+id/participant_num_1_user"
+        android:layout_width="41dp"
+        android:layout_height="21dp"
+        android:layout_below="@+id/date_time_tv_1_user"
+        android:layout_alignEnd="@+id/date_time_tv_1_user"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="71dp"
+        android:layout_marginBottom="0dp"
+        android:gravity="center"
+        android:textColor="#535353"
+        android:textSize="18dp" />
+</RelativeLayout>

@@ -79,7 +79,7 @@
         android:textSize="18dp" />
 
     <TextView
-        android:id="@+id/participant_tv_1_user"
+        android:id="@+id/participantCountTextView"
         android:layout_width="wrap_content"
         android:layout_height="22dp"
         android:layout_below="@+id/date_time_tv_1_user"

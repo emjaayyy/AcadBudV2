@@ -19,7 +19,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 
 public class post_math extends AppCompatActivity {
     private DatabaseReference mPostReference;
@@ -76,6 +79,11 @@ public class post_math extends AppCompatActivity {
                             newPost.setName(userName);
 
                             newPost.setPosts(postText);
+
+                            // Set the current date and time
+                            SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy", Locale.getDefault());
+                            String currentDate = dateFormat.format(new Date());
+                            newPost.setDate(currentDate);
 
                             // Calculate the next post_math key
                             String postKey = "Post " + (postCount + 1);
