@@ -44,7 +44,7 @@
         android:layout_height="2dp"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="54dp"
-        android:background="#000000"/>
+        android:background="#DBDEE3"/>
 
     <Button
         android:id="@+id/home_btn_math"
@@ -88,7 +88,7 @@
         android:layout_height="46dp"
         android:layout_alignTop="@+id/notif_btn_math"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="62dp"
+        android:layout_marginStart="53dp"
         android:layout_marginTop="0dp"
         android:layout_marginBottom="5dp"
         android:layout_toEndOf="@+id/notif_btn_math"
