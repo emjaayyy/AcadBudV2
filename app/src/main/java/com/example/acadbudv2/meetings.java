@@ -1,7 +1,25 @@
 package com.example.acadbudv2;
 
+import java.util.List;
+
 public class meetings {
-    String subject, topic, date, time, participants;
+    private String subject;
+    private String topic;
+    private String date;
+    private String time;
+    private List<String> participants;
+
+    public meetings() {
+        // Default constructor required for Firebase
+    }
+
+    public meetings(String subject, String topic, String date, String time, List<String> participants) {
+        this.subject = subject;
+        this.topic = topic;
+        this.date = date;
+        this.time = time;
+        this.participants = participants;
+    }
 
     public String getSubject() {
         return subject;
@@ -35,11 +53,11 @@ public class meetings {
         this.time = time;
     }
 
-    public String getParticipants() {
+    public List<String> getParticipants() {
         return participants;
     }
 
-    public void setParticipants(String participants) {
+    public void setParticipants(List<String> participants) {
         this.participants = participants;
     }
 }

@@ -14,15 +14,27 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class meeting_adapter extends RecyclerView.Adapter<meeting_adapter.MeetingViewHolder> {
     private List<meetings> meetingsList;
     private DatabaseReference databaseReference;
+    private String channelName;
+    private EditText subjectEditText;
+    private EditText topicEditText;
+    private EditText dateEditText;
+    private EditText timeEditText;
 
-    public meeting_adapter(List<meetings> meetingsList) {
+    public meeting_adapter(List<meetings> meetingsList, String channelName, EditText subjectEditText, EditText topicEditText, EditText dateEditText, EditText timeEditText) {
+        // Point to the "Meetings" node in Firebase
+        databaseReference = FirebaseDatabase.getInstance().getReference("Meetings");
         this.meetingsList = meetingsList;
-        databaseReference = FirebaseDatabase.getInstance().getReference("Meetings/Channels/"); // Reference to the "Meetings/Channels" node in Firebase Realtime Database
+        this.channelName = channelName;
+        this.subjectEditText = subjectEditText;
+        this.topicEditText = topicEditText;
+        this.dateEditText = dateEditText;
+        this.timeEditText = timeEditText;
     }
 
     @NonNull
@@ -43,15 +55,42 @@ public class meeting_adapter extends RecyclerView.Adapter<meeting_adapter.Meetin
         return meetingsList.size();
     }
 
-    public void addMeeting(meetings meeting) {
-        // Push a new meeting to Firebase
-        String key = databaseReference.push().getKey();
-        if (key != null) {
-            databaseReference.child(key).setValue(meeting);
-            meetingsList.add(meeting);
-            notifyItemInserted(meetingsList.size() - 1);
+    public void createAndSaveMeeting() {
+        String subject = subjectEditText.getText().toString();
+        String topic = topicEditText.getText().toString();
+        String date = dateEditText.getText().toString();
+        String time = timeEditText.getText().toString();
+
+        if (TextUtils.isEmpty(subject) || TextUtils.isEmpty(topic) || TextUtils.isEmpty(date) || TextUtils.isEmpty(time)) {
+            Toast.makeText(subjectEditText.getContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show();
+            return;
         }
+
+        // Create a new meetings object
+        List<String> participantsList = new ArrayList<>();
+        // Add participants to participantsList based on your UI
+
+        meetings newMeeting = new meetings(subject, topic, date, time, participantsList);
+
+        // Save the meeting to Firebase under the specified channel
+        saveMeetingToFirebase(channelName, newMeeting);
     }
+
+    private void saveMeetingToFirebase(String channelName, meetings meeting) {
+        DatabaseReference channelRef = databaseReference.child("Channels").child(channelName).child("Session 1");
+        DatabaseReference newMeetingRef = channelRef.push();
+        newMeetingRef.child("subject").setValue(meeting.getSubject());
+        newMeetingRef.child("topic").setValue(meeting.getTopic());
+        newMeetingRef.child("date").setValue(meeting.getDate());
+        newMeetingRef.child("time").setValue(meeting.getTime());
+
+        // You can also add participants to the meeting by updating the Firebase database
+
+        // Display a Toast message to indicate the success
+        Toast.makeText(subjectEditText.getContext(), "Meeting created successfully", Toast.LENGTH_SHORT).show();
+    }
+
+
 
     public class MeetingViewHolder extends RecyclerView.ViewHolder {
         EditText subjectEditText;
@@ -71,43 +110,13 @@ public class meeting_adapter extends RecyclerView.Adapter<meeting_adapter.Meetin
             buttonCreateMeeting.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // Handle creating and saving the meeting when the button is clicked
-                    createAndSaveMeeting();
+                    createAndSaveMeeting(); // Replace with the selected channel name
                 }
             });
         }
 
         public void bind(meetings meeting) {
-            subjectEditText.setText(meeting.getSubject());
-            dateEditText.setText(meeting.getDate());
-            timeEditText.setText(meeting.getTime());
-            topicEditText.setText(meeting.getTopic());
-        }
-
-        private void createAndSaveMeeting() {
-            // Extract meeting details from the EditText fields
-            String subject = subjectEditText.getText().toString();
-            String topic = topicEditText.getText().toString();
-            String date = dateEditText.getText().toString();
-            String time = timeEditText.getText().toString();
-
-            // Check if any of the fields are empty, and do not save if they are
-            if (TextUtils.isEmpty(subject) || TextUtils.isEmpty(topic) || TextUtils.isEmpty(date) || TextUtils.isEmpty(time)) {
-                Toast.makeText(itemView.getContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show();
-                return;
-            }
-
-            // Create a new meetings object
-            meetings newMeeting = new meetings();
-            newMeeting.setSubject(subject);
-            newMeeting.setTopic(topic);
-            newMeeting.setDate(date);
-            newMeeting.setTime(time);
-
-            // Save the meeting to Firebase
-            addMeeting(newMeeting);
-
-            // You can also add code to dismiss the dialog or perform any other action here
+            // Bind meeting data to the UI, if needed
         }
     }
 }

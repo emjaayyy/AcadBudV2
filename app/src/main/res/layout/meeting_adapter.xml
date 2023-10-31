@@ -99,9 +99,9 @@
         android:layout_marginTop="1dp"
         android:layout_marginBottom="18dp"
         android:gravity="left"
+        android:text="Participant"
         android:textColor="#535353"
-        android:textSize="18dp"
-        android:text="Participant"/>
+        android:textSize="18dp" />
 
     <TextView
         android:id="@+id/participant_num_1_user"
