@@ -27,6 +27,8 @@
         <activity
             android:name=".profile_user"
             android:exported="false" />
+        <activity android:name=".meeting_dialog"
+            android:exported="false"/>
         <activity
             android:name=".home_ssg"
             android:exported="false" />

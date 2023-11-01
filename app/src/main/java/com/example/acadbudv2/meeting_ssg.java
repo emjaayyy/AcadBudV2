@@ -1,17 +1,23 @@
 package com.example.acadbudv2;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,9 +27,10 @@ public class meeting_ssg extends AppCompatActivity {
     private DatabaseReference mdatabaseReference;
     private EditText subjectEditText;
     private EditText topicEditText;
-    private EditText dateEditText;
-    private EditText timeEditText;
+    private TextView date;
+    private TextView time;
     private String channelName = "Math";
+    private Context context; // Add a context variable
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -32,9 +39,19 @@ public class meeting_ssg extends AppCompatActivity {
         FirebaseApp.initializeApp(this);
         mdatabaseReference = FirebaseDatabase.getInstance().getReference("Meetings");
         recyclerView = findViewById(R.id.recyclerView);
-        adapter = new meeting_adapter(new ArrayList<meetings>(), channelName, subjectEditText, topicEditText, dateEditText, timeEditText);
+        subjectEditText = findViewById(R.id.editTextSubject);
+        topicEditText = findViewById(R.id.editTextTopic);
+        date = findViewById(R.id.date);
+        time = findViewById(R.id.time);
+
+        context = this; // Store the context
+
+        // Create the adapter with an empty list initially
+        adapter = new meeting_adapter(this, new ArrayList<meetings>(), channelName, subjectEditText, topicEditText, date, time);
+
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
+
         fetchMeetingsData();
     }
 
@@ -50,13 +67,15 @@ public class meeting_ssg extends AppCompatActivity {
                                 meetingsList.add(meeting);
                             }
                         }
-                        adapter = new meeting_adapter(meetingsList, channelName, subjectEditText, topicEditText, dateEditText, timeEditText);
-                        recyclerView.setAdapter(adapter);
+
+                        // Update the existing adapter with the fetched data
+                        adapter.updateMeetingsList(meetingsList);
                     }
 
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
                         // Handle error
+                        Toast.makeText(context, "Error: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
     }
