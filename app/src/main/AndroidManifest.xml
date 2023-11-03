@@ -18,6 +18,8 @@
         <activity
             android:name=".post_adapter"
             android:exported="false" />
+        <activity android:name=".meeting_dialog"
+            android:exported="false"/>
         <activity
             android:name=".channels"
             android:exported="false" />
@@ -27,7 +29,7 @@
         <activity
             android:name=".profile_user"
             android:exported="false" />
-        <activity android:name=".meeting_dialog"
+        <activity android:name=".meeting_adapter"
             android:exported="false"/>
         <activity
             android:name=".home_ssg"

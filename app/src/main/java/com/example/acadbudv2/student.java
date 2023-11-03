@@ -6,6 +6,25 @@ public class student {
     private String email;
     private String password;
 
+    public String getYear() {
+        return year;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
+    }
+
+    public String getSection() {
+        return section;
+    }
+
+    public void setSection(String section) {
+        this.section = section;
+    }
+
+    private String year;
+
+    private String section;
     public student() {
         // Default constructor required for Firebase
     }

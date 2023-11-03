@@ -42,7 +42,16 @@ public class profile_ssg extends AppCompatActivity {
         Button logoutButton = findViewById(R.id.logout_btn);
         Button notif = findViewById(R.id.notif_btn_profile);
         Button meet = findViewById(R.id.meeting_btn_profile);
+        Button edit = findViewById(R.id.edit_profile_btn);
         Button feed = findViewById(R.id.home_btn_profile);
+
+        edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent edited = new Intent(profile_ssg.this, edit_profile.class);
+                startActivity(edited);
+            }
+        });
 
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override

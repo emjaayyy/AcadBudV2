@@ -58,9 +58,10 @@
         android:layout_marginStart="15dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="107dp"
+        android:textColor="#000000"
         android:fontFamily="@font/poppins"
         android:gravity=""
-        android:hint="Section:"
+        android:hint="Section"
         android:textColorHint="#000000"
         android:textSize="15dp" />
 
@@ -74,8 +75,9 @@
         android:layout_marginStart="1dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="0dp"
+        android:textColor="#000000"
         android:fontFamily="@font/poppins"
-        android:hint="Year:"
+        android:hint="Year"
         android:textColorHint="#000000"
         android:textSize="15dp" />
 

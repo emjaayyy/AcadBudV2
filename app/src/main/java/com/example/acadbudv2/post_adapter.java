@@ -1,29 +1,20 @@
 package com.example.acadbudv2;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class post_adapter extends RecyclerView.Adapter<post_adapter.PostViewHolder> {
     private List<post_content> posts;
-    private boolean isUserChecked = false;
-    private Set<String> ssgStudentUIDs = new HashSet<>();
 
     public post_adapter(List<post_content> posts) {
         this.posts = posts;
@@ -40,18 +31,6 @@ public class post_adapter extends RecyclerView.Adapter<post_adapter.PostViewHold
     public void onBindViewHolder(@NonNull PostViewHolder holder, int position) {
         post_content post = posts.get(position);
         holder.bind(post);
-
-        // Check if the user should see the postAddBtn based on their LRN (UID)
-        if (!isUserChecked) {
-            checkUserLRN(holder.postAddBtn);
-        }
-
-        // Set the visibility of postAddBtn based on whether the user is an SSG Student
-        if (ssgStudentUIDs.contains(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
-            holder.postAddBtn.setVisibility(View.VISIBLE);
-        } else {
-            holder.postAddBtn.setVisibility(View.GONE);
-        }
     }
 
     @Override
@@ -63,8 +42,6 @@ public class post_adapter extends RecyclerView.Adapter<post_adapter.PostViewHold
         posts.add(post);
         notifyItemInserted(posts.size() - 1);
     }
-
-
 
     public class PostViewHolder extends RecyclerView.ViewHolder {
         TextView nameTextView;
@@ -78,6 +55,14 @@ public class post_adapter extends RecyclerView.Adapter<post_adapter.PostViewHold
             dateTextView = itemView.findViewById(R.id.dateTextView);
             contentTextView = itemView.findViewById(R.id.contentTextView);
             postAddBtn = itemView.findViewById(R.id.postAddBtn);
+
+            postAddBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // Start the meeting_adapter activity when the button is clicked.
+                    startMeetingAdapterActivity(v.getContext());
+                }
+            });
         }
 
         public void bind(post_content post) {
@@ -85,32 +70,15 @@ public class post_adapter extends RecyclerView.Adapter<post_adapter.PostViewHold
             dateTextView.setText(post.getDate());
             contentTextView.setText(post.getPosts());
         }
-    }
 
-    private void checkUserLRN(final Button postAddBtn) {
-        FirebaseAuth auth = FirebaseAuth.getInstance();
-        FirebaseUser user = auth.getCurrentUser();
+        private void startMeetingAdapterActivity(Context context) {
+            // Create an Intent to start the meeting_adapter activity.
+            Intent intent = new Intent(context, meeting_dialog.class);
 
-        if (user != null) {
-            DatabaseReference ssgStudentsRef = FirebaseDatabase.getInstance().getReference("SSG Students");
+            // You can also pass any data to the meeting_adapter activity if needed.
+            // intent.putExtra("key", value);
 
-            ssgStudentsRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    for (DataSnapshot studentSnapshot : dataSnapshot.getChildren()) {
-                        String studentUID = studentSnapshot.getKey();
-                        ssgStudentUIDs.add(studentUID);
-                    }
-
-                    isUserChecked = true;
-                    notifyDataSetChanged(); // Refresh RecyclerView after fetching SSG Students
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                    // Handle the error
-                }
-            });
+            context.startActivity(intent);
         }
     }
 }
