@@ -39,10 +39,6 @@ public class meeting_ssg extends AppCompatActivity {
         FirebaseApp.initializeApp(this);
         mdatabaseReference = FirebaseDatabase.getInstance().getReference("Meetings");
         recyclerView = findViewById(R.id.recyclerView);
-        subjectEditText = findViewById(R.id.editTextSubject);
-        topicEditText = findViewById(R.id.editTextTopic);
-        date = findViewById(R.id.date);
-        time = findViewById(R.id.time);
 
         context = this; // Store the context
 

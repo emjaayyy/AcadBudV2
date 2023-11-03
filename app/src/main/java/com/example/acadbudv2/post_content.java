@@ -1,6 +1,13 @@
 package com.example.acadbudv2;
 
 public class post_content {
+    public post_content(String name, String date, String content) {
+    }
+
+    public post_content() {
+
+    }
+
     public String getPosts() {
         return posts;
     }

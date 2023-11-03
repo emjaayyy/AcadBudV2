@@ -92,8 +92,6 @@ public class meeting_dialog extends AppCompatActivity {
 
     }
 
-
-
     private void showDatePickerDialog() {
         DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override

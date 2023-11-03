@@ -7,27 +7,22 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Locale;
 
 public class post_math extends AppCompatActivity {
     private DatabaseReference mPostReference;
-    private int postCount = 0;
-
     private String userName; // Variable to store the user's name
 
     @Override
@@ -41,91 +36,63 @@ public class post_math extends AppCompatActivity {
         // Initialize Firebase Database reference
         mPostReference = FirebaseDatabase.getInstance().getReference("Channels/Math Channels/Post/lrn"); // Replace "lrn" with your specific database node
 
-        // Create a listener to retrieve and handle the "lrn" value
-        mPostReference.addChildEventListener(new ChildEventListener() {
+        Button postButton = findViewById(R.id.post_btn);
+        EditText postEditText = findViewById(R.id.post_et);
+
+        // Retrieve the user's UID
+        String uid = mAuth.getCurrentUser().getUid();
+
+        // Retrieve the user's name from SharedPreferences
+        userName = getUserNameFromSharedPreferences();
+
+        postButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String previousChildName) {
-                if (dataSnapshot.exists()) {
-                    // Check if the data exists
-                    HashMap<String, Object> dataMap = (HashMap<String, Object>) dataSnapshot.getValue();
-                    if (dataMap != null) {
-                        // Make sure the dataMap is not null
+            public void onClick(View v) {
+                String postText = postEditText.getText().toString();
+                if (!postText.isEmpty()) {
+                    // Create a new post_content object
+                    post_content newPost = new post_content();
 
-                        // Access the 'lrn' value from the dataMap
-                        String lrnValue = (String) dataMap.get("lrn");
+                    // Set the user's name from SharedPreferences
+                    newPost.setName(userName);
 
-                        // Handle the lrnValue as needed (e.g., store it, process it)
-                    }
-                }
+                    newPost.setPosts(postText);
 
-                Button postButton = findViewById(R.id.post_btn);
-                EditText postEditText = findViewById(R.id.post_et);
+                    // Set the current date and time
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy", Locale.getDefault());
+                    String currentDate = dateFormat.format(new Date());
+                    newPost.setDate(currentDate);
 
-                // Retrieve the user's UID
-                String uid = mAuth.getCurrentUser().getUid();
-
-                // Retrieve the user's name from SharedPreferences
-                userName = getUserNameFromSharedPreferences();
-
-                postButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        String postText = postEditText.getText().toString();
-                        if (!postText.isEmpty()) {
-                            // Create a new post_content object
-                            post_content newPost = new post_content();
-
-                            // Set the user's name from SharedPreferences
-                            newPost.setName(userName);
-
-                            newPost.setPosts(postText);
-
-                            // Set the current date and time
-                            SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy", Locale.getDefault());
-                            String currentDate = dateFormat.format(new Date());
-                            newPost.setDate(currentDate);
-
-                            // Calculate the next post_math key
+                    // Calculate the next post_math key
+                    mPostReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            long postCount = dataSnapshot.getChildrenCount();
                             String postKey = "Post " + (postCount + 1);
 
                             // Save the new post_math to the Firebase database under the user's UID
-                            mPostReference.push().setValue(newPost);
+                            mPostReference.child(postKey).setValue(newPost);
 
                             // Optionally, you can add a success message
                             Toast.makeText(post_math.this, "Post saved successfully", Toast.LENGTH_SHORT).show();
-                        } else {
-                            // Handle empty post_math text
-                            Toast.makeText(post_math.this, "Please enter a post_math", Toast.LENGTH_SHORT).show();
                         }
-                    }
-                });
-            }
 
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-
-            // Method to retrieve the user's name from SharedPreferences
-            private String getUserNameFromSharedPreferences() {
-                // Replace "userName" with the key you used to store the user's name
-                return getSharedPreferences("MyPrefsFile", Context.MODE_PRIVATE).getString("userName", "");
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+                            // Handle the error
+                        }
+                    });
+                } else {
+                    // Handle empty post_math text
+                    Toast.makeText(post_math.this, "Please enter a post_math", Toast.LENGTH_SHORT).show();
+                }
             }
         });
+    }
+
+    // Method to retrieve the user's name from SharedPreferences
+    private String getUserNameFromSharedPreferences() {
+        // Replace "userName" with the key you used to store the user's name
+        return getSharedPreferences("MyPrefsFile", Context.MODE_PRIVATE).getString("userName", "");
     }
 }

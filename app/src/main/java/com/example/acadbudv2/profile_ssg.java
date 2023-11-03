@@ -8,10 +8,18 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.*;
+
+import java.util.ArrayList;
 
 public class profile_ssg extends AppCompatActivity {
 
@@ -19,6 +27,10 @@ public class profile_ssg extends AppCompatActivity {
     FirebaseAuth auth;
     SharedPreferences sharedPreferences;
     private static final String PREFS_NAME = "MyPrefsFile"; // Name for your SharedPreferences file
+
+    private RecyclerView postsRecyclerView;
+    private post_adapter postAdapter;
+    private DatabaseReference databaseRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +85,18 @@ public class profile_ssg extends AppCompatActivity {
             sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
             String savedName = sharedPreferences.getString("userName", "");
             profile_name.setText(savedName);
+
+            // Initialize the RecyclerView and adapter for posts
+            postsRecyclerView = findViewById(R.id.profile_rv);
+            postsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+            postAdapter = new post_adapter(new ArrayList<>());
+            postsRecyclerView.setAdapter(postAdapter);
+
+            // Initialize the Firebase Realtime Database reference
+            databaseRef = FirebaseDatabase.getInstance().getReference("Channels/Math Channels/Post/lrn");
+
+            // Fetch and display posts
+            fetchPosts();
         } else {
             // Handle the case where the user is not logged in
         }
@@ -108,5 +132,41 @@ public class profile_ssg extends AppCompatActivity {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
         finish(); // Finish the current activity
+    }
+
+    private void fetchPosts() {
+
+        databaseRef.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String previousChildName) {
+                if (dataSnapshot.exists()) {
+                    post_content post = dataSnapshot.getValue(post_content.class);
+                    if (post != null) {
+                        postAdapter.addPost(post);
+                    }
+                }
+
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Handle the error
+            }
+        });
     }
 }
