@@ -21,7 +21,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-public class post_math extends AppCompatActivity {
+public class post_innerthoughts extends AppCompatActivity {
     private DatabaseReference mPostReference;
     private String userName; // Variable to store the user's name
 
@@ -34,7 +34,7 @@ public class post_math extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
 
         // Initialize Firebase Database reference
-        mPostReference = FirebaseDatabase.getInstance().getReference("Channels/Math/Posts/lrn"); // Replace "lrn" with your specific database node
+        mPostReference = FirebaseDatabase.getInstance().getReference("Channels/Inner Thoughts/Posts/lrn"); // Replace "lrn" with your specific database node
 
         Button postButton = findViewById(R.id.post_btn);
         EditText postEditText = findViewById(R.id.post_et);
@@ -74,7 +74,7 @@ public class post_math extends AppCompatActivity {
                             mPostReference.child(postKey).setValue(newPost);
 
                             // Optionally, you can add a success message
-                            Toast.makeText(post_math.this, "Post saved successfully", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(post_innerthoughts.this, "Post saved successfully", Toast.LENGTH_SHORT).show();
                         }
 
                         @Override
@@ -84,7 +84,7 @@ public class post_math extends AppCompatActivity {
                     });
                 } else {
                     // Handle empty post_math text
-                    Toast.makeText(post_math.this, "Please enter a text", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(post_innerthoughts.this, "Please enter a text", Toast.LENGTH_SHORT).show();
                 }
             }
         });

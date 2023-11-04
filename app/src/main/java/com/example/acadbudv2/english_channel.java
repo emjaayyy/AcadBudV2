@@ -54,7 +54,7 @@ public class english_channel extends AppCompatActivity {
         }
 
         // Initialize Firebase Database reference
-        mPostReference = FirebaseDatabase.getInstance().getReference("Channels/English Channel/Post/lrn"); // Replace "lrn" with your specific database node
+        mPostReference = FirebaseDatabase.getInstance().getReference("Channels/English/Posts/lrn"); // Replace "lrn" with your specific database node
 
         // Initialize RecyclerView and its adapter
         recyclerView = findViewById(R.id.recyclerView);
@@ -102,7 +102,7 @@ public class english_channel extends AppCompatActivity {
         postButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent write = new Intent(english_channel.this, post_math.class);
+                Intent write = new Intent(english_channel.this, post_english.class);
                 startActivity(write);
             }
         });

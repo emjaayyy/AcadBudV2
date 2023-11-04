@@ -1,9 +1,92 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".tle_channel">
+    android:background="#ffffff">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/AcadBud_research_channel"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
+        android:fontFamily="@font/poppins"
+        android:paddingLeft="13dp"
+        android:text="TLE"
+        android:textColor="#2BC8D8"
+        android:textSize="35sp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="624dp"
+        android:layout_above="@+id/profile_btn_ap"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="2dp" />
+
+    <Button
+        android:id="@+id/tle_channel_post_btn"
+        android:layout_width="76dp"
+        android:layout_height="80dp"
+        android:layout_above="@+id/profile_btn_ap"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="26dp"
+        android:background="@drawable/post_btn" />
+
+    <View
+        android:id="@+id/filipino_vw"
+        android:layout_width="410dp"
+        android:layout_height="2dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="54dp"
+        android:background="#000000"/>
+
+    <Button
+        android:id="@+id/home_btn_ap"
+        android:layout_width="52dp"
+        android:layout_height="46dp"
+        android:layout_alignTop="@+id/filipino_vw"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="126dp"
+        android:layout_marginTop="-3dp"
+        android:layout_marginBottom="13dp"
+        android:background="@drawable/home_button" />
+
+    <Button
+        android:id="@+id/meeting_btn_ap"
+        android:layout_width="52dp"
+        android:layout_height="46dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="62dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/meeting_button" />
+
+    <Button
+        android:id="@+id/notif_btn_ap"
+        android:layout_width="52dp"
+        android:layout_height="46dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="6dp"
+        android:background="@drawable/notification_button" />
+
+    <Button
+        android:id="@+id/profile_btn_ap"
+        android:layout_width="52dp"
+        android:layout_height="46dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="62dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="9dp"
+        android:background="@drawable/profile_button" />
+
+</RelativeLayout>

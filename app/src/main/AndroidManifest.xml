@@ -61,9 +61,29 @@
         <activity
             android:name=".ap_channel"
             android:exported="false" />
+        <activity android:name=".post_research"
+            android:exported="false"/>
+        <activity android:name=".post_tle"
+            android:exported="false"/>
+        <activity android:name=".post_religion"
+            android:exported="false"/>
+        <activity android:name=".post_innerthoughts"
+            android:exported="false"/>
         <activity
             android:name=".filipino_channel"
             android:exported="false" />
+        <activity android:name=".post_esp"
+            android:exported="false"/>
+        <activity android:name=".post_mapeh"
+            android:exported="false"/>
+        <activity android:name=".post_english"
+            android:exported="false"/>
+        <activity android:name=".post_science"
+            android:exported="false"/>
+        <activity android:name=".post_filipino"
+            android:exported="false"/>
+        <activity android:name=".post_ap"
+            android:exported="false"/>
         <activity
             android:name=".meeting_user"
             android:exported="false" />

@@ -54,7 +54,7 @@ public class math_channel extends AppCompatActivity {
         }
 
         // Initialize Firebase Database reference
-        mPostReference = FirebaseDatabase.getInstance().getReference("Channels/Math Channels/Post/lrn"); // Replace "lrn" with your specific database node
+        mPostReference = FirebaseDatabase.getInstance().getReference("Channels/Math/Posts/lrn"); // Replace "lrn" with your specific database node
 
         // Initialize RecyclerView and its adapter
         recyclerView = findViewById(R.id.recyclerView);

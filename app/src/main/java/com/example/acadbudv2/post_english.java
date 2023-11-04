@@ -34,7 +34,7 @@ public class post_english extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
 
         // Initialize Firebase Database reference
-        mPostReference = FirebaseDatabase.getInstance().getReference("Channels/English Channel/Post/lrn"); // Replace "lrn" with your specific database node
+        mPostReference = FirebaseDatabase.getInstance().getReference("Channels/English/Posts/lrn"); // Replace "lrn" with your specific database node
 
         Button postButton = findViewById(R.id.post_btn);
         EditText postEditText = findViewById(R.id.post_et);
@@ -84,7 +84,7 @@ public class post_english extends AppCompatActivity {
                     });
                 } else {
                     // Handle empty post_math text
-                    Toast.makeText(post_english.this, "Please enter a post_math", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(post_english.this, "Please enter a text", Toast.LENGTH_SHORT).show();
                 }
             }
         });
