@@ -5,7 +5,7 @@
     android:background="#ffffff">
 
     <TextView
-        android:id="@+id/AcadBud_research_channel"
+        android:id="@+id/AcadBud_inner_thooughts_channel"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_alignParentStart="true"
@@ -17,76 +17,83 @@
         android:fontFamily="@font/poppins"
         android:paddingLeft="13dp"
         android:text="Inner Thoughts"
-        android:textColor="#2BC8D8"
+        android:textColor="#E55604"
         android:textSize="35sp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="624dp"
-        android:layout_above="@+id/profile_btn_ap"
-        android:layout_marginTop="0dp"
+        android:layout_above="@+id/profile_btn_inner_thoughts"
+        android:layout_below="@+id/AcadBud_inner_thooughts_channel"
+        android:layout_marginTop="4dp"
         android:layout_marginBottom="2dp" />
 
     <Button
-        android:id="@+id/innerthoughts_channel_post_btn"
+        android:id="@+id/inner_thoughts_channel_post_btn"
         android:layout_width="76dp"
         android:layout_height="80dp"
-        android:layout_above="@+id/profile_btn_ap"
+        android:layout_above="@+id/profile_btn_inner_thoughts"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="26dp"
         android:background="@drawable/post_btn" />
 
     <View
-        android:id="@+id/filipino_vw"
+        android:id="@+id/inner_thoughts_vw"
         android:layout_width="410dp"
         android:layout_height="2dp"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="54dp"
-        android:background="#000000"/>
+        android:background="#DBDEE3"/>
 
     <Button
-        android:id="@+id/home_btn_ap"
+        android:id="@+id/home_btn_inner_thoughts"
         android:layout_width="52dp"
         android:layout_height="46dp"
-        android:layout_alignTop="@+id/filipino_vw"
+        android:layout_alignTop="@+id/inner_thoughts_vw"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="126dp"
-        android:layout_marginTop="-3dp"
-        android:layout_marginBottom="13dp"
+        android:layout_marginStart="9dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
         android:background="@drawable/home_button" />
 
     <Button
-        android:id="@+id/meeting_btn_ap"
+        android:id="@+id/meeting_btn_inner_thoughts"
         android:layout_width="52dp"
         android:layout_height="46dp"
+        android:layout_alignTop="@+id/home_btn_inner_thoughts"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="62dp"
         android:layout_marginTop="0dp"
         android:layout_marginBottom="5dp"
+        android:layout_toEndOf="@+id/home_btn_inner_thoughts"
         android:background="@drawable/meeting_button" />
 
     <Button
-        android:id="@+id/notif_btn_ap"
+        android:id="@+id/notif_btn_inner_thoughts"
         android:layout_width="52dp"
         android:layout_height="46dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="0dp"
-        android:layout_marginBottom="6dp"
-        android:background="@drawable/notification_button" />
-
-    <Button
-        android:id="@+id/profile_btn_ap"
-        android:layout_width="52dp"
-        android:layout_height="46dp"
-        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/meeting_btn_inner_thoughts"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="62dp"
         android:layout_marginTop="0dp"
-        android:layout_marginEnd="25dp"
-        android:layout_marginBottom="9dp"
+        android:layout_marginBottom="5dp"
+        android:layout_toEndOf="@+id/meeting_btn_inner_thoughts"
+        android:background="@drawable/notification_button" />
+
+    <Button
+        android:id="@+id/profile_btn_inner_thoughts"
+        android:layout_width="52dp"
+        android:layout_height="46dp"
+        android:layout_alignTop="@+id/notif_btn_inner_thoughts"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="49dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="5dp"
+        android:layout_toEndOf="@+id/notif_btn_inner_thoughts"
         android:background="@drawable/profile_button" />
+
 
 </RelativeLayout>
