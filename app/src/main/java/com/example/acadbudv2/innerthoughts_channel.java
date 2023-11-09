@@ -100,7 +100,7 @@ public class innerthoughts_channel extends AppCompatActivity {
         });
 
         // Add a button click listener or any other functionality as needed
-        Button postButton = findViewById(R.id.innerthoughts_channel_post_btn);
+        Button postButton = findViewById(R.id.inner_thoughts_channel_post_btn);
         postButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

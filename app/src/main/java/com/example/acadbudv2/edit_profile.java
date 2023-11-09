@@ -47,9 +47,9 @@ public class edit_profile extends AppCompatActivity {
         userRef.child("section").setValue(newSection);
         userRef.child("year").setValue(newYear);
 
-        // Once the data is updated, you can navigate back to the profile screen or perform another action.
-        // For example, you can use an Intent to navigate back to the profile screen.
+        // Pass the user's UID to the profile_ssg activity
         Intent intent = new Intent(edit_profile.this, profile_ssg.class);
+        intent.putExtra("userUid", uid);
         startActivity(intent);
         finish(); // Finish the current activity
     }

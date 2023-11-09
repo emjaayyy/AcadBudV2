@@ -15,9 +15,11 @@ import java.util.List;
 
 public class post_adapter extends RecyclerView.Adapter<post_adapter.PostViewHolder> {
     private List<post_content> posts;
+    private boolean isSSGStudent; // Set this to true for SSG Students
 
-    public post_adapter(List<post_content> posts) {
+    public post_adapter(List<post_content> posts, boolean isSSGStudent) {
         this.posts = posts;
+        this.isSSGStudent = isSSGStudent;
     }
 
     @NonNull
@@ -38,16 +40,13 @@ public class post_adapter extends RecyclerView.Adapter<post_adapter.PostViewHold
         return posts.size();
     }
 
-    public void addPost(post_content post) {
-        posts.add(post);
-        notifyItemInserted(posts.size() - 1);
-    }
-
     public class PostViewHolder extends RecyclerView.ViewHolder {
         TextView nameTextView;
         TextView dateTextView;
         TextView contentTextView;
         Button postAddBtn;
+        Button editBtn;
+        Button deleteBtn;
 
         public PostViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -55,14 +54,27 @@ public class post_adapter extends RecyclerView.Adapter<post_adapter.PostViewHold
             dateTextView = itemView.findViewById(R.id.dateTextView);
             contentTextView = itemView.findViewById(R.id.contentTextView);
             postAddBtn = itemView.findViewById(R.id.postAddBtn);
+            editBtn = itemView.findViewById(R.id.edit_btn_post_adapter);
+            deleteBtn = itemView.findViewById(R.id.delete_btn_post_adapter);
 
             postAddBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     // Start the meeting_adapter activity when the button is clicked.
-                    startMeetingAdapterActivity(v.getContext());
+                    startMeetingListActivity(v.getContext());
                 }
             });
+
+            // Control the visibility of buttons based on the isSSGStudent value
+            if (isSSGStudent) {
+                postAddBtn.setVisibility(View.VISIBLE);
+                editBtn.setVisibility(View.GONE);
+                deleteBtn.setVisibility(View.GONE);
+            } else {
+                postAddBtn.setVisibility(View.GONE);
+                editBtn.setVisibility(View.VISIBLE);
+                deleteBtn.setVisibility(View.VISIBLE);
+            }
         }
 
         public void bind(post_content post) {
@@ -71,9 +83,9 @@ public class post_adapter extends RecyclerView.Adapter<post_adapter.PostViewHold
             contentTextView.setText(post.getPosts());
         }
 
-        private void startMeetingAdapterActivity(Context context) {
+        private void startMeetingListActivity(Context context) {
             // Create an Intent to start the meeting_adapter activity.
-            Intent intent = new Intent(context, meeting_dialog.class);
+            Intent intent = new Intent(context, meeting_list.class);
 
             // You can also pass any data to the meeting_adapter activity if needed.
             // intent.putExtra("key", value);

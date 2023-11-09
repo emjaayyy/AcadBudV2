@@ -56,8 +56,14 @@
             android:name=".mapeh_channel"
             android:exported="false" />
         <activity
+            android:name=".meeting_list"
+            android:exported="false"/>
+        <activity
             android:name=".esp_channel"
             android:exported="false" />
+        <activity
+            android:name=".meeting_list_adapter"
+            android:exported="false"/>
         <activity
             android:name=".ap_channel"
             android:exported="false" />
