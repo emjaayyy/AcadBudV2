@@ -88,32 +88,30 @@
         android:textColor="#535353"
         android:textSize="18dp" />
 
-    <TextView
-        android:id="@+id/participantTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="22dp"
-        android:layout_below="@+id/date_time_tv_1_user"
+    <Button
+        android:id="@+id/participant"
+        android:layout_width="100dp"
+        android:layout_height="20dp"
         android:layout_alignStart="@+id/date_time_tv_1_user"
         android:layout_alignBottom="@+id/math_vw_2_user"
         android:layout_marginStart="-1dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginBottom="18dp"
-        android:gravity="left"
-        android:text="Participant"
-        android:textColor="#535353"
-        android:textSize="18dp" />
+        android:layout_marginBottom="8dp"
+        android:text="Participants"
+        android:background="@color/colorTertiary"
+        android:textColor="#000000" />
 
     <TextView
         android:id="@+id/participant_num_1_user"
-        android:layout_width="41dp"
-        android:layout_height="21dp"
-        android:layout_alignTop="@+id/participantTextView"
+        android:layout_width="37dp"
+        android:layout_height="18dp"
+        android:layout_alignTop="@+id/participant"
         android:layout_alignEnd="@+id/date_time_tv_1_user"
-        android:layout_alignBottom="@+id/participantTextView"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="-135dp"
-        android:layout_marginBottom="2dp"
+        android:layout_alignBottom="@+id/math_vw_2_user"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="-152dp"
+        android:layout_marginBottom="8dp"
+        android:layout_toEndOf="@+id/participant"
         android:gravity="center"
         android:textColor="#535353"
         android:textSize="18dp" />
