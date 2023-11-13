@@ -1,11 +1,16 @@
 package com.example.acadbudv2;
 
 public class post_content {
-    public post_content(String name, String date, String content) {
+    private String posts, name, date;
+
+    public post_content(String name, String date, String posts) {
+        this.name = name;
+        this.date = date;
+        this.posts = posts;
     }
 
+    // Empty constructor for Firebase
     public post_content() {
-
     }
 
     public String getPosts() {
@@ -31,6 +36,4 @@ public class post_content {
     public void setDate(String date) {
         this.date = date;
     }
-
-    String posts, name, date;
 }
