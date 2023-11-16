@@ -22,7 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-public class meeting_adapter extends RecyclerView.Adapter<meeting_adapter.MeetingViewHolder> {
+public class meeting_adapter_ssg extends RecyclerView.Adapter<meeting_adapter_ssg.MeetingViewHolder> {
     private List<meetings> meetingsList;
     private DatabaseReference databaseReference;
     private String channelName;
@@ -32,7 +32,7 @@ public class meeting_adapter extends RecyclerView.Adapter<meeting_adapter.Meetin
     private TextView timeEditText;
     private Context context;
 
-    public meeting_adapter(Context context, List<meetings> meetingsList, String channelName, EditText subjectEditText, EditText topicEditText, TextView dateEditText, TextView timeEditText) {
+    public meeting_adapter_ssg(Context context, List<meetings> meetingsList, String channelName, EditText subjectEditText, EditText topicEditText, TextView dateEditText, TextView timeEditText) {
         this.context = context;
         databaseReference = FirebaseDatabase.getInstance().getReference("Meetings");
         this.meetingsList = meetingsList;

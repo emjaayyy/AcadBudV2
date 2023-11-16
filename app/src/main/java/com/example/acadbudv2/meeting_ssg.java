@@ -23,7 +23,7 @@ import java.util.List;
 
 public class meeting_ssg extends AppCompatActivity {
     private RecyclerView recyclerView;
-    private meeting_adapter adapter;
+    private meeting_adapter_ssg adapter;
     private DatabaseReference mdatabaseReference;
     private EditText subjectEditText;
     private EditText topicEditText;
@@ -43,7 +43,7 @@ public class meeting_ssg extends AppCompatActivity {
         context = this; // Store the context
 
         // Create the adapter with an empty list initially
-        adapter = new meeting_adapter(this, new ArrayList<meetings>(), channelName, subjectEditText, topicEditText, date, time);
+        adapter = new meeting_adapter_ssg(this, new ArrayList<meetings>(), channelName, subjectEditText, topicEditText, date, time);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);

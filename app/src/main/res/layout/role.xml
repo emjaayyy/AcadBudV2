@@ -18,7 +18,7 @@
         android:fontFamily="@font/poppins"
         android:text="Choose your role"
         android:textColor="#ffffff"
-        android:textSize="30sp" />
+        android:textSize="35sp" />
 
     <Button
         android:id="@+id/student_role"

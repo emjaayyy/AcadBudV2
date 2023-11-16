@@ -6,7 +6,7 @@
     android:background="#ffffff">
 
     <View
-        android:id="@+id/meeting_vw_ssg"
+        android:id="@+id/meeting_vw_user"
         android:layout_width="9dp"
         android:layout_height="104dp"
         android:layout_alignParentStart="true"
@@ -15,16 +15,16 @@
         android:background="#9E96FF" />
 
     <View
-        android:id="@+id/meeting_vw_2_ssg"
+        android:id="@+id/meeting_vw_2_user"
         android:layout_width="344dp"
         android:layout_height="103dp"
-        android:layout_alignBottom="@+id/meeting_vw_ssg"
+        android:layout_alignBottom="@+id/meeting_vw_user"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="-1dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="0dp"
-        android:layout_toEndOf="@+id/meeting_vw_ssg"
+        android:layout_toEndOf="@+id/meeting_vw_user"
         android:background="#EFEEFF"
         android:fontFamily="@font/poppins"
         android:paddingLeft="1dp"
@@ -32,11 +32,11 @@
         android:textSize="20sp" />
 
     <TextView
-        android:id="@+id/subject_tv_ssg"
+        android:id="@+id/subject_tv_user"
         android:layout_width="159dp"
         android:layout_height="30dp"
-        android:layout_alignTop="@+id/topic_tv_ssg"
-        android:layout_alignEnd="@+id/meeting_vw_2_ssg"
+        android:layout_alignTop="@+id/topic_tv_user"
+        android:layout_alignEnd="@+id/meeting_vw_2_user"
         android:layout_marginTop="0dp"
         android:layout_marginEnd="4dp"
         android:fontFamily="@font/poppins"
@@ -44,24 +44,24 @@
         android:textSize="19dp" />
 
     <TextView
-        android:id="@+id/topic_tv_ssg"
+        android:id="@+id/topic_tv_user"
         android:layout_width="159dp"
         android:layout_height="30dp"
-        android:layout_alignTop="@+id/meeting_vw_2_ssg"
+        android:layout_alignTop="@+id/meeting_vw_2_user"
         android:layout_marginStart="7dp"
         android:layout_marginTop="0dp"
         android:layout_marginEnd="177dp"
-        android:layout_toEndOf="@+id/meeting_vw_ssg"
+        android:layout_toEndOf="@+id/meeting_vw_user"
         android:fontFamily="@font/poppins"
         android:textColor="#003780"
         android:textSize="19dp" />
 
     <TextView
-        android:id="@+id/date_time_tv_1_ssg"
+        android:id="@+id/date_time_tv_1_user"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/topic_tv_ssg"
-        android:layout_alignStart="@+id/topic_tv_ssg"
+        android:layout_below="@+id/topic_tv_user"
+        android:layout_alignStart="@+id/topic_tv_user"
         android:layout_marginStart="2dp"
         android:layout_marginTop="5dp"
         android:gravity="left"
@@ -69,31 +69,47 @@
         android:textSize="18dp" />
 
     <Button
-        android:id="@+id/participant_ssg"
+        android:id="@+id/participant_user"
         android:layout_width="100dp"
         android:layout_height="20dp"
-        android:layout_alignStart="@+id/date_time_tv_1_ssg"
-        android:layout_alignBottom="@+id/meeting_vw_2_ssg"
+        android:layout_alignStart="@+id/date_time_tv_1_user"
+        android:layout_alignBottom="@+id/meeting_vw_2_user"
         android:layout_marginStart="-1dp"
         android:layout_marginBottom="8dp"
         android:text="Participants"
         android:background="@color/colorTertiary"
         android:textColor="#000000" />
 
+    <TextView
+        android:id="@+id/participant_num_1_user"
+        android:layout_width="37dp"
+        android:layout_height="18dp"
+        android:layout_alignTop="@+id/participant_user"
+        android:layout_alignEnd="@+id/date_time_tv_1_user"
+        android:layout_alignBottom="@+id/meeting_vw_2_user"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="-152dp"
+        android:layout_marginBottom="8dp"
+        android:layout_toEndOf="@+id/participant_user"
+        android:gravity="center"
+        android:textColor="#535353"
+        android:textSize="18dp" />
+
     <Button
-        android:id="@+id/add_btn_ssg"
+        android:id="@+id/leave_btn_user"
         android:layout_width="102dp"
         android:layout_height="22dp"
-        android:layout_below="@+id/subject_tv_ssg"
-        android:layout_alignEnd="@+id/meeting_vw_2_ssg"
-        android:layout_alignBottom="@+id/meeting_vw_2_ssg"
+        android:layout_below="@+id/subject_tv_user"
+        android:layout_alignEnd="@+id/meeting_vw_2_user"
+        android:layout_alignBottom="@+id/meeting_vw_2_user"
         android:layout_marginTop="50dp"
         android:layout_marginEnd="0dp"
         android:layout_marginBottom="1dp"
         android:background="#FF3131"
         android:fontFamily="@font/poppins"
         android:gravity="center"
-        android:text="ADD"
+        android:text="LEAVE"
         android:textColor="#ffffff"
-        android:textSize="15dp"/>
+        android:textSize="15dp" />
 </RelativeLayout>
