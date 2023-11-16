@@ -3,7 +3,7 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_height="170dp"
     android:background="#ffffff">
 
 
@@ -23,8 +23,8 @@
 
     <View
         android:id="@+id/content_vw_math"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="149dp"
         android:layout_alignTop="@+id/dateTextView"
         android:layout_marginTop="30dp"
         android:background="@drawable/rectangle"
@@ -57,19 +57,6 @@
         android:textSize="18dp" />
 
     <Button
-        android:id="@+id/postAddBtn"
-        android:layout_width="58dp"
-        android:layout_height="30dp"
-        android:layout_below="@+id/delete_btn_post_adapter"
-        android:layout_alignEnd="@+id/content_vw_math"
-        android:layout_marginTop="38dp"
-        android:layout_marginEnd="1dp"
-        android:background="@drawable/rounded_corner_view"
-        android:backgroundTint="#FF3131"
-        android:fontFamily="@font/poppins"
-        android:text="ADD" />
-
-    <Button
         android:id="@+id/edit_btn_post_adapter"
         android:layout_width="31dp"
         android:layout_height="26dp"
@@ -98,7 +85,6 @@
         android:layout_marginStart="4dp"
         android:layout_marginTop="14dp"
         android:layout_marginEnd="0dp"
-        android:layout_toStartOf="@+id/postAddBtn"
         android:hint="Type your concern ..."
         android:paddingLeft="5dp"
         android:textColor="#000000"
