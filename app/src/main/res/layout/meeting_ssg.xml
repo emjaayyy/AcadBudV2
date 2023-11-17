@@ -21,6 +21,21 @@
         android:textColor="#004AAD"
         android:textSize="35sp" />
 
+    <Button
+        android:id="@+id/create_meeting_btn_user"
+        android:layout_width="160dp"
+        android:layout_height="34dp"
+        android:layout_below="@+id/Meeting_tv_ssg"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="6dp"
+        android:background="@drawable/rectangle"
+        android:backgroundTint="@color/colorPrimary"
+        android:text="Create Meeting"
+        android:textAllCaps="false"
+        android:textColor="#ffffff"
+        android:textSize="18dp" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView_ssg_meeting"
         android:layout_width="match_parent"

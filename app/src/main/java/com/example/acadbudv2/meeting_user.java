@@ -14,7 +14,7 @@ public class meeting_user extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.meeting_user);
 
-        Button rating = findViewById(R.id.math_btn_meeting_ssg);
+        Button rating = findViewById(R.id.create_meeting_btn_user);
 
         rating.setOnClickListener(new View.OnClickListener() {
             @Override
