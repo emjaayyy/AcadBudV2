@@ -388,6 +388,35 @@
         android:textColor="#4F4A7D"
         android:textSize="15sp" />
 
+
+    <Button
+        android:id="@+id/btn_top_students"
+        android:layout_width="101dp"
+        android:layout_height="79dp"
+        android:layout_below="@+id/tv_tle_channels"
+        android:layout_alignStart="@+id/btn_tle_channels"
+        android:layout_alignEnd="@+id/btn_tle_channels"
+        android:layout_marginStart="-1dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="2dp"
+        android:background="@drawable/medal_btn" />
+
+    <TextView
+        android:id="@+id/tv_top_students"
+        android:layout_width="95dp"
+        android:layout_height="59dp"
+        android:layout_below="@+id/btn_top_students"
+        android:layout_alignStart="@+id/btn_top_students"
+        android:layout_alignEnd="@+id/btn_top_students"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="3dp"
+        android:fontFamily="@font/poppins"
+        android:gravity="center"
+        android:text="Top Students"
+        android:textColor="#4F4A7D"
+        android:textSize="15dp" />
+
     <View
         android:id="@+id/home_vw"
         android:layout_width="410dp"
