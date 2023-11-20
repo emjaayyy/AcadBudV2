@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">AcadBudV2</string>
 
-    <string-array name="Channels">
+    <string-array name="subjects_array">
+        <item>Subjects</item>
         <item>Math</item>
         <item>Science</item>
         <item>English</item>
