@@ -80,6 +80,7 @@
         android:background="@color/colorTertiary"
         android:textColor="#000000" />
 
+
     <Button
         android:id="@+id/add_btn_ssg"
         android:layout_width="102dp"
@@ -95,5 +96,8 @@
         android:gravity="center"
         android:text="ADD"
         android:textColor="#ffffff"
-        android:textSize="15dp"/>
+        android:textSize="15dp"
+        android:onClick="showSearchBar" />
+
+
 </RelativeLayout>

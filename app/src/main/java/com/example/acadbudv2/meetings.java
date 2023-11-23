@@ -1,5 +1,6 @@
 package com.example.acadbudv2;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class meetings {
@@ -57,7 +58,10 @@ public class meetings {
         return participants;
     }
 
-    public void setParticipants(List<String> participants) {
-        this.participants = participants;
+    public void addParticipant(String participant) {
+        if (participants == null) {
+            participants = new ArrayList<>();
+        }
+        participants.add(participant);
     }
 }

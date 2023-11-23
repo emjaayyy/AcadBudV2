@@ -13,6 +13,11 @@ import java.util.List;
 public class meeting_adapter_ssg extends RecyclerView.Adapter<meeting_adapter_ssg.MeetingViewHolder> {
     private List<meetings> meetingsList;
     private Context context;
+    private OnAddBtnClickListener addBtnClickListener;
+
+    public interface OnAddBtnClickListener {
+        void onAddBtnClick(int position);
+    }
 
     public meeting_adapter_ssg(Context context, List<meetings> meetingsList) {
         this.context = context;
@@ -51,30 +56,27 @@ public class meeting_adapter_ssg extends RecyclerView.Adapter<meeting_adapter_ss
             dateTimeTextView = itemView.findViewById(R.id.date_time_tv_1_ssg);
             participantsButton = itemView.findViewById(R.id.participant_ssg);
             addButton = itemView.findViewById(R.id.add_btn_ssg);
-        }
-
-        public void bind(meetings meeting) {
-            // Bind meeting data to the UI
-            subjectTextView.setText(meeting.getSubject());
-            topicTextView.setText(meeting.getTopic());
-            String dateTime = meeting.getDate() + " " + meeting.getTime();
-            dateTimeTextView.setText(dateTime);
-
-            // Set click listeners or other actions for buttons if needed
-            participantsButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // Handle participants button click
-                }
-            });
 
             addButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // Handle add button click
+                    if (addBtnClickListener != null) {
+                        addBtnClickListener.onAddBtnClick(getAdapterPosition());
+                    }
                 }
             });
         }
+
+        public void bind(meetings meeting) {
+            subjectTextView.setText(meeting.getSubject());
+            topicTextView.setText(meeting.getTopic());
+            String dateTime = meeting.getDate() + " " + meeting.getTime();
+            dateTimeTextView.setText(dateTime);
+        }
+    }
+
+    public void setOnAddBtnClickListener(OnAddBtnClickListener listener) {
+        this.addBtnClickListener = listener;
     }
 
     public void updateMeetingsList(List<meetings> updatedMeetingsList) {
