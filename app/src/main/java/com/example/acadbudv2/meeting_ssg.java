@@ -15,7 +15,6 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -101,7 +100,7 @@ public class meeting_ssg extends AppCompatActivity {
     }
 
     private void updateRecyclerView(List<meetings> meetingsList) {
-        meeting_adapter_ssg adapter = new meeting_adapter_ssg(context, meetingsList);
+        meeting_adapter_ssg adapter = new meeting_adapter_ssg (context, meetingsList);
         RecyclerView recyclerView = findViewById(R.id.recyclerView_ssg_meeting);
         recyclerView.setAdapter(adapter);
     }

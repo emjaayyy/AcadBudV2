@@ -96,8 +96,7 @@
         android:gravity="center"
         android:text="ADD"
         android:textColor="#ffffff"
-        android:textSize="15dp"
-        android:onClick="showSearchBar" />
+        android:textSize="15dp" />
 
 
 </RelativeLayout>

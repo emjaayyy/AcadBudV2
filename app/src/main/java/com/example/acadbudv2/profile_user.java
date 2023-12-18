@@ -5,12 +5,15 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -20,12 +23,18 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class profile_user extends AppCompatActivity {
 
     TextView profile_name;
     FirebaseAuth auth;
     SharedPreferences sharedPreferences;
     private static final String PREFS_NAME = "MyPrefsFile"; // Name for your SharedPreferences file
+    private RecyclerView recyclerViewProfile;
+    private post_adapter postAdapter;
+    private List<post_content> userPosts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +54,17 @@ public class profile_user extends AppCompatActivity {
         if (currentUser != null) {
             String uid = currentUser.getUid();
 
+            // Initialize RecyclerView and Adapter
+            recyclerViewProfile = findViewById(R.id.recyclerViewProfile);
+            userPosts = new ArrayList<>();
+            postAdapter = new post_adapter(userPosts);
+            recyclerViewProfile.setLayoutManager(new LinearLayoutManager(this));
+            recyclerViewProfile.setAdapter(postAdapter);
+
             // Call the readData method with the UID
             readData(uid);
         }
+
         // The rest of your code...
         Button logoutButton = findViewById(R.id.logout_btn_user);
         Button notif = findViewById(R.id.notif_btn_profile);
@@ -82,37 +99,42 @@ public class profile_user extends AppCompatActivity {
 
             }
         });
-
     }
 
+    private void readData(String userName) {
+        DatabaseReference channelsReference = FirebaseDatabase.getInstance().getReference("Channels");
 
-    private void readData(String uid) {
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Students").child(uid).child("name");
-        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+        channelsReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    String name = dataSnapshot.getValue(String.class);
+            public void onDataChange(DataSnapshot channelsSnapshot) {
+                userPosts.clear(); // Clear the list to avoid duplicates
 
-                    // Save the user's name in SharedPreferences
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putString("userName", name);
-                    editor.apply();
+                for (DataSnapshot channelSnapshot : channelsSnapshot.getChildren()) {
+                    // Assuming each post has a "name" field
+                    for (DataSnapshot postSnapshot : channelSnapshot.child("Posts").child("lrn").getChildren()) {
+                        String postName = postSnapshot.child("name").getValue(String.class);
 
-                    profile_name.setText(name);
-                } else {
-                    // Handle the case where the user's data doesn't exist
-                    // You can display an error message or take appropriate action.
+                        if (postName != null && postName.equalsIgnoreCase(userName)) {
+                            post_content post = postSnapshot.getValue(post_content.class);
+                            Log.d("ProfileUser", "Post: " + post.getName() + " - " + post.getPosts() + " - " + post.getDate());
+                            userPosts.add(post);
+                        }
+                    }
                 }
+
+                postAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
+                Log.e("ProfileUser", "Error in database operation: " + databaseError.getMessage());
                 // Handle any errors that occur
-                // You can display an error message or take appropriate action.
             }
         });
     }
+
+
+
 
     private void showLogoutConfirmationDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);

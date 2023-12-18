@@ -18,11 +18,14 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 public class signup_ssg extends AppCompatActivity {
 
     private EditText positionSSG, lrnSSG, nameSSG, emailSSG, passwordSSG;
     private DatabaseReference databaseReference;
-    private FirebaseAuth auth; // Firebase Authentication
+    private FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +52,6 @@ public class signup_ssg extends AppCompatActivity {
             }
         });
 
-
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -67,16 +69,15 @@ public class signup_ssg extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
                                         // User account creation is successful, you can proceed with saving user data in the Realtime Database
-                                        ssg ssg = new ssg(position, lrn, name, email, password);
-                                        databaseReference.child(lrn).setValue(ssg);
+                                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                                        if (user != null) {
+                                            String uid = user.getUid();
+                                            String hashedPassword = hashPassword(password);
+                                            ssg ssg = new ssg(position, lrn, name, email, hashedPassword);
+                                            databaseReference.child(lrn).setValue(ssg);
 
-                                        // Optional: You can sign in the user after successful registration
-                                        auth.signInWithEmailAndPassword(email, password);
-
-                                        // Send email verification
-                                        FirebaseUser users = FirebaseAuth.getInstance().getCurrentUser();
-                                        if (users != null) {
-                                            users.sendEmailVerification()
+                                            // Send email verification
+                                            user.sendEmailVerification()
                                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                         @Override
                                                         public void onComplete(@NonNull Task<Void> task) {
@@ -89,7 +90,7 @@ public class signup_ssg extends AppCompatActivity {
                                                     });
                                         }
 
-                                        // Redirect to a different activity or perform any post_math-registration actions
+                                        // Redirect to a different activity or perform any post-registration actions
                                     } else {
                                         // User account creation failed, show an error message
                                         Toast.makeText(signup_ssg.this, "User account creation failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
@@ -102,8 +103,8 @@ public class signup_ssg extends AppCompatActivity {
                 }
             }
         });
-
     }
+
     // Validation method
     private boolean validateInfo(String position, String lrn, String name, String email, String password) {
         if (!lrn.matches("[0-9]{12}$")) {
@@ -136,6 +137,24 @@ public class signup_ssg extends AppCompatActivity {
             return false;
         } else {
             return true;
+        }
+    }
+
+    private String hashPassword(String password) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] hashedBytes = md.digest(password.getBytes());
+
+            // Convert bytes to hexadecimal format
+            StringBuilder sb = new StringBuilder();
+            for (byte b : hashedBytes) {
+                sb.append(String.format("%02x", b));
+            }
+
+            return sb.toString();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            return "";
         }
     }
 }

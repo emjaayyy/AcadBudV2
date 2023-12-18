@@ -30,6 +30,8 @@
         <activity
             android:name=".meeting_adapter_ssg"
             android:exported="false" />
+        <activity android:name=".search"
+            android:exported="false"/>
         <activity
             android:name=".home_ssg"
             android:exported="false" />
