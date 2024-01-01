@@ -8,21 +8,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
 import java.util.List;
 
 public class post_adapter extends RecyclerView.Adapter<post_adapter.PostViewHolder> {
     private List<post_content> posts;
-    private FirebaseAuth mAuth;
-    private DatabaseReference mDatabase;
 
     public post_adapter(List<post_content> posts) {
         this.posts = posts;
-        mAuth = FirebaseAuth.getInstance();
-        mDatabase = FirebaseDatabase.getInstance().getReference();
     }
 
     @NonNull
@@ -60,16 +52,10 @@ public class post_adapter extends RecyclerView.Adapter<post_adapter.PostViewHold
             contentTextView = itemView.findViewById(R.id.contentTextView);
         }
 
-
-
         public void bind(post_content post) {
             nameTextView.setText(post.getName());
             dateTextView.setText(post.getDate());
             contentTextView.setText(post.getPosts());
-
-            // Ensure buttons are properly shown or hidden when binding data
-
         }
     }
-
 }

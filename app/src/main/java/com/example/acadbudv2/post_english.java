@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -25,6 +24,8 @@ public class post_english extends AppCompatActivity {
     private DatabaseReference mPostReference;
     private String userName; // Variable to store the user's name
 
+    private String channelIdentifier = "English"; // Change this to the desired channel identifier
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,13 +35,10 @@ public class post_english extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
 
         // Initialize Firebase Database reference
-        mPostReference = FirebaseDatabase.getInstance().getReference("Channels/English/Posts/lrn"); // Replace "lrn" with your specific database node
+        mPostReference = FirebaseDatabase.getInstance().getReference("Channels/" + channelIdentifier);
 
         Button postButton = findViewById(R.id.post_btn);
         EditText postEditText = findViewById(R.id.post_et);
-
-        // Retrieve the user's UID
-        String uid = mAuth.getCurrentUser().getUid();
 
         // Retrieve the user's name from SharedPreferences
         userName = getUserNameFromSharedPreferences();
@@ -53,9 +51,8 @@ public class post_english extends AppCompatActivity {
                     // Create a new post_content object
                     post_content newPost = new post_content();
 
-                    // Set the user's name from SharedPreferences
+                    // Set the user's name as the key
                     newPost.setName(userName);
-
                     newPost.setPosts(postText);
 
                     // Set the current date and time
@@ -63,18 +60,21 @@ public class post_english extends AppCompatActivity {
                     String currentDate = dateFormat.format(new Date());
                     newPost.setDate(currentDate);
 
-                    // Calculate the next post_math key
-                    mPostReference.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            long postCount = dataSnapshot.getChildrenCount();
-                            String postKey = "Post " + (postCount + 1);
+                    // Save the new post to the Firebase database under the user's name
+                    mPostReference.child(userName).addListenerForSingleValueEvent(new ValueEventListener() {
 
-                            // Save the new post_math to the Firebase database under the user's UID
-                            mPostReference.child(postKey).setValue(newPost);
+                        public void onDataChange(com.google.firebase.database.DataSnapshot dataSnapshot) {
+                            long postCount = dataSnapshot.getChildrenCount() + 1; // Increment the post counter
+                            String postKey = "Post " + postCount;
 
-                            // Optionally, you can add a success message
-                            Toast.makeText(post_english.this, "Post saved successfully", Toast.LENGTH_SHORT).show();
+                            // Save the new post to the Firebase database under the user's name
+                            mPostReference.child(userName).child(postKey).setValue(newPost, new DatabaseReference.CompletionListener() {
+                                @Override
+                                public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                                    // Optionally, you can add a success message
+                                    Toast.makeText(post_english.this, "Post saved successfully", Toast.LENGTH_SHORT).show();
+                                }
+                            });
                         }
 
                         @Override
@@ -83,7 +83,7 @@ public class post_english extends AppCompatActivity {
                         }
                     });
                 } else {
-                    // Handle empty post_math text
+                    // Handle empty post text
                     Toast.makeText(post_english.this, "Please enter a text", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -96,3 +96,4 @@ public class post_english extends AppCompatActivity {
         return getSharedPreferences("MyPrefsFile", Context.MODE_PRIVATE).getString("userName", "");
     }
 }
+

@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -15,9 +16,15 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.*;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -102,12 +109,13 @@ public class profile_ssg extends AppCompatActivity {
             postsRecyclerView.setAdapter(postAdapter);
 
             // Initialize the Firebase Realtime Database reference
-            databaseRef = FirebaseDatabase.getInstance().getReference("Channels/Math Channels/Post/lrn");
+            databaseRef = FirebaseDatabase.getInstance().getReference("Channels");
 
-            // Fetch and display posts
-            fetchPosts();
+            // Fetch and display posts from all channels
+            fetchPostsFromAllChannels(savedName);
         } else {
             // Handle the case where the user is not logged in
+            Log.e("ProfileError", "User is not logged in");
         }
     }
 
@@ -143,38 +151,64 @@ public class profile_ssg extends AppCompatActivity {
         finish(); // Finish the current activity
     }
 
-    private void fetchPosts() {
+    private void fetchPostsFromAllChannels(String userName) {
+        DatabaseReference channelsRef = FirebaseDatabase.getInstance().getReference("Channels");
 
-        databaseRef.addChildEventListener(new ChildEventListener() {
+        // Iterate through each channel
+        channelsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot channelsSnapshot) {
+                for (DataSnapshot channelSnapshot : channelsSnapshot.getChildren()) {
+                    String channelName = channelSnapshot.getKey();
+
+                    // Fetch posts for the user from the current channel
+                    fetchPostsForUserInChannel(userName, channelName);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Handle the error
+                Log.e("FirebaseError", "Error retrieving channels: " + error.getMessage());
+            }
+        });
+    }
+
+    private void fetchPostsForUserInChannel(String userName, String channelName) {
+        DatabaseReference userChannelRef = FirebaseDatabase.getInstance()
+                .getReference("Channels/" + channelName + "/" + userName);
+
+        userChannelRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String previousChildName) {
                 if (dataSnapshot.exists()) {
                     post_content post = dataSnapshot.getValue(post_content.class);
                     if (post != null) {
+                        Log.d("FirebaseDebug", "Post retrieved: " + post.getName() + ", " + post.getDate() + ", " + post.getPosts());
                         postAdapter.addPost(post);
                     }
                 }
-
             }
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
+                // Handle post changes if needed
             }
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
+                // Handle post removal if needed
             }
 
             @Override
             public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
+                // Handle post movement if needed
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 // Handle the error
+                Log.e("FirebaseError", "Error retrieving posts: " + databaseError.getMessage());
             }
         });
     }

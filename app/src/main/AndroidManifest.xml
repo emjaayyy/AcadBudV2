@@ -60,7 +60,7 @@
             android:name=".esp_channel"
             android:exported="false" />
         <activity
-            android:name=".meeting_list_adapter"
+            android:name=".post_filipino"
             android:exported="false" />
         <activity
             android:name=".ap_channel"
@@ -91,9 +91,6 @@
             android:exported="false" />
         <activity
             android:name=".post_science"
-            android:exported="false" />
-        <activity
-            android:name=".post_filipino"
             android:exported="false" />
         <activity
             android:name=".post_ap"

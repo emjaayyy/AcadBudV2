@@ -39,9 +39,10 @@ import java.util.List;
 
 public class meeting_ssg extends AppCompatActivity {
     private DatabaseReference mdatabaseReference;
-    private String channelName = "Math";
+    private String channelName = "Math"; // Update with your channel name or retrieve dynamically
     private Context context;
-    private ArrayAdapter<String> adapter; // Declare adapter as a member variable
+    private ArrayAdapter<String> adapter;
+    private int currentSessionNumber; // Update or manage session numbers accordingly
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -49,8 +50,11 @@ public class meeting_ssg extends AppCompatActivity {
         setContentView(R.layout.meeting_ssg);
         FirebaseApp.initializeApp(this);
         mdatabaseReference = FirebaseDatabase.getInstance().getReference("Meetings");
-
+        
         context = this;
+
+        fetchLatestSessionNumber();
+
 
         // Create meeting button click listener
         Button createMeetingBtn = findViewById(R.id.create_meeting_btn_user);
@@ -73,34 +77,76 @@ public class meeting_ssg extends AppCompatActivity {
 
         // Fetch meetings data and set up RecyclerView
         fetchMeetingsData();
+
+    }
+
+    private void fetchLatestSessionNumber() {
+        mdatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                // Find the latest session number
+                for (DataSnapshot sessionSnapshot : dataSnapshot.getChildren()) {
+                    int sessionNumber = extractSessionNumber(sessionSnapshot.getKey());
+                    if (sessionNumber > currentSessionNumber) {
+                        currentSessionNumber = sessionNumber;
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.e("Firebase", "Failed to retrieve latest session number", databaseError.toException());
+                Toast.makeText(context, "Failed to retrieve latest session number", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private int extractSessionNumber(String sessionKey) {
+        // Assuming sessionKey is in the format "Session 1", "Session 2", etc.
+        try {
+            return Integer.parseInt(sessionKey.split(" ")[1]);
+        } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+            // Handle parsing errors or index out of bounds
+            e.printStackTrace();
+        }
+        return 0;
     }
 
     private void fetchMeetingsData() {
-        mdatabaseReference.child("Channels").child(channelName).child("Session 1")
-                .addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        List<meetings> meetingsList = new ArrayList<>();
+        mdatabaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                List<meetings> meetingsList = new ArrayList<>();
 
-                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                            meetings meeting = snapshot.getValue(meetings.class);
-                            meetingsList.add(meeting);
-                        }
+                for (DataSnapshot sessionSnapshot : dataSnapshot.getChildren()) {
+                    // Assuming that each child is a session (Session 1, Session 2, etc.)
+                    DataSnapshot detailsSnapshot = sessionSnapshot.child("Details");
+                    meetings meeting = detailsSnapshot.getValue(meetings.class);
 
-                        // Update the RecyclerView adapter with the new data
-                        updateRecyclerView(meetingsList);
+                    if (meeting != null) {
+                        // Assuming that Participants is directly under the session
+                        DataSnapshot participantsSnapshot = sessionSnapshot.child("Participants");
+                        // Fetch participants data (if needed)
+
+                        // Add the meeting to the list
+                        meetingsList.add(meeting);
                     }
+                }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-                        Log.e("Firebase", "Failed to retrieve meetings", databaseError.toException());
-                        Toast.makeText(context, "Failed to retrieve meetings", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                // Update the RecyclerView adapter with the new data
+                updateRecyclerView(meetingsList);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.e("Firebase", "Failed to retrieve meetings", databaseError.toException());
+                Toast.makeText(context, "Failed to retrieve meetings", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void updateRecyclerView(List<meetings> meetingsList) {
-        meeting_adapter_ssg adapter = new meeting_adapter_ssg (context, meetingsList);
+        meeting_adapter_ssg adapter = new meeting_adapter_ssg(context, meetingsList, mdatabaseReference, channelName, currentSessionNumber);
         RecyclerView recyclerView = findViewById(R.id.recyclerView_ssg_meeting);
         recyclerView.setAdapter(adapter);
     }
@@ -198,11 +244,14 @@ public class meeting_ssg extends AppCompatActivity {
                 String time = timeTextView.getText().toString();
 
                 if (isValidTime(time) && isValidWeekday(date)) {
+                    // Increment session number
+                    currentSessionNumber++;
+
                     // Create a new meeting object
                     meetings newMeeting = new meetings(selectedSubject, topic, date, time, new ArrayList<>());
 
-                    // Save the new meeting to Firebase
-                    mdatabaseReference.child("Channels").child(channelName).child("Session 1").push().setValue(newMeeting);
+                    // Save the new meeting to Firebase under the current session
+                    saveMeetingToFirebase(newMeeting, currentSessionNumber);
 
                     // Inform the user that the meeting has been created
                     Toast.makeText(context, "Meeting created successfully", Toast.LENGTH_SHORT).show();
@@ -216,7 +265,6 @@ public class meeting_ssg extends AppCompatActivity {
                 }
             }
         });
-
         // Set negative button click listener
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
@@ -243,6 +291,20 @@ public class meeting_ssg extends AppCompatActivity {
 
         // Display the dialog
         builder.show();
+    }
+
+    private void saveMeetingToFirebase(meetings newMeeting, int sessionNumber) {
+        DatabaseReference currentSessionReference = mdatabaseReference.child("Session " + sessionNumber);
+        DatabaseReference detailsReference = currentSessionReference.child("Details");
+        DatabaseReference participantsReference = currentSessionReference.child("Participants");
+
+        // Save meeting details under "Details"
+        detailsReference.setValue(newMeeting);
+
+        // Save participants under "Participants"
+        for (String participantName : newMeeting.getParticipants()) {
+            participantsReference.child(participantName).setValue(true);
+        }
     }
 
 
@@ -357,5 +419,4 @@ public class meeting_ssg extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();
     }
-
 }

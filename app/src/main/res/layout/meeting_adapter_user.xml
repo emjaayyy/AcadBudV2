@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="170dp"
+    android:layout_height="140dp"
     android:background="#ffffff">
 
     <View
@@ -67,18 +67,6 @@
         android:gravity="left"
         android:textColor="#535353"
         android:textSize="18dp" />
-
-    <Button
-        android:id="@+id/participant_user"
-        android:layout_width="100dp"
-        android:layout_height="20dp"
-        android:layout_alignStart="@+id/date_time_tv_1_user"
-        android:layout_alignBottom="@+id/meeting_vw_2_user"
-        android:layout_marginStart="-1dp"
-        android:layout_marginBottom="8dp"
-        android:text="Participants"
-        android:background="@color/colorTertiary"
-        android:textColor="#000000" />
 
     <TextView
         android:id="@+id/participant_num_1_user"

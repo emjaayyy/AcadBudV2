@@ -1,10 +1,9 @@
 package com.example.acadbudv2;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -29,84 +28,107 @@ public class ap_channel extends AppCompatActivity {
     private RecyclerView recyclerView;
     private post_adapter postAdapter;
 
-    // Define a key for the user's name in shared preferences
     private static final String PREF_USER_NAME = "user_name";
+    private String channelIdentifier = "AP";
 
-    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ap_channel);
 
-        // Initialize shared preferences
-        sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        Button meeting = findViewById(R.id.meeting_btn_religion);
+        Button notif = findViewById(R.id.notif_btn_religion);
+        Button profile = findViewById(R.id.profile_btn_religion);
+        Button home = findViewById(R.id.home_btn_religion);
 
-        // Retrieve the user's name from shared preferences
-        userName = sharedPreferences.getString(PREF_USER_NAME, "");
+        meeting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent meet_user = new Intent(ap_channel.this, meeting_user.class);
+                startActivity(meet_user);
+            }
+        });
 
-        if (userName.isEmpty()) {
-            // If the user's name is not found in shared preferences, you can handle it accordingly
-            // For example, you can prompt the user to enter their name.
+        notif.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent bell = new Intent(ap_channel.this, notif.class);
+                startActivity(bell);
+            }
+        });
 
-            // Here's an example of how you can save the user's name to shared preferences
-            userName = "Default Name"; // Set a default name if the user hasn't provided one
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putString(PREF_USER_NAME, userName);
-            editor.apply();
-        }
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent me = new Intent(ap_channel.this, profile_ssg.class);
+                startActivity(me);
+            }
+        });
 
-        // Initialize Firebase Database reference
-        mPostReference = FirebaseDatabase.getInstance().getReference("Channels/AP/Posts/lrn"); // Replace "lrn" with your specific database node
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent back = new Intent(ap_channel.this, home_user.class);
+                startActivity(back);
+            }
+        });
+
+
 
         // Initialize RecyclerView and its adapter
-        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView = findViewById(R.id.recyclerView_ap);
         postAdapter = new post_adapter(new ArrayList<>());
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(postAdapter);
 
         // Create a listener to retrieve and handle posts
-        mPostReference.addChildEventListener(new ChildEventListener() {
+        mPostReference = FirebaseDatabase.getInstance().getReference("Channels");
+        mPostReference.child(channelIdentifier).addChildEventListener(new ChildEventListener() {
             @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String previousChildName) {
-                if (dataSnapshot.exists()) {
-                    post_content post = dataSnapshot.getValue(post_content.class);
+            public void onChildAdded(DataSnapshot studentSnapshot, String previousChildName) {
+                // This dataSnapshot refers to each student
+                for (DataSnapshot postSnapshot : studentSnapshot.getChildren()) {
+                    // This dataSnapshot refers to each post under a student
+                    post_content post = postSnapshot.getValue(post_content.class);
                     if (post != null) {
                         postAdapter.addPost(post);
+                        // Log information about the retrieved post
+                        Log.d("PostDebug", "Post ID: " + postSnapshot.getKey() + ", User: " + post.getName() + ", Text: " + post.getPosts());
                     }
                 }
             }
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
+                // Handle post changes if needed
             }
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
+                // Handle post removal if needed
             }
 
             @Override
             public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
+                // Handle post movement if needed
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                // Handle database error if needed
+                Log.e("FirebaseError", "Error retrieving posts: " + error.getMessage());
             }
-
-            // Implement other ChildEventListener methods as needed
         });
 
-        // Add a button click listener or any other functionality as needed
         Button postButton = findViewById(R.id.ap_channel_post_btn);
         postButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent write = new Intent(ap_channel.this,post_ap.class);
+                Intent write = new Intent(ap_channel.this, post_ap.class);
                 startActivity(write);
             }
+
         });
     }
 }
+

@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class meetings {
+    private String key;
     private String subject;
     private String topic;
     private String date;
     private String time;
     private List<String> participants;
 
+    // No-argument constructor required for Firebase
     public meetings() {
         // Default constructor required for Firebase
     }
@@ -20,6 +22,15 @@ public class meetings {
         this.date = date;
         this.time = time;
         this.participants = participants;
+    }
+
+    // Add getter and setter methods for the new 'key' field
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public String getSubject() {
