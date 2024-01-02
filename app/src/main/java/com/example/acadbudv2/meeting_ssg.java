@@ -50,7 +50,7 @@ public class meeting_ssg extends AppCompatActivity {
         setContentView(R.layout.meeting_ssg);
         FirebaseApp.initializeApp(this);
         mdatabaseReference = FirebaseDatabase.getInstance().getReference("Meetings");
-        
+
         context = this;
 
         fetchLatestSessionNumber();

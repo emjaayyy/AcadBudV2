@@ -51,7 +51,7 @@ public class meeting_adapter_ssg extends RecyclerView.Adapter<meeting_adapter_ss
     @Override
     public MeetingViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.meeting_adapter_ssg, parent, false);
-        return new MeetingViewHolder(view);
+        return new MeetingViewHolder(view, validStudents); // Pass valid students here
     }
 
     @Override
@@ -74,9 +74,12 @@ public class meeting_adapter_ssg extends RecyclerView.Adapter<meeting_adapter_ss
 
         // Keep track of selected student names
         private List<String> selectedStudentNames = new ArrayList<>();
+        private List<String> validStudents;
 
-        public MeetingViewHolder(@NonNull View itemView) {
+        // Add a constructor to receive valid students
+        public MeetingViewHolder(@NonNull View itemView, List<String> validStudents) {
             super(itemView);
+            this.validStudents = validStudents;
             subjectTextView = itemView.findViewById(R.id.subject_tv_ssg);
             topicTextView = itemView.findViewById(R.id.topic_tv_ssg);
             dateTimeTextView = itemView.findViewById(R.id.date_time_tv_1_ssg);
@@ -86,7 +89,7 @@ public class meeting_adapter_ssg extends RecyclerView.Adapter<meeting_adapter_ss
             addButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    showSearchBar();
+                    showSearchBar(getAdapterPosition() + 1);
                 }
             });
 
@@ -104,8 +107,7 @@ public class meeting_adapter_ssg extends RecyclerView.Adapter<meeting_adapter_ss
             String dateTime = meeting.getDate() + " " + meeting.getTime();
             dateTimeTextView.setText(dateTime);
         }
-
-        private void showSearchBar() {
+        private void showSearchBar(int sessionNumber) {
             if (selectedStudentNames.size() < 10) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setTitle("Search Students");
@@ -133,7 +135,7 @@ public class meeting_adapter_ssg extends RecyclerView.Adapter<meeting_adapter_ss
                                 selectedStudentNames.add(selectedStudentName);
 
                                 // Save the selected user to Firebase
-                                saveSelectedUserToFirebase(selectedStudentName);
+                                saveSelectedUserToFirebase(selectedStudentName, sessionNumber);
 
                                 // Notify the user
                                 Toast.makeText(context, "User selected: " + selectedStudentName, Toast.LENGTH_LONG).show();
@@ -178,9 +180,9 @@ public class meeting_adapter_ssg extends RecyclerView.Adapter<meeting_adapter_ss
         }
 
         // Inside the MeetingViewHolder class
-        private void saveSelectedUserToFirebase(String selectedStudentName) {
+        private void saveSelectedUserToFirebase(String selectedStudentName, int sessionNumber) {
             // Save the selected user to the Firebase database under the current session
-            DatabaseReference currentSessionReference = mdatabaseReference.child("Session " + currentSessionNumber);
+            DatabaseReference currentSessionReference = mdatabaseReference.child("Session " + sessionNumber);
             DatabaseReference participantsReference = currentSessionReference.child("Participants");
 
             // Check if the user is already added to the session
@@ -205,7 +207,6 @@ public class meeting_adapter_ssg extends RecyclerView.Adapter<meeting_adapter_ss
                 }
             });
         }
-
 
         private void showParticipants(int sessionNumber) {
             DatabaseReference currentSessionReference = mdatabaseReference.child("Session " + sessionNumber).child("Participants");
@@ -234,21 +235,21 @@ public class meeting_adapter_ssg extends RecyclerView.Adapter<meeting_adapter_ss
                 }
             });
         }
-            private void showParticipantsDialog(String participants) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setTitle("Participants");
-                builder.setMessage(participants);
 
-                // Set positive button click listener (optional)
-                builder.setPositiveButton("OK", (dialogInterface, i) -> {
-                    dialogInterface.dismiss(); // Close the dialog
-                });
+        private void showParticipantsDialog(String participants) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setTitle("Participants");
+            builder.setMessage(participants);
 
-                // Show the dialog
-                AlertDialog dialog = builder.create();
-                dialog.show();
+            // Set positive button click listener (optional)
+            builder.setPositiveButton("OK", (dialogInterface, i) -> {
+                dialogInterface.dismiss(); // Close the dialog
+            });
 
-            }
+            // Show the dialog
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        }
     }
 
     private void fetchValidStudentNames() {

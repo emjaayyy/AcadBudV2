@@ -53,42 +53,50 @@ public class meeting_user extends AppCompatActivity {
 
     private void fetchMeetingsData() {
         mdatabaseReference.addValueEventListener(new ValueEventListener() {
-
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                List<meetings> meetingList = new ArrayList<>();
+                List<meetings> meetingsList = new ArrayList<>();
+                String currentUserName = getCurrentUserName();
 
                 for (DataSnapshot sessionSnapshot : dataSnapshot.getChildren()) {
-                    // Assuming that each child is a session (Session 1, Session 2, etc.)
-                    DataSnapshot detailsSnapshot = sessionSnapshot.child("Details");
-                    meetings meeting = detailsSnapshot.getValue(meetings.class);
+                    DataSnapshot participantsSnapshot = sessionSnapshot.child("Participants");
 
-                    if (meeting != null) {
-                        // Assuming that Participants is directly under the session
-                        DataSnapshot participantsSnapshot = sessionSnapshot.child("Participants");
-                        // Fetch participants data (if needed)
+                    // Check if the current user is a participant in this session
+                    if (participantsSnapshot.exists() && participantsSnapshot.hasChild(currentUserName)) {
+                        DataSnapshot detailsSnapshot = sessionSnapshot.child("Details");
+                        meetings meeting = detailsSnapshot.getValue(meetings.class);
 
-                        // Add the meeting to the list
-                        meetingList.add(meeting);
+                        if (meeting != null) {
+                            meetingsList.add(meeting);
+                        }
                     }
                 }
 
                 // Update the RecyclerView adapter with the new data
-                updateRecyclerView(meetingList);
+                updateRecyclerView(meetingsList);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle errors if any
                 Log.e("Firebase", "Failed to retrieve meetings", databaseError.toException());
                 Toast.makeText(context, "Failed to retrieve meetings", Toast.LENGTH_SHORT).show();
             }
 
 
-            private void updateRecyclerView(List<meetings> meetingsList) {
-        adapter = new meeting_adapter_user(context, meetingsList, mdatabaseReference);
-        RecyclerView recyclerView = findViewById(R.id.recyclerView_meeting_user);
+    private void updateRecyclerView(List<meetings> meetingsList) {
+                // Corrected instantiation of meeting_adapter_user
+                adapter = new meeting_adapter_user(context, meetingsList);
+
+                RecyclerView recyclerView = findViewById(R.id.recyclerView_meeting_user);
         recyclerView.setAdapter(adapter);
             }
         });
+    }
+
+    private String getCurrentUserName() {
+        SharedPreferences sharedPreferences = getSharedPreferences("userName", Context.MODE_PRIVATE);
+        // Replace "user_name_key" with the actual key you use to store the user's name
+        return sharedPreferences.getString("userName", "");
     }
 }

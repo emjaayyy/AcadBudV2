@@ -17,4 +17,6 @@
 
     </string-array>
 
+    <string name="date_time_format">%s %s</string>
+
 </resources>

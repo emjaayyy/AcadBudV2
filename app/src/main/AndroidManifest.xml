@@ -32,6 +32,8 @@
             android:exported="false" />
         <activity android:name=".search"
             android:exported="false"/>
+        <activity android:name=".ratings"
+            android:exported="false"/>
         <activity
             android:name=".home_ssg"
             android:exported="false" />
