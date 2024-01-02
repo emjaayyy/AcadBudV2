@@ -18,10 +18,12 @@ public class meeting_adapter_user extends RecyclerView.Adapter<meeting_adapter_u
 
     private Context context;
     private List<meetings> meetingsList;
+    private String currentUser;
 
-    public meeting_adapter_user(Context context, List<meetings> meetingsList) {
+    public meeting_adapter_user(Context context, List<meetings> meetingsList, String currentUser) {
         this.context = context;
         this.meetingsList = meetingsList;
+        this.currentUser = currentUser;
     }
 
     @NonNull
