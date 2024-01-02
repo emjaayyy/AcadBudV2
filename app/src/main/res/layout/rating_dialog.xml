@@ -1,16 +1,16 @@
 <!-- res/layout/meeting_dialog.xml -->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="300dp"
+    android:layout_width="360dp"
     android:layout_height="300dp"
     android:orientation="vertical"
     android:background="@drawable/rectangle">
 
     <Button
-        android:id="@+id/close_btn_meeting"
+        android:id="@+id/close_btn_rating"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginLeft="260dp"
+        android:layout_marginLeft="310dp"
         android:layout_marginTop="5dp"
         android:background="@drawable/close_btn"/>
 
@@ -18,22 +18,25 @@
     <TextView
         android:id="@+id/tv_rating"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:fontFamily="@font/poppins"
         android:gravity="center"
+        android:layout_marginTop="25dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
         android:text="Please leave a rating before you leave!"
         android:textColor="#000000"
-        android:textSize="20dp" />
+        android:textSize="16dp" />
 
     <RatingBar
         android:id="@+id/rating_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:numStars="5"
-        android:progressTint="#E5E4E4"
-        android:progressBackgroundTint="#FFC107"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"/>
+        android:progressTint="#FFC107"
+        android:progressBackgroundTint="#E5E4E4"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="5dp"/>
 
     <Button
         android:id="@+id/button_submit_rating"
@@ -43,7 +46,7 @@
         android:backgroundTint="#003780"
         android:gravity="center"
         android:textSize="22dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="43dp"
         android:layout_marginTop="25dp"
         android:text="Submit"
         android:fontFamily="@font/poppins"

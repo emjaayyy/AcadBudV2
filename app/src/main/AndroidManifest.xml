@@ -16,6 +16,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".identifier_tutor"
+            android:exported="false" />
+        <activity
             android:name=".post_adapter"
             android:exported="false" />
         <activity
@@ -30,10 +33,12 @@
         <activity
             android:name=".meeting_adapter_ssg"
             android:exported="false" />
-        <activity android:name=".search"
-            android:exported="false"/>
-        <activity android:name=".ratings"
-            android:exported="false"/>
+        <activity
+            android:name=".search"
+            android:exported="false" />
+        <activity
+            android:name=".ratings"
+            android:exported="false" />
         <activity
             android:name=".home_ssg"
             android:exported="false" />

@@ -1,0 +1,61 @@
+<!-- res/layout/meeting_dialog.xml -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="360dp"
+    android:layout_height="300dp"
+    android:orientation="vertical"
+    android:background="@drawable/rectangle">
+
+    <Button
+        android:id="@+id/close_btn_identifier"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="310dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/close_btn"/>
+
+
+    <TextView
+        android:id="@+id/tv_identifier_tutor"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:fontFamily="@font/poppins"
+        android:gravity="center"
+        android:layout_marginTop="25dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:text="Please enter the name of the Tutor:"
+        android:textColor="#000000"
+        android:textSize="18dp" />
+
+    <AutoCompleteTextView
+        android:id="@+id/tutor_1"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="0dp"
+        android:layout_gravity="center"
+        android:background="@drawable/rectangle"
+        android:textColor="@color/color_border"/>
+
+    <AutoCompleteTextView
+        android:id="@+id/tutor_2"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
+        android:background="@drawable/rectangle"
+        android:textColor="@color/color_border"/>
+
+    <Button
+        android:id="@+id/Enter_tutor"
+        android:layout_width="85dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="15dp"
+        android:layout_gravity="center"
+        android:background="@drawable/rectangle"
+        android:backgroundTint="@color/colorPrimary"
+        android:text="Enter"
+        android:textColor="@color/colorTertiary"/>
+
+
+</LinearLayout>
