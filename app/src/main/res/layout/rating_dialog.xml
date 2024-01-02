@@ -14,18 +14,19 @@
         android:layout_marginTop="5dp"
         android:background="@drawable/close_btn"/>
 
+
     <TextView
         android:id="@+id/tv_rating"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Please leave a ratings before you leave!"
-        android:gravity="center"
         android:fontFamily="@font/poppins"
-        android:textSize="22dp"
-        android:textColor="#000000" />
-
+        android:gravity="center"
+        android:text="Please leave a rating before you leave!"
+        android:textColor="#000000"
+        android:textSize="20dp" />
 
     <RatingBar
+        android:id="@+id/rating_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:numStars="5"
