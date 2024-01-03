@@ -96,7 +96,7 @@ public class profile_user extends AppCompatActivity {
         feed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent feed = new Intent(profile_user.this, home_user.class);
             }
         });
     }
