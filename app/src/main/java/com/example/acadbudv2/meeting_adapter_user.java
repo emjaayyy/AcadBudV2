@@ -2,6 +2,7 @@ package com.example.acadbudv2;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,6 +22,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.MutableData;
+import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -300,7 +304,9 @@ public class meeting_adapter_user extends RecyclerView.Adapter<meeting_adapter_u
                     // Check if a rating is given
                     float rating = ratingBar.getRating();
                     if (rating > 0) {
-                        // Handle the rating submission
+                        // Save the rating to Firebase
+                        saveRatingToFirebase(tutorName, rating);
+
                         // For now, let's just close the dialogs
                         leaveDialog.dismiss();
                         builder.create().dismiss();
@@ -317,6 +323,46 @@ public class meeting_adapter_user extends RecyclerView.Adapter<meeting_adapter_u
             AlertDialog ratingDialog = builder.create();
             ratingDialog.show();
         }
+
+        private void saveRatingToFirebase(String tutorName, float rating) {
+            // Assuming "Ratings" is the new node in your Firebase structure
+            DatabaseReference ratingsRef = FirebaseDatabase.getInstance().getReference("Ratings");
+
+            // Update the existing count of stars
+            ratingsRef.child(tutorName).runTransaction(new Transaction.Handler() {
+                @NonNull
+                @Override
+                public Transaction.Result doTransaction(@NonNull MutableData mutableData) {
+                    // Get the current count
+                    Float currentRating = mutableData.getValue(Float.class);
+
+                    // If there is no existing count, assume it's 0
+                    if (currentRating == null) {
+                        currentRating = 0.0f;
+                    }
+
+                    // Increment the count by the new rating
+                    currentRating += rating;
+
+                    // Update the count in Firebase
+                    mutableData.setValue(currentRating);
+
+                    // Indicate that the transaction was successful
+                    return Transaction.success(mutableData);
+                }
+
+                @Override
+                public void onComplete(@Nullable DatabaseError databaseError, boolean b, @Nullable DataSnapshot dataSnapshot) {
+                    // Handle the completion of the transaction if needed
+                    if (databaseError != null) {
+                        Log.d("Firebase", "Transaction failed: " + databaseError.getMessage());
+                    } else {
+                        Log.d("Firebase", "Transaction succeeded.");
+                    }
+                }
+            });
+        }
+
 
         private void showThankYouDialog(DialogInterface leaveDialog) {
             // Inflate the thank you dialog layout
