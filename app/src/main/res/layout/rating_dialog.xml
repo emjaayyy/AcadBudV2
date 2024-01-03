@@ -1,9 +1,9 @@
-<!-- res/layout/meeting_dialog.xml -->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="360dp"
-    android:layout_height="300dp"
+    android:layout_width="wrap_content"
+    android:layout_height="250dp"
     android:orientation="vertical"
+    android:layout_marginRight="20dp"
     android:background="@drawable/rectangle">
 
     <Button
@@ -17,13 +17,13 @@
 
     <TextView
         android:id="@+id/tv_rating"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:fontFamily="@font/poppins"
-        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="25dp"
         android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
+        android:fontFamily="@font/poppins"
+        android:gravity="center"
         android:text="Please leave a rating before you leave!"
         android:textColor="#000000"
         android:textSize="16dp" />

@@ -68,7 +68,9 @@ public class meetings {
     public List<String> getParticipants() {
         return participants;
     }
-
+    public void setParticipants(List<String> participants) {
+        this.participants = participants;
+    }
     public void addParticipant(String participant) {
         if (participants == null) {
             participants = new ArrayList<>();

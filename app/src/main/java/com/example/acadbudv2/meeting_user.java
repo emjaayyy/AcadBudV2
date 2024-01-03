@@ -24,6 +24,7 @@ public class meeting_user extends AppCompatActivity {
 
     private DatabaseReference mdatabaseReference;
     private meeting_adapter_user adapter;
+    private List<String> participantsList;
     private String currentUser;
 
     @Override
@@ -67,7 +68,14 @@ public class meeting_user extends AppCompatActivity {
                         DataSnapshot detailsSnapshot = sessionSnapshot.child("Details");
                         meetings meeting = detailsSnapshot.getValue(meetings.class);
 
+                        // Retrieve the list of participants
+                        List<String> participantsList = new ArrayList<>();
+                        for (DataSnapshot participantSnapshot : participantsSnapshot.getChildren()) {
+                            participantsList.add(participantSnapshot.getKey());
+                        }
+
                         if (meeting != null) {
+                            meeting.setParticipants(participantsList);
                             meetingsList.add(meeting);
                         }
                     }
@@ -94,4 +102,5 @@ public class meeting_user extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.recyclerView_meeting_user);
         recyclerView.setAdapter(adapter);
     }
+
 }

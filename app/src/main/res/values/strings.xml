@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AcadBudV2</string>
+    <string name="app_name">AcadBud</string>
 
     <string-array name="subjects_array">
         <item>Subjects</item>
@@ -18,5 +18,4 @@
     </string-array>
 
     <string name="date_time_format">%s %s</string>
-
 </resources>

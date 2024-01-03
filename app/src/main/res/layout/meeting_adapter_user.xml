@@ -43,6 +43,18 @@
         android:textColor="#003780"
         android:textSize="19dp" />
 
+    <Button
+        android:id="@+id/participant_user"
+        android:layout_width="100dp"
+        android:layout_height="20dp"
+        android:layout_alignStart="@+id/meeting_vw_2_user"
+        android:layout_alignBottom="@+id/meeting_vw_2_user"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="6dp"
+        android:background="@color/colorTertiary"
+        android:text="Participants"
+        android:textColor="#000000" />
+
     <TextView
         android:id="@+id/topic_tv_user"
         android:layout_width="159dp"
@@ -68,21 +80,6 @@
         android:textColor="#535353"
         android:textSize="18dp" />
 
-    <TextView
-        android:id="@+id/participant_num_1_user"
-        android:layout_width="37dp"
-        android:layout_height="18dp"
-        android:layout_alignTop="@+id/participant_user"
-        android:layout_alignEnd="@+id/date_time_tv_1_user"
-        android:layout_alignBottom="@+id/meeting_vw_2_user"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginEnd="-152dp"
-        android:layout_marginBottom="8dp"
-        android:layout_toEndOf="@+id/participant_user"
-        android:gravity="center"
-        android:textColor="#535353"
-        android:textSize="18dp" />
 
     <Button
         android:id="@+id/leave_btn_user"
