@@ -1,7 +1,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-    android:layout_height="250dp"
+    android:layout_height="270dp"
     android:orientation="vertical"
     android:layout_marginRight="20dp"
     android:background="@drawable/rectangle">
@@ -10,46 +10,61 @@
         android:id="@+id/close_btn_rating"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginLeft="310dp"
+        android:layout_marginLeft="300dp"
         android:layout_marginTop="5dp"
         android:background="@drawable/close_btn"/>
 
-
-    <TextView
-        android:id="@+id/tv_rating"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginRight="10dp"
-        android:fontFamily="@font/poppins"
-        android:gravity="center"
-        android:text="Please leave a rating before you leave!"
-        android:textColor="#000000"
-        android:textSize="16dp" />
+        android:orientation="vertical">
 
-    <RatingBar
-        android:id="@+id/rating_bar"
+        <TextView
+            android:id="@+id/tv_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="@font/poppins"
+            android:gravity="center"
+            android:text="Please leave a rating before you leave!"
+            android:textColor="#000000"
+            android:textSize="16dp" />
+
+        <RatingBar
+            android:id="@+id/rating_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:numStars="5"
+            android:progressTint="#FFC107"
+            android:progressBackgroundTint="#E5E4E4"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="5dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:numStars="5"
-        android:progressTint="#FFC107"
-        android:progressBackgroundTint="#E5E4E4"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="5dp"/>
-
-    <Button
-        android:id="@+id/button_submit_rating"
-        android:layout_width="268dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/rectangle"
-        android:backgroundTint="#003780"
+        android:orientation="vertical"
         android:gravity="center"
-        android:textSize="22dp"
-        android:layout_marginLeft="43dp"
-        android:layout_marginTop="25dp"
-        android:text="Submit"
-        android:fontFamily="@font/poppins"
-        android:textColor="#ffffff" />
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="50dp">
 
+        <Button
+            android:id="@+id/button_submit_rating"
+            android:layout_width="244dp"
+            android:layout_height="37dp"
+            android:layout_marginLeft="0dp"
+            android:background="@drawable/rectangle"
+            android:backgroundTint="#003780"
+            android:fontFamily="@font/poppins"
+            android:gravity="center"
+            android:text="Submit"
+            android:textColor="#ffffff"
+            android:textSize="22dp" />
+
+    </LinearLayout>
 </LinearLayout>

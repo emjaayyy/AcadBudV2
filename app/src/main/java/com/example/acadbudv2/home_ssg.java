@@ -29,7 +29,16 @@ public class home_ssg extends AppCompatActivity {
         Button meeting = findViewById(R.id.meeting_btn_home_ssg);
         Button notif = findViewById(R.id.notif_btn_home_ssg);
         Button profile = findViewById(R.id.profile_btn_home_ssg);
+        Button rate = findViewById(R.id.btn_top_students);
 
+
+        rate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent r1 = new Intent(home_ssg.this, ratings.class);
+                startActivity(r1);
+            }
+        });
 
         math.setOnClickListener(new View.OnClickListener() {
             @Override

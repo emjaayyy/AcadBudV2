@@ -29,7 +29,15 @@ public class home_user extends AppCompatActivity {
         Button meeting = findViewById(R.id.meeting_btn_home);
         Button notif = findViewById(R.id.notif_btn_home);
         Button profile = findViewById(R.id.profile_btn_home);
+        Button rate = findViewById(R.id.btn_top_students);
 
+        rate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent r1 = new Intent(home_user.this, ratings.class);
+                startActivity(r1);
+            }
+        });
 
         math.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -138,7 +146,7 @@ public class home_user extends AppCompatActivity {
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent me = new Intent(home_user.this, profile_ssg.class);
+                Intent me = new Intent(home_user.this, profile_user.class);
                 startActivity(me);
             }
         });
