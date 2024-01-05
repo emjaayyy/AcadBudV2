@@ -20,7 +20,7 @@
         android:paddingLeft="13dp"
         android:text="Notification"
         android:textColor="#004AAD"
-        android:textSize="35sp" />
+        android:textSize="33sp" />
 
     <View
         android:id="@+id/notif"
@@ -129,9 +129,9 @@
         android:layout_height="46dp"
         android:layout_alignTop="@+id/notif_btn_notif"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="62dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginBottom="3dp"
+        android:layout_marginStart="41dp"
+        android:layout_marginTop="-2dp"
+        android:layout_marginBottom="7dp"
         android:layout_toEndOf="@+id/notif_btn_notif"
         android:background="@drawable/profile_button" />
 

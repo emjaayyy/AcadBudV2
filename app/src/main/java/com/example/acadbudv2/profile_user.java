@@ -33,6 +33,8 @@ public class profile_user extends AppCompatActivity {
     TextView profile_name;
     TextView profile_year_user;
     TextView profile_section_user;
+    String savedName;
+    TextView profile_rate_user;
     FirebaseAuth auth;
     SharedPreferences sharedPreferences;
     private static final String PREFS_NAME = "MyPrefsFile"; // Name for your SharedPreferences file
@@ -49,6 +51,7 @@ public class profile_user extends AppCompatActivity {
         profile_name = findViewById(R.id.profile_name_user);
         profile_year_user = findViewById(R.id.profile_year_user);
         profile_section_user = findViewById(R.id.profile_section_user);
+        profile_rate_user = findViewById(R.id.profile_rate_user);
 
         Button logoutButton = findViewById(R.id.logout_btn_user);
         Button notif = findViewById(R.id.notif_btn_profile);
@@ -60,7 +63,7 @@ public class profile_user extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent edited = new Intent(profile_user.this, edit_profile.class);
-                startActivity(edited);
+                startActivityForResult(edited, EDIT_PROFILE_REQUEST_CODE);
             }
         });
 
@@ -98,13 +101,12 @@ public class profile_user extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = auth.getCurrentUser();
 
-
         if (currentUser != null) {
             String uid = currentUser.getUid();
 
             // Access the user's name from SharedPreferences
             sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-            String savedName = sharedPreferences.getString("userName", "");
+            savedName = sharedPreferences.getString("userName", "");
             profile_name.setText(savedName);
 
             // Initialize the RecyclerView and adapter for posts
@@ -121,13 +123,54 @@ public class profile_user extends AppCompatActivity {
 
             // Fetch and display profile information
             fetchProfileData(uid);
+            // Fetch and display profile information
+            fetchProfileDataLocallyOrFirebase(uid);
+
+            // Fetch and display ratings
+            fetchAndDisplayRatings(savedName);
         } else {
             // Handle the case where the user is not logged in
             Log.e("ProfileError", "User is not logged in");
         }
-
     }
 
+    private static final int EDIT_PROFILE_REQUEST_CODE = 1; // Choose any unique request code
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == EDIT_PROFILE_REQUEST_CODE && resultCode == RESULT_OK) {
+            // Handle the updated data from edit_profile activity
+            String updatedYear = data.getStringExtra("updatedYear");
+            String updatedSection = data.getStringExtra("updatedSection");
+
+            // Update UI with the new data
+            profile_year_user.setText("Year: " + updatedYear);
+            profile_section_user.setText("Section: " + updatedSection);
+
+            // Save the updated data locally (SharedPreferences)
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("userYear", updatedYear);
+            editor.putString("userSection", updatedSection);
+            editor.apply();
+        }
+    }
+
+    // Add this method to fetch profile data either from SharedPreferences or Firebase
+    private void fetchProfileDataLocallyOrFirebase(String uid) {
+        String savedYear = sharedPreferences.getString("userYear", "");
+        String savedSection = sharedPreferences.getString("userSection", "");
+
+        if (!savedYear.isEmpty() && !savedSection.isEmpty()) {
+            // Data exists in SharedPreferences, use it
+            profile_year_user.setText("Year: " + savedYear);
+            profile_section_user.setText("Section: " + savedSection);
+        } else {
+            // Data doesn't exist in SharedPreferences, fetch from Firebase
+            fetchProfileData(uid);
+        }
+    }
 
     private void fetchProfileData(String uid) {
         DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("Students");
@@ -141,6 +184,9 @@ public class profile_user extends AppCompatActivity {
                     if (userYear != null && userSection != null) {
                         profile_year_user.setText("Year: " + userYear);
                         profile_section_user.setText("Section: " + userSection);
+                        // Fetch and display ratings
+
+                        fetchAndDisplayRatings(savedName); // Add this line
 
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putString("userYear", userYear);
@@ -154,13 +200,36 @@ public class profile_user extends AppCompatActivity {
                 }
             }
 
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 Log.e("ProfileUser", "Error in database operation: " + databaseError.getMessage());
             }
         });
     }
+
+    private void fetchAndDisplayRatings(String userName) {
+        Log.d("RatingDebug", "User Name: " + userName);
+        DatabaseReference ratingsRef = FirebaseDatabase.getInstance().getReference("Ratings").child(userName);
+        ratingsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    // Assuming your rating is stored as a float
+                    float userRating = dataSnapshot.getValue(Float.class);
+                    profile_rate_user.setText("Ratings: " + userRating);
+                } else {
+                    // Handle the case where ratings data doesn't exist for the user
+                    profile_rate_user.setText("Ratings: N/A");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.e("RatingsError", "Error fetching ratings: " + databaseError.getMessage());
+            }
+        });
+    }
+
     private void showLogoutConfirmationDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
@@ -254,4 +323,5 @@ public class profile_user extends AppCompatActivity {
             }
         });
     }
+
 }

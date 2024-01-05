@@ -1,5 +1,6 @@
 package com.example.acadbudv2;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -103,5 +104,13 @@ public class edit_profile extends AppCompatActivity {
                 Toast.makeText(edit_profile.this, "Error updating profile data: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+        Intent resultIntent = new Intent();
+        resultIntent.putExtra("updatedYear", newYear);
+        resultIntent.putExtra("updatedSection", newSection);
+        setResult(RESULT_OK, resultIntent);
+
+        // Finish the activity
+        finish();
     }
+
 }
