@@ -2,6 +2,7 @@ package com.example.acadbudv2;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -181,22 +182,21 @@ public class meeting_adapter_ssg extends RecyclerView.Adapter<meeting_adapter_ss
 
         // Inside the MeetingViewHolder class
         private void saveSelectedUserToFirebase(String selectedStudentName, int sessionNumber) {
-            // Save the selected user to the Firebase database under the current session
             DatabaseReference currentSessionReference = mdatabaseReference.child("Session " + sessionNumber);
             DatabaseReference participantsReference = currentSessionReference.child("Participants");
 
-            // Check if the user is already added to the session
             participantsReference.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if (!dataSnapshot.hasChild(selectedStudentName)) {
-                        // User is not already added, proceed to add
                         participantsReference.child(selectedStudentName).setValue(true);
 
                         // Notify the user
                         Toast.makeText(context, "You added: " + selectedStudentName, Toast.LENGTH_LONG).show();
+
+                        // Add the code to send a notification here
+                        sendNotification(selectedStudentName, sessionNumber);
                     } else {
-                        // User is already added, show a message
                         Toast.makeText(context, "User already added to this session", Toast.LENGTH_LONG).show();
                     }
                 }
@@ -208,6 +208,12 @@ public class meeting_adapter_ssg extends RecyclerView.Adapter<meeting_adapter_ss
             });
         }
 
+        private void sendNotification(String userName, int sessionNumber) {
+            Intent intent = new Intent(context, notif.class);
+            String notificationMessage = "You have been added to the meeting in Session " + sessionNumber;
+            intent.putExtra("notification_message", notificationMessage);
+            context.startActivity(intent);
+        }
         private void showParticipants(int sessionNumber) {
             DatabaseReference currentSessionReference = mdatabaseReference.child("Session " + sessionNumber).child("Participants");
 

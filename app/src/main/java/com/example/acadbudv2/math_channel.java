@@ -60,7 +60,7 @@ public class math_channel extends AppCompatActivity {
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent me = new Intent(math_channel.this, profile_ssg.class);
+                Intent me = new Intent(math_channel.this, profile_user.class);
                 startActivity(me);
             }
         });

@@ -1,21 +1,25 @@
 package com.example.acadbudv2;
 
-import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class edit_profile extends AppCompatActivity {
 
     private EditText sectionEditText;
     private EditText yearEditText;
+    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,25 +36,72 @@ public class edit_profile extends AppCompatActivity {
                 updateProfile();
             }
         });
+
+        // Fetch and display the current user's "year" and "section" data
+        fetchProfileData();
     }
 
+    private void fetchProfileData() {
+        // Retrieve the user's name from SharedPreferences
+        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefsFile", MODE_PRIVATE);
+        String userName = sharedPreferences.getString("userName", "");
+
+        // Retrieve "year" and "section" data for the specific user from Firebase
+            DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("Students");
+            userRef.orderByChild("name").equalTo(userName).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                        // Get the "year" and "section" values
+                        String userYear = userSnapshot.child("year").getValue(String.class);
+                        String userSection = userSnapshot.child("section").getValue(String.class);
+
+                        // Set the fetched values to the corresponding EditText fields
+                        yearEditText.setText(userYear);
+                        sectionEditText.setText(userSection);
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    Toast.makeText(edit_profile.this, "Error fetching profile data: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+
     private void updateProfile() {
-        // Get the new data from the EditText fields
         String newSection = sectionEditText.getText().toString();
         String newYear = yearEditText.getText().toString();
 
-        // Get the current user's UID (or LRN, if it's the user's LRN)
-        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid(); // Assuming UID is the LRN
+        // Retrieve the user's name from SharedPreferences
+        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefsFile", MODE_PRIVATE);
+        String userName = sharedPreferences.getString("userName", "");
 
-        // Update the user's profile data in Firebase under their "lrn" node in "Students"
-        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("Students").child(uid);
-        userRef.child("section").setValue(newSection);
-        userRef.child("year").setValue(newYear);
+        // Update the user's profile data in Firebase under their name
+        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("Students");
+        userRef.orderByChild("name").equalTo(userName).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                    // Update "year" and "section" for the specific user
+                    userSnapshot.getRef().child("year").setValue(newYear);
+                    userSnapshot.getRef().child("section").setValue(newSection);
 
-        // Pass the user's UID to the profile_ssg activity
-        Intent intent = new Intent(edit_profile.this, profile_ssg.class);
-        intent.putExtra("userUid", uid);
-        startActivity(intent);
-        finish(); // Finish the current activity
+                    // Save the updated values to SharedPreferences
+                    editor = getSharedPreferences("MyPrefsFile", MODE_PRIVATE).edit();
+                    editor.putString("userYear", newYear);
+                    editor.putString("userSection", newSection);
+                    editor.apply();
+
+                    // Provide feedback to the user
+                    Toast.makeText(edit_profile.this, "Profile updated successfully", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Toast.makeText(edit_profile.this, "Error updating profile data: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

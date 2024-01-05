@@ -28,7 +28,7 @@
         android:layout_below="@+id/AcadBud_home"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="-1dp"
+        android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"
         android:layout_marginEnd="5dp"
         android:background="#DBDEE3" />
@@ -58,7 +58,7 @@
         android:fontFamily="@font/poppins"
         android:text="CHANNELS"
         android:textColor="#ffffff"
-        android:textSize="25sp" />
+        android:textSize="23sp" />
 
     <TextView
         android:id="@+id/channel_description"
@@ -86,8 +86,8 @@
         android:layout_alignParentEnd="true"
         android:layout_marginStart="237dp"
         android:layout_marginTop="34dp"
-        android:layout_marginEnd="-13dp"
-        android:layout_marginBottom="-14dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="0dp"
         android:background="@drawable/q_a" />
 
     <Button
@@ -97,7 +97,7 @@
         android:layout_below="@+id/channel_bg"
         android:layout_alignParentStart="true"
         android:layout_marginStart="14dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="6dp"
         android:background="@drawable/math_channel" />
 
     <TextView
@@ -121,8 +121,8 @@
         android:layout_width="101dp"
         android:layout_height="79dp"
         android:layout_below="@+id/channel_bg"
-        android:layout_marginStart="39dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="6dp"
         android:layout_toEndOf="@+id/ssg_math_channel"
         android:background="@drawable/english_channel" />
 
@@ -147,8 +147,8 @@
         android:layout_width="101dp"
         android:layout_height="79dp"
         android:layout_below="@+id/channel_bg"
-        android:layout_marginStart="39dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="9dp"
         android:layout_toEndOf="@+id/ssg_english_channels"
         android:background="@drawable/science_channel" />
 
@@ -199,8 +199,8 @@
         android:layout_width="101dp"
         android:layout_height="79dp"
         android:layout_below="@+id/tv_english_channels"
-        android:layout_alignStart="@+id/ssg_english_channels"
-        android:layout_marginStart="1dp"
+        android:layout_alignStart="@+id/tv_english_channels"
+        android:layout_marginStart="0dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/aralinpanlipunan_channel" />
 
@@ -281,7 +281,7 @@
         android:layout_width="101dp"
         android:layout_height="79dp"
         android:layout_below="@+id/tv_ap_channels"
-        android:layout_alignStart="@+id/ssg_ap_channels"
+        android:layout_alignStart="@+id/tv_ap_channels"
         android:layout_alignEnd="@+id/ssg_ap_channels"
         android:layout_marginStart="0dp"
         android:layout_marginTop="4dp"
@@ -299,10 +299,10 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="0dp"
         android:fontFamily="@font/poppins"
+        android:gravity="center"
         android:text="Research"
         android:textColor="#4F4A7D"
-        android:textSize="15sp"
-        android:gravity="center"/>
+        android:textSize="15sp" />
 
     <Button
         android:id="@+id/ssg_tle_channels"
@@ -365,7 +365,7 @@
         android:layout_width="101dp"
         android:layout_height="79dp"
         android:layout_below="@+id/tv_research_channels"
-        android:layout_alignStart="@+id/ssg_research_channels"
+        android:layout_alignStart="@+id/tv_research_channels"
         android:layout_alignEnd="@+id/ssg_research_channels"
         android:layout_marginStart="0dp"
         android:layout_marginTop="10dp"
@@ -380,13 +380,42 @@
         android:layout_alignStart="@+id/ssg_innerthoughts_channels"
         android:layout_alignEnd="@+id/ssg_innerthoughts_channels"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginEnd="1dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
         android:fontFamily="@font/poppins"
         android:gravity="center"
         android:text="Inner Thoughts"
         android:textColor="#4F4A7D"
         android:textSize="15sp" />
+
+    <Button
+        android:id="@+id/btn_top_students"
+        android:layout_width="95dp"
+        android:layout_height="78dp"
+        android:layout_below="@+id/tv_tle_channels"
+
+        android:layout_alignStart="@+id/tv_tle_channels"
+        android:layout_alignEnd="@+id/tv_tle_channels"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="0dp"
+        android:background="@drawable/medal_btn" />
+
+    <TextView
+        android:id="@+id/tv_top_ssg"
+        android:layout_width="95dp"
+        android:layout_height="59dp"
+        android:layout_below="@+id/btn_top_students"
+        android:layout_alignStart="@+id/btn_top_students"
+        android:layout_alignEnd="@+id/btn_top_students"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
+        android:fontFamily="@font/poppins"
+        android:gravity="center"
+        android:text="Top Students"
+        android:textColor="#4F4A7D"
+        android:textSize="15dp" />
 
     <View
         android:id="@+id/home_vw"
@@ -403,9 +432,9 @@
         android:layout_alignTop="@+id/home_vw"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="9dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
+        android:layout_marginBottom="6dp"
         android:background="@drawable/home_button" />
 
     <Button
@@ -414,9 +443,9 @@
         android:layout_height="46dp"
         android:layout_alignTop="@+id/home_btn_home_ssg"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="55dp"
+        android:layout_marginStart="54dp"
         android:layout_marginTop="0dp"
-        android:layout_marginBottom="5dp"
+        android:layout_marginBottom="6dp"
         android:layout_toEndOf="@+id/home_btn_home_ssg"
         android:background="@drawable/meeting_button" />
 
@@ -426,7 +455,7 @@
         android:layout_height="46dp"
         android:layout_alignTop="@+id/home_btn_home_ssg"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="55dp"
+        android:layout_marginStart="54dp"
         android:layout_marginTop="0dp"
         android:layout_marginBottom="6dp"
         android:layout_toEndOf="@+id/meeting_btn_home_ssg"
@@ -438,9 +467,9 @@
         android:layout_height="46dp"
         android:layout_alignTop="@+id/meeting_btn_home_ssg"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="55dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="5dp"
         android:layout_toEndOf="@+id/notif_btn_home_ssg"
         android:background="@drawable/profile_button" />
 
