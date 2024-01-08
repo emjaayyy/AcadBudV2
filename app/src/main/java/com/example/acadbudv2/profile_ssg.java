@@ -105,8 +105,9 @@ public class profile_ssg extends AppCompatActivity {
             // Initialize the RecyclerView and adapter for posts
             postsRecyclerView = findViewById(R.id.profile_rv);
             postsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-            postAdapter = new post_adapter(new ArrayList<>());
+            postAdapter = new post_adapter(new ArrayList<>(), "", new ArrayList<>());
             postsRecyclerView.setAdapter(postAdapter);
+
 
             // Initialize the Firebase Realtime Database reference
             databaseRef = FirebaseDatabase.getInstance().getReference("Channels");

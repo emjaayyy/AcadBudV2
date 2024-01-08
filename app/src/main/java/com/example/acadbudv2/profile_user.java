@@ -112,8 +112,10 @@ public class profile_user extends AppCompatActivity {
             // Initialize the RecyclerView and adapter for posts
             recyclerViewProfile = findViewById(R.id.recyclerViewProfile);
             recyclerViewProfile.setLayoutManager(new LinearLayoutManager(this));
-            postAdapter = new post_adapter(new ArrayList<>());
+            postAdapter = new post_adapter(new ArrayList<>(), "", new ArrayList<>());
             recyclerViewProfile.setAdapter(postAdapter);
+
+
 
             // Initialize the Firebase Realtime Database reference
             databaseRef = FirebaseDatabase.getInstance().getReference("Channels");

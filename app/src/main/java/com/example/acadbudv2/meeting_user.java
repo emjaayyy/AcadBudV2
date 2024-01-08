@@ -40,13 +40,13 @@ public class meeting_user extends AppCompatActivity {
         Button notif = findViewById(R.id.notif_btn_math);
         Button me = findViewById(R.id.profile_btn_math);
 
-      me.setOnClickListener(new View.OnClickListener() {
-          @Override
-          public void onClick(View v) {
-              Intent m1 = new Intent(meeting_user.this, profile_user.class);
-              startActivity(m1);
-          }
-      });
+        me.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent m1 = new Intent(meeting_user.this, profile_user.class);
+                startActivity(m1);
+            }
+        });
 
         notif.setOnClickListener(new View.OnClickListener() {
             @Override

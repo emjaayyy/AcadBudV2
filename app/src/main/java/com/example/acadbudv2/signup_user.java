@@ -19,6 +19,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 public class signup_user extends AppCompatActivity {
 
     private EditText lrnEditText, nameEditText, emailEditText, passwordEditText;
@@ -66,8 +69,9 @@ public class signup_user extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
+                                        String hashedPassword = hashPassword(password);
                                         // User account creation is successful, you can proceed with saving user data in the Realtime Database
-                                        student user = new student(lrn, name, email, password);
+                                        student user = new student(lrn, name, email, hashedPassword);
                                         databaseReference.child(lrn).setValue(user);
 
                                         // Optional: You can sign in the user after successful registration
@@ -132,6 +136,23 @@ public class signup_user extends AppCompatActivity {
             return false;
         } else {
             return true;
+        }
+    }
+    private String hashPassword(String password) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] hashedBytes = md.digest(password.getBytes());
+
+            // Convert bytes to hexadecimal format
+            StringBuilder sb = new StringBuilder();
+            for (byte b : hashedBytes) {
+                sb.append(String.format("%02x", b));
+            }
+
+            return sb.toString();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            return "";
         }
     }
 }

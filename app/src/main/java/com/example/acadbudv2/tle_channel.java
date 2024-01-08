@@ -77,7 +77,7 @@ public class tle_channel extends AppCompatActivity {
 
         // Initialize RecyclerView and its adapter
         recyclerView = findViewById(R.id.recyclerView_tle);
-        postAdapter = new post_adapter(new ArrayList<>());
+        postAdapter = new post_adapter(new ArrayList<>(), "", new ArrayList<>());
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(postAdapter);
 

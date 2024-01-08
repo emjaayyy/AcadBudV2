@@ -1,12 +1,13 @@
 package com.example.acadbudv2;
 
 public class post_content {
-    private String posts, name, date;
+    private String posts, name, date, userId;
 
-    public post_content(String name, String date, String posts) {
+    public post_content(String name, String date, String posts, String userId) {
         this.name = name;
         this.date = date;
         this.posts = posts;
+        this.userId = userId;
     }
 
     // Empty constructor for Firebase
@@ -35,5 +36,18 @@ public class post_content {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public boolean isCurrentUser(String currentUserId) {
+        // Check if userId is not null before invoking equals method
+        return userId != null && userId.equals(currentUserId);
     }
 }

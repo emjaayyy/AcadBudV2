@@ -73,11 +73,9 @@ public class ap_channel extends AppCompatActivity {
             }
         });
 
-
-
         // Initialize RecyclerView and its adapter
         recyclerView = findViewById(R.id.recyclerView_ap);
-        postAdapter = new post_adapter(new ArrayList<>());
+        postAdapter = new post_adapter(new ArrayList<>(), "", new ArrayList<>());
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(postAdapter);
 
@@ -127,8 +125,6 @@ public class ap_channel extends AppCompatActivity {
                 Intent write = new Intent(ap_channel.this, post_ap.class);
                 startActivity(write);
             }
-
         });
     }
 }
-

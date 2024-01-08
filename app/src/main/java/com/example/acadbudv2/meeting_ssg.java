@@ -1,10 +1,14 @@
 package com.example.acadbudv2;
 
+import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -33,9 +37,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class meeting_ssg extends AppCompatActivity {
     private DatabaseReference mdatabaseReference;
@@ -54,6 +61,33 @@ public class meeting_ssg extends AppCompatActivity {
         context = this;
 
         fetchLatestSessionNumber();
+
+        Button home = findViewById(R.id.home_btn_meeting_ssg);
+        Button notif = findViewById(R.id.notif_btn_meeting_ssg);
+        Button me = findViewById(R.id.profile_btn_meeting_ssg);
+
+        me.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent m1 = new Intent(meeting_ssg.this, profile_ssg.class);
+                startActivity(m1);
+            }
+        });
+
+        notif.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent n1 = new Intent(meeting_ssg.this, notif.class);
+                startActivity(n1);
+            }
+        });
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent user = new Intent(meeting_ssg.this, home_ssg.class);
+                startActivity(user);
+            }
+        });
 
 
         // Create meeting button click listener
@@ -130,7 +164,9 @@ public class meeting_ssg extends AppCompatActivity {
 
                         // Add the meeting to the list
                         meetingsList.add(meeting);
+                        scheduleRemindersForParticipants(sessionSnapshot.getKey(), meeting);
                     }
+                    
                 }
 
                 // Update the RecyclerView adapter with the new data
@@ -145,6 +181,90 @@ public class meeting_ssg extends AppCompatActivity {
         });
     }
 
+    private void scheduleRemindersForParticipants(String sessionNumber, meetings meeting) {
+        DatabaseReference currentSessionReference = mdatabaseReference.child(sessionNumber).child("Participants");
+
+        // Fetch participants data
+        currentSessionReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot participantSnapshot : dataSnapshot.getChildren()) {
+                    String participantName = participantSnapshot.getKey();
+
+                    // Calculate the alarmTime based on your logic
+                    long alarmTime = calculateAlarmTimeBasedOnYourLogic(meeting.getDate(), meeting.getTime());
+
+                    if (alarmTime > System.currentTimeMillis()) {
+                        // Schedule a local notification for each participant
+                        scheduleLocalNotification(alarmTime, meeting.getTopic(), participantName);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle errors if any
+            }
+        });
+    }
+
+    private void scheduleLocalNotification(long alarmTime, String topic, String participantName) {
+        Intent intent = new Intent(this, reminder_receiver.class);
+        intent.putExtra("topic", topic);
+        intent.putExtra("participant", participantName);
+
+        // Generate a unique requestCode based on meeting details
+        int requestCode = generateUniqueRequestCode(topic, participantName);
+
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                this,
+                requestCode,
+                intent,
+                PendingIntent.FLAG_UPDATE_CURRENT
+        );
+
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, alarmTime, pendingIntent);
+    }
+
+    // Helper method to generate a unique requestCode based on meeting details
+    private int generateUniqueRequestCode(String topic, String participantName) {
+        // Concatenate the topic and participantName to create a unique identifier
+        String uniqueIdentifier = topic + "_" + participantName;
+
+        // Use hashCode() to convert the string to an integer
+        return Math.abs(uniqueIdentifier.hashCode());
+    }
+
+    private long calculateAlarmTimeBasedOnYourLogic(String meetingDate, String meetingTime) {
+        // Combine the meeting date and time into a single string
+        String dateTimeString = meetingDate + " " + meetingTime;
+
+        // Define the format of your date and time
+        SimpleDateFormat dateFormat = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm", Locale.getDefault());
+        }
+
+        try {
+            // Parse the combined date and time string
+            Date dateTime = null;
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                dateTime = dateFormat.parse(dateTimeString);
+            }
+
+            // Set the parsed date and time to a Calendar instance
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(dateTime);
+
+            // Return the time in milliseconds
+            return calendar.getTimeInMillis();
+        } catch (ParseException e) {
+            // Handle parsing errors
+            e.printStackTrace();
+            return 0; // Return an appropriate value indicating an error
+        }
+    }
     private void updateRecyclerView(List<meetings> meetingsList) {
         meeting_adapter_ssg adapter = new meeting_adapter_ssg(context, meetingsList, mdatabaseReference, channelName, currentSessionNumber);
         RecyclerView recyclerView = findViewById(R.id.recyclerView_ssg_meeting);

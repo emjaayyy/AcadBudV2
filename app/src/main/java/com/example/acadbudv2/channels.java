@@ -26,11 +26,12 @@ public class channels extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.channels);
 
-        // Initialize the RecyclerView and its adapter
+        // Initialize RecyclerView and its adapter
         recyclerView = findViewById(R.id.recyclerView);
-        postAdapter = new post_adapter(new ArrayList<>()); // Use the correct class name for your adapter
+        postAdapter = new post_adapter(new ArrayList<>(), "", new ArrayList<>());
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(postAdapter);
+
 
         // Initialize the list of posts for the specific channel (e.g., "Math" channel)
         posts = new ArrayList<>();

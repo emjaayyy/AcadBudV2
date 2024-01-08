@@ -77,9 +77,10 @@ public class math_channel extends AppCompatActivity {
 
         // Initialize RecyclerView and its adapter
         recyclerView = findViewById(R.id.recyclerView_math);
-        postAdapter = new post_adapter(new ArrayList<>());
+        postAdapter = new post_adapter(new ArrayList<>(), "", new ArrayList<>());
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(postAdapter);
+
 
         // Create a listener to retrieve and handle posts
         mPostReference = FirebaseDatabase.getInstance().getReference("Channels");

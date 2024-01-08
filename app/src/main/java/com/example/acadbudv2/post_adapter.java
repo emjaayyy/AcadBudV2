@@ -9,20 +9,17 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class post_adapter extends RecyclerView.Adapter<post_adapter.PostViewHolder> {
     private List<post_content> posts;
-    private String currentUser;
+    private String currentUserId;
+    private List<String> foulWords;
 
-    public post_adapter(List<post_content> posts) {
+    public post_adapter(List<post_content> posts, String currentUserId, List<String> foulWords) {
         this.posts = posts;
-    }
-
-    public void setCurrentUser(String currentUser) {
-        this.currentUser = currentUser;
+        this.currentUserId = currentUserId;
+        this.foulWords = foulWords;
     }
 
     @NonNull
@@ -37,12 +34,40 @@ public class post_adapter extends RecyclerView.Adapter<post_adapter.PostViewHold
         post_content post = posts.get(position);
         holder.bind(post);
 
-        // Check if the post owner is the current user
-        boolean isCurrentUserPost = post.getName().equals(currentUser);
+        // Check if the current user is the creator of the post
+        if (post.isCurrentUser(currentUserId)) {
+            holder.editButton.setVisibility(View.VISIBLE);
+            holder.deleteButton.setVisibility(View.VISIBLE);
 
-        // Set visibility for edit and delete buttons based on ownership
-        holder.editButton.setVisibility(isCurrentUserPost ? View.VISIBLE : View.GONE);
-        holder.deleteButton.setVisibility(isCurrentUserPost ? View.VISIBLE : View.GONE);
+            // Set click listeners for edit and delete buttons
+            holder.editButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // Handle edit button click
+                    // Add your logic to open an edit activity or perform the edit action
+                    // You can pass the post details to the edit activity if needed
+                }
+            });
+
+            holder.deleteButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // Handle delete button click
+                    // Add your logic to confirm the deletion and delete the post from the database
+                }
+            });
+        } else {
+            holder.editButton.setVisibility(View.GONE);
+            holder.deleteButton.setVisibility(View.GONE);
+        }
+
+        // Check for foul words before allowing the post to be visible
+        if (containsFoulWords(post.getPosts())) {
+            // Hide the post or take appropriate action
+            holder.itemView.setVisibility(View.GONE);
+        } else {
+            holder.itemView.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -53,6 +78,15 @@ public class post_adapter extends RecyclerView.Adapter<post_adapter.PostViewHold
     public void addPost(post_content post) {
         posts.add(post);
         notifyItemInserted(posts.size() - 1);
+    }
+
+    private boolean containsFoulWords(String postContent) {
+        for (String foulWord : foulWords) {
+            if (postContent.toLowerCase().contains(foulWord.toLowerCase())) {
+                return true; // Found a foul word
+            }
+        }
+        return false; // No foul words found
     }
 
     public class PostViewHolder extends RecyclerView.ViewHolder {
@@ -69,8 +103,6 @@ public class post_adapter extends RecyclerView.Adapter<post_adapter.PostViewHold
             contentTextView = itemView.findViewById(R.id.contentTextView);
             editButton = itemView.findViewById(R.id.edit_btn_post_adapter);
             deleteButton = itemView.findViewById(R.id.delete_btn_post_adapter);
-
-            // Set onClickListeners for edit and delete buttons if needed
         }
 
         public void bind(post_content post) {
