@@ -38,6 +38,9 @@ public class post_ap extends AppCompatActivity {
 
         mPostReference = FirebaseDatabase.getInstance().getReference("Channels/" + channelIdentifier);
 
+
+
+
         Button postButton = findViewById(R.id.post_btn);
         EditText postEditText = findViewById(R.id.post_et);
 

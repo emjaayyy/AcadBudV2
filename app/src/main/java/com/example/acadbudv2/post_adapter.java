@@ -1,5 +1,6 @@
 package com.example.acadbudv2;
 
+import android.icu.text.SimpleDateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +10,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.ParseException;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class post_adapter extends RecyclerView.Adapter<post_adapter.PostViewHolder> {
     private List<post_content> posts;
@@ -20,6 +26,41 @@ public class post_adapter extends RecyclerView.Adapter<post_adapter.PostViewHold
         this.posts = posts;
         this.currentUserId = currentUserId;
         this.foulWords = foulWords;
+        // Sort the posts initially
+        sortPostsByDate();
+    }
+
+    public List<post_content> getPosts() {
+        return posts;
+    }
+
+    public void sortPostsByDate() {
+        // Sort posts based on the date
+        Collections.sort(posts, new Comparator<post_content>() {
+            @Override
+            public int compare(post_content post1, post_content post2) {
+                SimpleDateFormat sdf = null;
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                    sdf = new SimpleDateFormat("MM/dd/yyyy", Locale.getDefault());
+                }
+                try {
+                    Date date1 = null;
+                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                        date1 = sdf.parse(post1.getDate());
+                    }
+                    Date date2 = null;
+                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                        date2 = sdf.parse(post2.getDate());
+                    }
+
+                    // Reverse the order for descending order (newest first)
+                    return date2.compareTo(date1);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                return 0;
+            }
+        });
     }
 
     @NonNull
@@ -77,7 +118,8 @@ public class post_adapter extends RecyclerView.Adapter<post_adapter.PostViewHold
 
     public void addPost(post_content post) {
         posts.add(post);
-        notifyItemInserted(posts.size() - 1);
+        sortPostsByDate(); // Sort the posts after adding a new one
+        notifyDataSetChanged(); // Notify the adapter that data has changed
     }
 
     private boolean containsFoulWords(String postContent) {

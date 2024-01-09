@@ -166,7 +166,7 @@ public class meeting_ssg extends AppCompatActivity {
                         meetingsList.add(meeting);
                         scheduleRemindersForParticipants(sessionSnapshot.getKey(), meeting);
                     }
-                    
+
                 }
 
                 // Update the RecyclerView adapter with the new data
@@ -220,7 +220,7 @@ public class meeting_ssg extends AppCompatActivity {
                 this,
                 requestCode,
                 intent,
-                PendingIntent.FLAG_UPDATE_CURRENT
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE // or FLAG_MUTABLE if needed
         );
 
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
@@ -256,6 +256,7 @@ public class meeting_ssg extends AppCompatActivity {
             // Set the parsed date and time to a Calendar instance
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(dateTime);
+            calendar.add(Calendar.MINUTE, -10);
 
             // Return the time in milliseconds
             return calendar.getTimeInMillis();

@@ -108,7 +108,6 @@ public class profile_ssg extends AppCompatActivity {
             postAdapter = new post_adapter(new ArrayList<>(), "", new ArrayList<>());
             postsRecyclerView.setAdapter(postAdapter);
 
-
             // Initialize the Firebase Realtime Database reference
             databaseRef = FirebaseDatabase.getInstance().getReference("Channels");
 
@@ -165,6 +164,8 @@ public class profile_ssg extends AppCompatActivity {
                     // Fetch posts for the user from the current channel
                     fetchPostsForUserInChannel(userName, channelName);
                 }
+                // Sort posts after fetching from all channels
+                sortAndDisplayPosts();
             }
 
             @Override
@@ -212,5 +213,11 @@ public class profile_ssg extends AppCompatActivity {
                 Log.e("FirebaseError", "Error retrieving posts: " + databaseError.getMessage());
             }
         });
+    }
+    private void sortAndDisplayPosts() {
+        // Sort posts by date
+        postAdapter.sortPostsByDate();
+        // Notify the adapter that the data set has changed
+        postAdapter.notifyDataSetChanged();
     }
 }

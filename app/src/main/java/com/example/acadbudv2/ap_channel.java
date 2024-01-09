@@ -20,6 +20,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class ap_channel extends AppCompatActivity {
     private DatabaseReference mPostReference;
@@ -89,6 +90,9 @@ public class ap_channel extends AppCompatActivity {
                     // This dataSnapshot refers to each post under a student
                     post_content post = postSnapshot.getValue(post_content.class);
                     if (post != null) {
+                        // Reverse the order of the postAdapter.posts list before adding them to the adapter
+                        Collections.reverse(postAdapter.getPosts());
+
                         postAdapter.addPost(post);
                         // Log information about the retrieved post
                         Log.d("PostDebug", "Post ID: " + postSnapshot.getKey() + ", User: " + post.getName() + ", Text: " + post.getPosts());
@@ -125,6 +129,7 @@ public class ap_channel extends AppCompatActivity {
                 Intent write = new Intent(ap_channel.this, post_ap.class);
                 startActivity(write);
             }
+
         });
     }
 }

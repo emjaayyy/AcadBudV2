@@ -39,7 +39,7 @@ public class math_channel extends AppCompatActivity {
         Button meeting = findViewById(R.id.meeting_btn_math);
         Button notif = findViewById(R.id.notif_btn_math);
         Button profile = findViewById(R.id.profile_btn_math);
-        Button home = findViewById(R.id.home_btn_english);
+        Button home = findViewById(R.id.home_btn_math);
 
         meeting.setOnClickListener(new View.OnClickListener() {
             @Override

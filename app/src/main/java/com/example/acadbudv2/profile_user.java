@@ -1,5 +1,5 @@
 package com.example.acadbudv2;
-
+import java.util.Collections;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -117,6 +117,7 @@ public class profile_user extends AppCompatActivity {
 
 
 
+
             // Initialize the Firebase Realtime Database reference
             databaseRef = FirebaseDatabase.getInstance().getReference("Channels");
 
@@ -186,7 +187,7 @@ public class profile_user extends AppCompatActivity {
                     if (userYear != null && userSection != null) {
                         profile_year_user.setText("Year: " + userYear);
                         profile_section_user.setText("Section: " + userSection);
-                        // Fetch and display ratings
+                            // Fetch and display ratings
 
                         fetchAndDisplayRatings(savedName); // Add this line
 
@@ -277,6 +278,9 @@ public class profile_user extends AppCompatActivity {
                     // Fetch posts for the user from the current channel
                     fetchPostsForUserInChannel(userName, channelName);
                 }
+
+                // Sort posts after fetching from all channels
+                sortAndDisplayPosts();
             }
 
             @Override
@@ -326,4 +330,12 @@ public class profile_user extends AppCompatActivity {
         });
     }
 
+    private void sortAndDisplayPosts() {
+        // Sort posts by date
+        postAdapter.sortPostsByDate();
+        // Notify the adapter that the data set has changed
+        postAdapter.notifyDataSetChanged();
+    }
+
 }
+
