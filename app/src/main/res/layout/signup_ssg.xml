@@ -78,9 +78,9 @@
         android:id="@+id/ssg_icon"
         android:layout_width="@dimen/_45sdp"
         android:layout_height="@dimen/_45sdp"
-        android:layout_marginTop="@dimen/_290sdp"
         android:layout_marginLeft="@dimen/_25sdp"
-        android:background="@drawable/ssg_position" />
+        android:layout_marginTop="@dimen/_290sdp"
+        android:background="@drawable/position" />
 
     <EditText
         android:id="@+id/Input_ssg_signup"
@@ -92,7 +92,7 @@
         android:textColorHint="@color/color_border"
         android:backgroundTint="#ffffff"
         android:textColor="#000000"
-        android:hint="SSG Position"
+        android:hint="SSLG Position"
         android:inputType="textPersonName"
         android:paddingLeft="@dimen/_10sdp"
         android:theme="@style/Base.Theme.AcadBudV2"
@@ -102,9 +102,9 @@
         android:id="@+id/LrnIcon_signup_ssg"
         android:layout_width="@dimen/_45sdp"
         android:layout_height="@dimen/_45sdp"
-        android:layout_marginTop="@dimen/_335sdp"
         android:layout_marginLeft="@dimen/_25sdp"
-        android:background="@drawable/lrn_signup" />
+        android:layout_marginTop="@dimen/_335sdp"
+        android:background="@drawable/lrn__1_" />
 
     <EditText
         android:id="@+id/Input_Lrn_signup_ssg"
@@ -125,9 +125,9 @@
         android:id="@+id/NameIcon_signup_ssg"
         android:layout_width="@dimen/_45sdp"
         android:layout_height="@dimen/_45sdp"
-        android:layout_marginTop="@dimen/_380sdp"
         android:layout_marginLeft="@dimen/_25sdp"
-        android:background="@drawable/fullname_signup" />
+        android:layout_marginTop="@dimen/_380sdp"
+        android:background="@drawable/fullname" />
 
     <EditText
         android:id="@+id/Input_Name_ssg"
@@ -149,9 +149,9 @@
         android:id="@+id/EmailAddressIcon_ssg"
         android:layout_width="@dimen/_45sdp"
         android:layout_height="@dimen/_45sdp"
-        android:layout_marginTop="@dimen/_425sdp"
         android:layout_marginLeft="@dimen/_25sdp"
-        android:background="@drawable/email_signup" />
+        android:layout_marginTop="@dimen/_425sdp"
+        android:background="@drawable/email__1_" />
 
     <EditText
         android:id="@+id/Input_Email_ssg"
@@ -173,9 +173,9 @@
         android:id="@+id/PasswordIcon_signup_ssg"
         android:layout_width="@dimen/_45sdp"
         android:layout_height="@dimen/_45sdp"
-        android:layout_marginTop="@dimen/_472sdp"
         android:layout_marginLeft="@dimen/_25sdp"
-        android:background="@drawable/password_signup" />
+        android:layout_marginTop="@dimen/_472sdp"
+        android:background="@drawable/password__1_" />
 
     <EditText
         android:id="@+id/Input_Password_signup_ssg"

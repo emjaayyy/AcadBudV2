@@ -7,7 +7,7 @@
     <TextView
         android:id="@+id/AcadBud_ESP_channel"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="53dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
@@ -18,7 +18,7 @@
         android:paddingLeft="13dp"
         android:text="ESP"
         android:textColor="#00BF63"
-        android:textSize="35sp" />
+        android:textSize="@dimen/_30ssp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView_esp"
@@ -54,7 +54,7 @@
         android:layout_alignTop="@+id/esp_vw"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="9dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
         android:background="@drawable/home_button" />
@@ -65,7 +65,7 @@
         android:layout_height="46dp"
         android:layout_alignTop="@+id/home_btn_esp"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="62dp"
+        android:layout_marginStart="54dp"
         android:layout_marginTop="0dp"
         android:layout_marginBottom="5dp"
         android:layout_toEndOf="@+id/home_btn_esp"
@@ -77,7 +77,7 @@
         android:layout_height="46dp"
         android:layout_alignTop="@+id/meeting_btn_esp"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="62dp"
+        android:layout_marginStart="55dp"
         android:layout_marginTop="0dp"
         android:layout_marginBottom="5dp"
         android:layout_toEndOf="@+id/meeting_btn_esp"
@@ -89,7 +89,7 @@
         android:layout_height="46dp"
         android:layout_alignTop="@+id/notif_btn_esp"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="49dp"
+        android:layout_marginStart="38dp"
         android:layout_marginTop="0dp"
         android:layout_marginBottom="5dp"
         android:layout_toEndOf="@+id/notif_btn_esp"

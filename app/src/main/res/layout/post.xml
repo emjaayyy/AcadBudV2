@@ -19,7 +19,7 @@
         android:paddingLeft="13dp"
         android:text="AcadBud"
         android:textColor="#004AAD"
-        android:textSize="35sp" />
+        android:textSize="@dimen/_30ssp" />
 
     <EditText
         android:id="@+id/post_et"
@@ -49,7 +49,9 @@
         android:layout_marginTop="92dp"
         android:layout_marginEnd="11dp"
         android:layout_marginBottom="8dp"
-        android:background="#02408B"
-        android:text="post" />
+        android:background="@drawable/rectangle"
+        android:backgroundTint="#02408B"
+        android:text="post"
+        android:textSize="@dimen/_12ssp"/>
 
 </RelativeLayout>

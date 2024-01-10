@@ -63,9 +63,9 @@
         android:id="@+id/ssg_icon_login"
         android:layout_width="@dimen/_45sdp"
         android:layout_height="@dimen/_45sdp"
-        android:layout_marginTop="@dimen/_330sdp"
         android:layout_marginLeft="@dimen/_25sdp"
-        android:background="@drawable/ssg_position" />
+        android:layout_marginTop="@dimen/_330sdp"
+        android:background="@drawable/position" />
 
     <EditText
         android:id="@+id/Input_ssg_login"
@@ -87,9 +87,9 @@
         android:id="@+id/LrnIcon_login_ssg"
         android:layout_width="@dimen/_45sdp"
         android:layout_height="@dimen/_45sdp"
-        android:layout_marginTop="@dimen/_375sdp"
         android:layout_marginLeft="@dimen/_25sdp"
-        android:background="@drawable/lrn_signup" />
+        android:layout_marginTop="@dimen/_375sdp"
+        android:background="@drawable/lrn__1_" />
 
     <EditText
         android:id="@+id/Input_Lrn_login_ssg"
@@ -110,9 +110,9 @@
         android:id="@+id/PasswordIcon_login_ssg"
         android:layout_width="@dimen/_45sdp"
         android:layout_height="@dimen/_45sdp"
-        android:layout_marginTop="@dimen/_420sdp"
         android:layout_marginLeft="@dimen/_25sdp"
-        android:background="@drawable/password_signup" />
+        android:layout_marginTop="@dimen/_420sdp"
+        android:background="@drawable/password__1_" />
 
     <EditText
         android:id="@+id/Input_Password_login_ssg"

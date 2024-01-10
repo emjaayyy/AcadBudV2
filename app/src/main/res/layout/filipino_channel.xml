@@ -7,7 +7,7 @@
     <TextView
         android:id="@+id/AcadBud_filipino_channel"
         android:layout_width="wrap_content"
-        android:layout_height="50dp"
+        android:layout_height="53dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
@@ -18,7 +18,7 @@
         android:paddingLeft="13dp"
         android:text="Filipino"
         android:textColor="#2BC8D8"
-        android:textSize="35sp" />
+        android:textSize="@dimen/_30ssp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView_filipino"
@@ -54,7 +54,7 @@
         android:layout_alignTop="@+id/filipino_vw"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="9dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
         android:background="@drawable/home_button" />
@@ -65,7 +65,7 @@
         android:layout_height="46dp"
         android:layout_alignTop="@+id/home_btn_filipino"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="62dp"
+        android:layout_marginStart="54dp"
         android:layout_marginTop="0dp"
         android:layout_marginBottom="5dp"
         android:layout_toEndOf="@+id/home_btn_filipino"
@@ -77,7 +77,7 @@
         android:layout_height="46dp"
         android:layout_alignTop="@+id/meeting_btn_filipino"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="62dp"
+        android:layout_marginStart="55dp"
         android:layout_marginTop="0dp"
         android:layout_marginBottom="5dp"
         android:layout_toEndOf="@+id/meeting_btn_filipino"
@@ -89,7 +89,7 @@
         android:layout_height="46dp"
         android:layout_alignTop="@+id/notif_btn_filipino"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="49dp"
+        android:layout_marginStart="38dp"
         android:layout_marginTop="0dp"
         android:layout_marginBottom="5dp"
         android:layout_toEndOf="@+id/notif_btn_filipino"

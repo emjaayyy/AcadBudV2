@@ -81,7 +81,7 @@
             android:layout_height="@dimen/_45sdp"
             android:layout_marginLeft="@dimen/_25sdp"
             android:layout_marginTop="@dimen/_310sdp"
-            android:background="@drawable/lrn_signup" />
+            android:background="@drawable/lrn__1_" />
 
         <EditText
             android:id="@+id/Input_Lrn_signup_user"
@@ -105,7 +105,7 @@
             android:layout_height="@dimen/_45sdp"
             android:layout_marginLeft="@dimen/_25sdp"
             android:layout_marginTop="@dimen/_356sdp"
-            android:background="@drawable/fullname_signup" />
+            android:background="@drawable/fullname" />
 
         <EditText
             android:id="@+id/Input_Name_user"
@@ -129,7 +129,7 @@
             android:layout_height="@dimen/_45sdp"
             android:layout_marginLeft="@dimen/_25sdp"
             android:layout_marginTop="@dimen/_403sdp"
-            android:background="@drawable/email_signup" />
+            android:background="@drawable/email__1_" />
 
         <EditText
             android:id="@+id/Input_Email_user"
@@ -151,9 +151,9 @@
             android:id="@+id/PasswordIcon_signup_user"
             android:layout_width="@dimen/_45sdp"
             android:layout_height="@dimen/_45sdp"
-            android:layout_marginTop="@dimen/_450sdp"
             android:layout_marginLeft="@dimen/_25sdp"
-            android:background="@drawable/password_signup" />
+            android:layout_marginTop="@dimen/_450sdp"
+            android:background="@drawable/password__1_" />
 
         <EditText
             android:id="@+id/Input_Password_signup_user"

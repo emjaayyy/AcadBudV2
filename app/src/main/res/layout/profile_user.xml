@@ -168,7 +168,7 @@
         android:layout_alignTop="@+id/profile_vw"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="9dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
         android:background="@drawable/home_btn__1_" />
@@ -179,34 +179,34 @@
         android:layout_height="46dp"
         android:layout_alignTop="@+id/home_btn_profile"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="55dp"
+        android:layout_marginStart="54dp"
         android:layout_marginTop="0dp"
         android:layout_marginBottom="5dp"
         android:layout_toEndOf="@+id/home_btn_profile"
         android:background="@drawable/meeting_button" />
 
     <Button
-        android:id="@+id/notif_btn_profile"
-        android:layout_width="52dp"
-        android:layout_height="46dp"
-        android:layout_alignTop="@+id/home_btn_profile"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="55dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginBottom="6dp"
-        android:layout_toEndOf="@+id/meeting_btn_profile"
-        android:background="@drawable/notification_button" />
-
-    <Button
-        android:id="@+id/profile_btn_profile"
+        android:id="@+id/notif_btn_home"
         android:layout_width="52dp"
         android:layout_height="46dp"
         android:layout_alignTop="@+id/meeting_btn_profile"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="55dp"
         android:layout_marginTop="0dp"
-        android:layout_marginBottom="8dp"
-        android:layout_toEndOf="@+id/notif_btn_profile"
+        android:layout_marginBottom="5dp"
+        android:layout_toEndOf="@+id/meeting_btn_profile"
+        android:background="@drawable/notification_button" />
+
+    <Button
+        android:id="@+id/profile_btn_home"
+        android:layout_width="52dp"
+        android:layout_height="46dp"
+        android:layout_alignTop="@+id/notif_btn_home"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="38dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="5dp"
+        android:layout_toEndOf="@+id/notif_btn_home"
         android:background="@drawable/profile_btn__1_" />
 
     <Button

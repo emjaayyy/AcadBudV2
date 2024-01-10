@@ -32,7 +32,7 @@
         android:layout_marginBottom="0dp" />
 
     <View
-        android:id="@+id/math_vw"
+        android:id="@+id/meeting_user_vw"
         android:layout_width="410dp"
         android:layout_height="2dp"
         android:layout_alignParentBottom="true"
