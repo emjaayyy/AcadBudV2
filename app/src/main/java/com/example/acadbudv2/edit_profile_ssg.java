@@ -16,7 +16,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class edit_profile extends AppCompatActivity {
+public class edit_profile_ssg extends AppCompatActivity {
 
     private EditText sectionEditText;
     private EditText yearEditText;
@@ -25,7 +25,7 @@ public class edit_profile extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.edit_profile);
+        setContentView(R.layout.edit_profile_ssg);
 
         sectionEditText = findViewById(R.id.profile_section_edit_profile);
         yearEditText = findViewById(R.id.profile_year_edit_profile);
@@ -48,7 +48,7 @@ public class edit_profile extends AppCompatActivity {
         String userName = sharedPreferences.getString("userName", "");
 
         // Retrieve "year" and "section" data for the specific user from Firebase
-        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("Students");
+        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("SSG Students");
         userRef.orderByChild("name").equalTo(userName).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -65,7 +65,7 @@ public class edit_profile extends AppCompatActivity {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(edit_profile.this, "Error fetching profile data: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(edit_profile_ssg.this, "Error fetching profile data: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -79,7 +79,7 @@ public class edit_profile extends AppCompatActivity {
         String userName = sharedPreferences.getString("userName", "");
 
         // Update the user's profile data in Firebase under their name
-        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("Students");
+        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("SSG Students");
         userRef.orderByChild("name").equalTo(userName).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -95,13 +95,13 @@ public class edit_profile extends AppCompatActivity {
                     editor.apply();
 
                     // Provide feedback to the user
-                    Toast.makeText(edit_profile.this, "Profile updated successfully", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(edit_profile_ssg.this, "Profile updated successfully", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(edit_profile.this, "Error updating profile data: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(edit_profile_ssg.this, "Error updating profile data: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
         Intent resultIntent = new Intent();

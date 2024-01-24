@@ -1,5 +1,6 @@
 package com.example.acadbudv2;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -13,6 +14,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -25,6 +28,7 @@ public class math_channel extends AppCompatActivity {
     private DatabaseReference mPostReference;
     private String userName;
     private SharedPreferences sharedPreferences;
+    private String currentUserId;
     private RecyclerView recyclerView;
     private post_adapter postAdapter;
 
@@ -73,13 +77,14 @@ public class math_channel extends AppCompatActivity {
             }
         });
 
-
+        getCurrentUserDetails();
 
         // Initialize RecyclerView and its adapter
         recyclerView = findViewById(R.id.recyclerView_math);
-        postAdapter = new post_adapter(new ArrayList<>(), "", new ArrayList<>());
+        postAdapter = new post_adapter(new ArrayList<>(), currentUserId, new ArrayList<>());
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(postAdapter);
+
 
 
         // Create a listener to retrieve and handle posts
@@ -131,5 +136,21 @@ public class math_channel extends AppCompatActivity {
 
         });
     }
+
+    private void getCurrentUserDetails() {
+        // Retrieve user name from SharedPreferences
+        userName = getUserNameFromSharedPreferences();
+
+        // Retrieve current user ID from Firebase Authentication
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        currentUserId = (currentUser != null) ? currentUser.getUid() : "";
+    }
+
+    private String getUserNameFromSharedPreferences() {
+        // Replace "userName" with the key you used to store the user's name
+        return getSharedPreferences("MyPrefsFile", Context.MODE_PRIVATE).getString("userName", "");
+    }
+
 }
 

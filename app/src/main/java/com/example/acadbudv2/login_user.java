@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.InputType;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -40,11 +41,54 @@ public class login_user extends AppCompatActivity {
         lrnEditText = findViewById(R.id.Input_Lrn_login_user);
         passwordEditText = findViewById(R.id.Input_Password_login_user);
 
+        Button forgotPasswordButton = findViewById(R.id.ForgotPassword_user);
         Button loginButton = findViewById(R.id.Login_Btn_user);
         databaseReference = FirebaseDatabase.getInstance().getReference("Students");
         auth = FirebaseAuth.getInstance();
         // ToggleButton for showing/hiding password
         ToggleButton showPasswordToggle = findViewById(R.id.showPasswordeye_user);
+
+        forgotPasswordButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String lrn = lrnEditText.getText().toString().trim();
+
+                if (TextUtils.isEmpty(lrn)) {
+                    Toast.makeText(login_user.this, "Please enter your LRN to reset the password.", Toast.LENGTH_LONG).show();
+                } else {
+                    // Retrieve the user's email from the Realtime Database using the LRN
+                    databaseReference.child(lrn).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.exists()) {
+                                String email = dataSnapshot.child("email").getValue(String.class);
+
+                                auth.sendPasswordResetEmail(email)
+                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if (task.isSuccessful()) {
+                                                    Toast.makeText(login_user.this, "Password reset email sent.", Toast.LENGTH_SHORT).show();
+                                                } else {
+                                                    Toast.makeText(login_user.this, "Failed to send password reset email: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                                                }
+                                            }
+                                        });
+                            } else {
+                                Toast.makeText(login_user.this, "User with this LRN does not exist.", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+                            // Handle any database errors
+                        }
+                    });
+                }
+            }
+        });
+
+
         showPasswordToggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

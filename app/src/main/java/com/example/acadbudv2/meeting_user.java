@@ -36,9 +36,9 @@ public class meeting_user extends AppCompatActivity {
         setContentView(R.layout.meeting_user);
 
 
-        Button home = findViewById(R.id.home_btn_english);
-        Button notif = findViewById(R.id.notif_btn_math);
-        Button me = findViewById(R.id.profile_btn_math);
+        Button home = findViewById(R.id.meeting_btn_home);
+        Button notif = findViewById(R.id.meeting_btn_notif);
+        Button me = findViewById(R.id.meeting_btn_profile);
 
         me.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,8 +51,8 @@ public class meeting_user extends AppCompatActivity {
         notif.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent n1 = new Intent(meeting_user.this, notif.class);
-                startActivity(n1);
+                // When the "notif" button is clicked, fetch meeting data and start notif activity
+                fetchMeetingsData();
             }
         });
         home.setOnClickListener(new View.OnClickListener() {
@@ -60,6 +60,13 @@ public class meeting_user extends AppCompatActivity {
             public void onClick(View v) {
                 Intent user = new Intent(meeting_user.this, home_user.class);
                 startActivity(user);
+            }
+        });
+        notif.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent nn = new Intent(meeting_user.this, com.example.acadbudv2.notif.class);
+                startActivity(nn);
             }
         });
 
@@ -124,6 +131,7 @@ public class meeting_user extends AppCompatActivity {
             }
         });
     }
+
 
 
     private void updateRecyclerView(List<meetings> meetingsList) {

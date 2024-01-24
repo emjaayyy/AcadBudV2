@@ -17,12 +17,15 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class post_filipino extends AppCompatActivity {
     private DatabaseReference mPostReference;
     private String userName; // Variable to store the user's name
+    private List<String> foulWords;
 
     private String channelIdentifier = "Filipino"; // Change this to the desired channel identifier
 
@@ -42,52 +45,65 @@ public class post_filipino extends AppCompatActivity {
 
         // Retrieve the user's name from SharedPreferences
         userName = getUserNameFromSharedPreferences();
+        foulWords = Arrays.asList("obob", "bobo", "ulaga", "tanga", "anga", "tangina","taena", "potaena", "potangina", "putangina", "inaka", "pota", "atop", "hindutan", "hindut", "ogag",
+                "gagi", "gago","gagu", "gaga", "tarantado", "tado", "tarantada", " puke ng ina mo", "kinanginamo", "kingina","Fota", "Kinangina", "Pu*ta", "Tang*ina", "Put*", "Put@", "Put@ngina", "Fu*ck", "Pak*yu",
+                "P@kyu", "Bo*bo", "B*b*", "Obob", "Tanginam0", "T@nginamo", "p0t@", "iyot", "paeut", "paiyot", "hindot", "pahindot", "estuped", "stupid", "antanga", "katangahan", "k@t@ng@h@n", "Punyeta",
+                "depota", "putapete", "shunga", "tarantado", "bobita", "bopols", "hindotka", "poka", "pukenginamo", "fuck","stupid","stupida","Nigga", "WTF", "watdapak", "bastard", "Son of a bitch", "jerk",
+                "STFU", "dick head", "motherfucker", "dork", "ass","a$$","F*ck", "F*ck you", "F*u", "f*u", "fuck u", "f*ck u", "shit", "sh*t", "Shit", "Sh*t", "$hit", "stupid","$tupid","Bitch", "bastard", "bitch",
+                "b*tch", "B*tch", "Damn", "damn", "d*mn", "D*mn", "Shit hole", "shit face","Nigga", "WTF", "watdapak", "bastard", "Son of a bitch", "jerk", "STFU", "dick head", "motherfucker", "dork", "ass"
+                , "shawty","etits", "tits", "uten","utog","libog","malibog","lf","chukchakan","kiss","halik","oten"/* Add more foul words */);
 
         postButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String postText = postEditText.getText().toString();
                 if (!postText.isEmpty()) {
-                    // Create a new post_content object
-                    post_content newPost = new post_content();
+                    // Check for foul words before allowing the post to be saved
+                    if (containsFoulWords(postText)) {
+                        // Handle foul words
+                        Toast.makeText(post_filipino.this, "Post contains foul words", Toast.LENGTH_SHORT).show();
+                    } else {
+                        post_content newPost = new post_content();
+                        newPost.setName(userName);
+                        newPost.setPosts(postText);
 
-                    // Set the user's name as the key
-                    newPost.setName(userName);
-                    newPost.setPosts(postText);
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy", Locale.getDefault());
+                        String currentDate = dateFormat.format(new Date());
+                        newPost.setDate(currentDate);
 
-                    // Set the current date and time
-                    SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy", Locale.getDefault());
-                    String currentDate = dateFormat.format(new Date());
-                    newPost.setDate(currentDate);
+                        mPostReference.child(userName).addListenerForSingleValueEvent(new ValueEventListener() {
+                            public void onDataChange(com.google.firebase.database.DataSnapshot dataSnapshot) {
+                                long postCount = dataSnapshot.getChildrenCount() + 1;
+                                String postKey = "Post " + postCount;
 
-                    // Save the new post to the Firebase database under the user's name
-                    mPostReference.child(userName).addListenerForSingleValueEvent(new ValueEventListener() {
+                                mPostReference.child(userName).child(postKey).setValue(newPost, new DatabaseReference.CompletionListener() {
+                                    @Override
+                                    public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                                        Toast.makeText(post_filipino.this, "Post saved successfully", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
 
-                        public void onDataChange(com.google.firebase.database.DataSnapshot dataSnapshot) {
-                            long postCount = dataSnapshot.getChildrenCount() + 1; // Increment the post counter
-                            String postKey = "Post " + postCount;
-
-                            // Save the new post to the Firebase database under the user's name
-                            mPostReference.child(userName).child(postKey).setValue(newPost, new DatabaseReference.CompletionListener() {
-                                @Override
-                                public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
-                                    // Optionally, you can add a success message
-                                    Toast.makeText(post_filipino.this, "Post saved successfully", Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                        }
-
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-                            // Handle the error
-                        }
-                    });
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+                                // Handle the error
+                            }
+                        });
+                    }
                 } else {
-                    // Handle empty post text
                     Toast.makeText(post_filipino.this, "Please enter a text", Toast.LENGTH_SHORT).show();
                 }
             }
         });
+    }
+
+    private boolean containsFoulWords(String postContent) {
+        for (String foulWord : foulWords) {
+            if (postContent.toLowerCase().contains(foulWord.toLowerCase())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     // Method to retrieve the user's name from SharedPreferences

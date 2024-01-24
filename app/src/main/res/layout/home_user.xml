@@ -91,22 +91,22 @@
         android:background="@drawable/q_a" />
 
     <Button
-        android:id="@+id/ssg_math_channel"
+        android:id="@+id/btn_math_channel"
         android:layout_width="101dp"
         android:layout_height="79dp"
         android:layout_below="@+id/channel_bg"
         android:layout_alignParentStart="true"
         android:layout_marginStart="14dp"
-        android:layout_marginTop="0dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/math_channel" />
 
     <TextView
         android:id="@+id/tv_math_channels"
         android:layout_width="103dp"
         android:layout_height="20dp"
-        android:layout_below="@+id/ssg_math_channel"
-        android:layout_alignStart="@+id/ssg_math_channel"
-        android:layout_alignEnd="@+id/ssg_math_channel"
+        android:layout_below="@+id/btn_math_channel"
+        android:layout_alignStart="@+id/btn_math_channel"
+        android:layout_alignEnd="@+id/btn_math_channel"
         android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"
         android:layout_marginEnd="0dp"
@@ -117,22 +117,22 @@
         android:textSize="15sp" />
 
     <Button
-        android:id="@+id/ssg_english_channels"
+        android:id="@+id/btn_english_channels"
         android:layout_width="101dp"
         android:layout_height="79dp"
         android:layout_below="@+id/channel_bg"
-        android:layout_marginStart="37dp"
-        android:layout_marginTop="0dp"
-        android:layout_toEndOf="@+id/ssg_math_channel"
+        android:layout_marginStart="34dp"
+        android:layout_marginTop="30dp"
+        android:layout_toEndOf="@+id/btn_math_channel"
         android:background="@drawable/english_channel" />
 
     <TextView
         android:id="@+id/tv_english_channels"
         android:layout_width="103dp"
         android:layout_height="20dp"
-        android:layout_below="@+id/ssg_english_channels"
-        android:layout_alignStart="@+id/ssg_english_channels"
-        android:layout_alignEnd="@+id/ssg_english_channels"
+        android:layout_below="@+id/btn_english_channels"
+        android:layout_alignStart="@+id/btn_english_channels"
+        android:layout_alignEnd="@+id/btn_english_channels"
         android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"
         android:layout_marginEnd="0dp"
@@ -143,25 +143,25 @@
         android:textSize="15sp" />
 
     <Button
-        android:id="@+id/ssg_science_channels"
+        android:id="@+id/btn_science_channels"
         android:layout_width="101dp"
         android:layout_height="79dp"
         android:layout_below="@+id/channel_bg"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginEnd="14dp"
-        android:layout_toEndOf="@+id/ssg_english_channels"
+        android:layout_marginStart="34dp"
+        android:layout_marginTop="30dp"
+        android:layout_toEndOf="@+id/btn_english_channels"
         android:background="@drawable/science_channel" />
 
     <TextView
         android:id="@+id/tv_science_channels"
         android:layout_width="103dp"
         android:layout_height="20dp"
-        android:layout_below="@+id/ssg_science_channels"
-        android:layout_alignStart="@+id/ssg_science_channels"
+        android:layout_below="@+id/btn_science_channels"
+        android:layout_alignStart="@+id/btn_science_channels"
+        android:layout_alignEnd="@+id/btn_science_channels"
         android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
         android:fontFamily="@font/poppins"
         android:paddingLeft="19dp"
         android:text="Science"
@@ -169,11 +169,11 @@
         android:textSize="15sp" />
 
     <Button
-        android:id="@+id/ssg_filipino_channels"
+        android:id="@+id/btn_filipino_channels"
         android:layout_width="101dp"
         android:layout_height="79dp"
         android:layout_below="@+id/tv_math_channels"
-        android:layout_alignStart="@+id/ssg_math_channel"
+        android:layout_alignStart="@+id/btn_math_channel"
         android:layout_alignEnd="@+id/tv_math_channels"
         android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"
@@ -184,9 +184,9 @@
         android:id="@+id/tv_filipino_channels"
         android:layout_width="103dp"
         android:layout_height="20dp"
-        android:layout_below="@+id/ssg_filipino_channels"
-        android:layout_alignStart="@+id/ssg_filipino_channels"
-        android:layout_alignEnd="@+id/ssg_filipino_channels"
+        android:layout_below="@+id/btn_filipino_channels"
+        android:layout_alignStart="@+id/btn_filipino_channels"
+        android:layout_alignEnd="@+id/btn_filipino_channels"
         android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"
         android:layout_marginEnd="0dp"
@@ -197,12 +197,12 @@
         android:gravity="center"/>
 
     <Button
-        android:id="@+id/ssg_ap_channels"
+        android:id="@+id/btn_ap_channels"
         android:layout_width="101dp"
         android:layout_height="79dp"
         android:layout_below="@+id/tv_english_channels"
-        android:layout_alignStart="@+id/ssg_english_channels"
-        android:layout_alignEnd="@+id/ssg_english_channels"
+        android:layout_alignStart="@+id/btn_english_channels"
+        android:layout_alignEnd="@+id/btn_english_channels"
         android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"
         android:layout_marginEnd="0dp"
@@ -212,9 +212,9 @@
         android:id="@+id/tv_ap_channels"
         android:layout_width="98dp"
         android:layout_height="44dp"
-        android:layout_below="@+id/ssg_ap_channels"
-        android:layout_alignStart="@+id/ssg_ap_channels"
-        android:layout_alignEnd="@+id/ssg_ap_channels"
+        android:layout_below="@+id/btn_ap_channels"
+        android:layout_alignStart="@+id/btn_ap_channels"
+        android:layout_alignEnd="@+id/btn_ap_channels"
         android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"
         android:layout_marginEnd="3dp"
@@ -225,11 +225,11 @@
         android:textSize="15sp" />
 
     <Button
-        android:id="@+id/ssg_esp_channels"
+        android:id="@+id/btn_esp_channels"
         android:layout_width="101dp"
         android:layout_height="79dp"
         android:layout_below="@+id/tv_science_channels"
-        android:layout_alignStart="@+id/ssg_science_channels"
+        android:layout_alignStart="@+id/btn_science_channels"
         android:layout_alignEnd="@+id/tv_science_channels"
         android:layout_marginStart="1dp"
         android:layout_marginTop="0dp"
@@ -240,9 +240,9 @@
         android:id="@+id/tv_esp_channels"
         android:layout_width="103dp"
         android:layout_height="20dp"
-        android:layout_below="@+id/ssg_esp_channels"
-        android:layout_alignStart="@+id/ssg_esp_channels"
-        android:layout_alignEnd="@+id/ssg_esp_channels"
+        android:layout_below="@+id/btn_esp_channels"
+        android:layout_alignStart="@+id/btn_esp_channels"
+        android:layout_alignEnd="@+id/btn_esp_channels"
         android:layout_marginStart="1dp"
         android:layout_marginTop="0dp"
         android:layout_marginEnd="0dp"
@@ -253,12 +253,12 @@
         android:textSize="15sp" />
 
     <Button
-        android:id="@+id/ssg_mapeh_channels"
+        android:id="@+id/btn_mapeh_channels"
         android:layout_width="101dp"
         android:layout_height="79dp"
         android:layout_below="@+id/tv_filipino_channels"
-        android:layout_alignStart="@+id/ssg_filipino_channels"
-        android:layout_alignEnd="@+id/ssg_filipino_channels"
+        android:layout_alignStart="@+id/btn_filipino_channels"
+        android:layout_alignEnd="@+id/btn_filipino_channels"
         android:layout_marginStart="1dp"
         android:layout_marginTop="25dp"
         android:layout_marginEnd="0dp"
@@ -268,9 +268,9 @@
         android:id="@+id/tv_mapeh_channels"
         android:layout_width="101dp"
         android:layout_height="20dp"
-        android:layout_below="@+id/ssg_mapeh_channels"
-        android:layout_alignStart="@+id/ssg_mapeh_channels"
-        android:layout_alignEnd="@+id/ssg_mapeh_channels"
+        android:layout_below="@+id/btn_mapeh_channels"
+        android:layout_alignStart="@+id/btn_mapeh_channels"
+        android:layout_alignEnd="@+id/btn_mapeh_channels"
         android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"
         android:layout_marginEnd="0dp"
@@ -281,7 +281,7 @@
         android:textSize="15sp" />
 
     <Button
-        android:id="@+id/ssg_research_channels"
+        android:id="@+id/btn_research_channels"
         android:layout_width="101dp"
         android:layout_height="79dp"
         android:layout_below="@+id/tv_ap_channels"
@@ -296,9 +296,9 @@
         android:id="@+id/tv_research_channels"
         android:layout_width="103dp"
         android:layout_height="20dp"
-        android:layout_below="@+id/ssg_research_channels"
-        android:layout_alignStart="@+id/ssg_research_channels"
-        android:layout_alignEnd="@+id/ssg_research_channels"
+        android:layout_below="@+id/btn_research_channels"
+        android:layout_alignStart="@+id/btn_research_channels"
+        android:layout_alignEnd="@+id/btn_research_channels"
         android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"
         android:layout_marginEnd="0dp"
@@ -309,12 +309,12 @@
         android:textSize="15sp" />
 
     <Button
-        android:id="@+id/ssg_tle_channels"
+        android:id="@+id/btn_tle_channels"
         android:layout_width="101dp"
         android:layout_height="79dp"
         android:layout_below="@+id/tv_esp_channels"
-        android:layout_alignStart="@+id/ssg_esp_channels"
-        android:layout_alignEnd="@+id/ssg_esp_channels"
+        android:layout_alignStart="@+id/btn_esp_channels"
+        android:layout_alignEnd="@+id/btn_esp_channels"
         android:layout_marginStart="0dp"
         android:layout_marginTop="25dp"
         android:layout_marginEnd="0dp"
@@ -324,9 +324,9 @@
         android:id="@+id/tv_tle_channels"
         android:layout_width="103dp"
         android:layout_height="20dp"
-        android:layout_below="@+id/ssg_tle_channels"
-        android:layout_alignStart="@+id/ssg_tle_channels"
-        android:layout_alignEnd="@+id/ssg_tle_channels"
+        android:layout_below="@+id/btn_tle_channels"
+        android:layout_alignStart="@+id/btn_tle_channels"
+        android:layout_alignEnd="@+id/btn_tle_channels"
         android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"
         android:layout_marginEnd="0dp"
@@ -337,12 +337,12 @@
         android:gravity="center"/>
 
     <Button
-        android:id="@+id/ssg_religion_channels"
+        android:id="@+id/btn_religion_channels"
         android:layout_width="101dp"
         android:layout_height="79dp"
         android:layout_below="@+id/tv_mapeh_channels"
-        android:layout_alignStart="@+id/ssg_mapeh_channels"
-        android:layout_alignEnd="@+id/ssg_mapeh_channels"
+        android:layout_alignStart="@+id/btn_mapeh_channels"
+        android:layout_alignEnd="@+id/btn_mapeh_channels"
         android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"
         android:layout_marginEnd="0dp"
@@ -352,9 +352,9 @@
         android:id="@+id/tv_religion_channels"
         android:layout_width="103dp"
         android:layout_height="20dp"
-        android:layout_below="@+id/ssg_religion_channels"
-        android:layout_alignStart="@+id/ssg_religion_channels"
-        android:layout_alignEnd="@+id/ssg_religion_channels"
+        android:layout_below="@+id/btn_religion_channels"
+        android:layout_alignStart="@+id/btn_religion_channels"
+        android:layout_alignEnd="@+id/btn_religion_channels"
         android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"
         android:layout_marginEnd="0dp"
@@ -365,12 +365,12 @@
         android:textSize="15sp" />
 
     <Button
-        android:id="@+id/ssg_innerthoughts_channels"
+        android:id="@+id/btn_innerthoughts_channels"
         android:layout_width="101dp"
         android:layout_height="79dp"
         android:layout_below="@+id/tv_research_channels"
         android:layout_alignStart="@+id/tv_research_channels"
-        android:layout_alignEnd="@+id/ssg_research_channels"
+        android:layout_alignEnd="@+id/btn_research_channels"
         android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"
         android:layout_marginEnd="0dp"
@@ -380,9 +380,9 @@
         android:id="@+id/tv_innerthoughts_channels"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/ssg_innerthoughts_channels"
-        android:layout_alignStart="@+id/ssg_innerthoughts_channels"
-        android:layout_alignEnd="@+id/ssg_innerthoughts_channels"
+        android:layout_below="@+id/btn_innerthoughts_channels"
+        android:layout_alignStart="@+id/btn_innerthoughts_channels"
+        android:layout_alignEnd="@+id/btn_innerthoughts_channels"
         android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"
         android:layout_marginEnd="0dp"
@@ -397,7 +397,6 @@
         android:layout_width="95dp"
         android:layout_height="78dp"
         android:layout_below="@+id/tv_tle_channels"
-
         android:layout_alignStart="@+id/tv_tle_channels"
         android:layout_alignEnd="@+id/tv_tle_channels"
         android:layout_marginStart="0dp"
@@ -436,45 +435,45 @@
         android:layout_alignTop="@+id/home_vw"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
         android:background="@drawable/home_button" />
 
     <Button
-        android:id="@+id/meeting_btn_profile"
+        android:id="@+id/meeting_btn_home"
         android:layout_width="52dp"
         android:layout_height="46dp"
         android:layout_alignTop="@+id/home_btn_home"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="54dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginBottom="5dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="-1dp"
+        android:layout_marginBottom="6dp"
         android:layout_toEndOf="@+id/home_btn_home"
         android:background="@drawable/meeting_button" />
 
     <Button
-        android:id="@+id/notif_btn_profile"
+        android:id="@+id/notif_btn_home"
         android:layout_width="52dp"
         android:layout_height="46dp"
-        android:layout_alignTop="@+id/meeting_btn_profile"
+        android:layout_alignTop="@+id/meeting_btn_home"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="55dp"
+        android:layout_marginStart="67dp"
         android:layout_marginTop="0dp"
         android:layout_marginBottom="5dp"
-        android:layout_toEndOf="@+id/meeting_btn_profile"
+        android:layout_toEndOf="@+id/meeting_btn_home"
         android:background="@drawable/notification_button" />
 
     <Button
-        android:id="@+id/profile_btn_profile"
+        android:id="@+id/profile_btn_home"
         android:layout_width="52dp"
         android:layout_height="46dp"
-        android:layout_alignTop="@+id/notif_btn_profile"
+        android:layout_alignTop="@+id/notif_btn_home"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="38dp"
+        android:layout_marginStart="45dp"
         android:layout_marginTop="0dp"
         android:layout_marginBottom="5dp"
-        android:layout_toEndOf="@+id/notif_btn_profile"
+        android:layout_toEndOf="@+id/notif_btn_home"
         android:background="@drawable/profile_button" />
 
 </RelativeLayout>

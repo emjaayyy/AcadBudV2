@@ -1,14 +1,12 @@
 package com.example.acadbudv2;
 
-import android.icu.text.SimpleDateFormat;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
-public class meetings {
+public class meetings implements Parcelable {
     private String key;
     private String subject;
     private String topic;
@@ -20,20 +18,7 @@ public class meetings {
     public meetings() {
         // Default constructor required for Firebase
     }
-    public long getMeetingDateTimeMillis() {
-        // Assuming your date and time are in a format like "yyyy-MM-dd HH:mm"
-        String dateTimeString = date + " " + time;
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault());
-        try {
-            Date meetingDateTime = sdf.parse(dateTimeString);
-            if (meetingDateTime != null) {
-                return meetingDateTime.getTime();
-            }
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return 0; // Default value if parsing fails
-    }
+
 
     public meetings(String subject, String topic, String date, String time, List<String> participants) {
         this.subject = subject;
@@ -41,6 +26,43 @@ public class meetings {
         this.date = date;
         this.time = time;
         this.participants = participants;
+    }
+
+    // Parcelable implementation
+    protected meetings(Parcel in) {
+        key = in.readString();
+        subject = in.readString();
+        topic = in.readString();
+        date = in.readString();
+        time = in.readString();
+        participants = in.createStringArrayList();
+    }
+
+    public static final Creator<meetings> CREATOR = new Creator<meetings>() {
+        @Override
+        public meetings createFromParcel(Parcel in) {
+            return new meetings(in);
+        }
+
+        @Override
+        public meetings[] newArray(int size) {
+            return new meetings[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(key);
+        dest.writeString(subject);
+        dest.writeString(topic);
+        dest.writeString(date);
+        dest.writeString(time);
+        dest.writeStringList(participants);
     }
 
     // Add getter and setter methods for the new 'key' field
@@ -87,9 +109,11 @@ public class meetings {
     public List<String> getParticipants() {
         return participants;
     }
+
     public void setParticipants(List<String> participants) {
         this.participants = participants;
     }
+
     public void addParticipant(String participant) {
         if (participants == null) {
             participants = new ArrayList<>();

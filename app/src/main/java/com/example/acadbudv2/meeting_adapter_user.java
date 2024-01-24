@@ -171,9 +171,10 @@ public class meeting_adapter_user extends RecyclerView.Adapter<meeting_adapter_u
             // Inflate the tutor identification dialog layout
             View dialogView = LayoutInflater.from(context).inflate(R.layout.identify_tutor, null);
 
-            // Create the AlertDialog builder
-            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            // Create the AlertDialog builder and apply the custom style
+            AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.CustomAlertDialog);
             builder.setView(dialogView);
+
 
             // Find views in the tutor identification dialog
             Button closeButton = dialogView.findViewById(R.id.close_btn_identifier);

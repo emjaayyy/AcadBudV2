@@ -91,4 +91,5 @@ public class ratings extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();
     }
+
 }

@@ -1,0 +1,141 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff">
+
+    <TextView
+        android:id="@+id/AcadBud_edit_profile"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
+        android:fontFamily="@font/poppins"
+        android:gravity="center"
+        android:paddingLeft="13dp"
+        android:text="Edit Profile "
+        android:textColor="#000000"
+        android:textSize="35sp" />
+
+    <View
+        android:id="@+id/edit_profile_vw1"
+        android:layout_width="wrap_content"
+        android:layout_height="129dp"
+        android:layout_below="@+id/AcadBud_edit_profile"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="98dp"
+        android:layout_marginEnd="16dp"
+        android:background="#DCF4FF" />
+
+    <EditText
+        android:id="@+id/profile_section_edit_profile"
+        android:layout_width="272dp"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/edit_profile_vw1"
+        android:layout_alignTop="@+id/edit_profile_vw1"
+        android:layout_alignEnd="@+id/edit_profile_vw1"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="91dp"
+        android:fontFamily="@font/poppins"
+        android:gravity=""
+        android:hint="Section"
+        android:textColor="#000000"
+        android:textColorHint="#000000"
+        android:textSize="15dp" />
+
+    <EditText
+        android:id="@+id/profile_year_edit_profile"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/profile_section_edit_profile"
+        android:layout_alignStart="@+id/profile_section_edit_profile"
+        android:layout_alignEnd="@+id/edit_profile_vw1"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="100dp"
+        android:fontFamily="@font/poppins"
+        android:hint="Year"
+        android:textColor="#000000"
+        android:textColorHint="#000000"
+        android:textSize="15dp" />
+
+    <Button
+        android:id="@+id/update_profile"
+        android:layout_width="173dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edit_profile_vw1"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="119dp"
+        android:layout_marginTop="137dp"
+        android:layout_marginEnd="119dp"
+        android:background="@color/colorPrimary"
+        android:textColor="#ffffff"
+        android:fontFamily="@font/poppins"
+        android:text="Update Profile" />
+
+    <View
+        android:id="@+id/edit_profile_vw2"
+        android:layout_width="410dp"
+        android:layout_height="2dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="54dp"
+        android:background="#DBDEE3"/>
+
+    <Button
+        android:id="@+id/home_btn_edit_profile"
+        android:layout_width="52dp"
+        android:layout_height="46dp"
+        android:layout_alignTop="@+id/edit_profile_vw2"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="9dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/home_btn__1_" />
+
+    <Button
+        android:id="@+id/meeting_btn_edit_profile"
+        android:layout_width="52dp"
+        android:layout_height="46dp"
+        android:layout_alignTop="@+id/home_btn_edit_profile"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="5dp"
+        android:layout_toEndOf="@+id/home_btn_edit_profile"
+        android:background="@drawable/meeting_button" />
+
+    <Button
+        android:id="@+id/notif_btn_edit_profile"
+        android:layout_width="52dp"
+        android:layout_height="46dp"
+        android:layout_alignTop="@+id/home_btn_edit_profile"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="6dp"
+        android:layout_toEndOf="@+id/meeting_btn_edit_profile"
+        android:background="@drawable/notification_button" />
+
+    <Button
+        android:id="@+id/profile_btn_edit_profile"
+        android:layout_width="52dp"
+        android:layout_height="46dp"
+        android:layout_alignTop="@+id/meeting_btn_edit_profile"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="8dp"
+        android:layout_toEndOf="@+id/notif_btn_edit_profile"
+        android:background="@drawable/profile_btn__1_" />
+
+
+</RelativeLayout>

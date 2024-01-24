@@ -31,11 +31,15 @@ import java.util.ArrayList;
 public class profile_ssg extends AppCompatActivity {
 
     TextView profile_name;
+    TextView profile_year_user;
+    TextView profile_section_user;
+    String savedName;
+    TextView profile_rate_user;
     FirebaseAuth auth;
     SharedPreferences sharedPreferences;
     private static final String PREFS_NAME = "MyPrefsFile"; // Name for your SharedPreferences file
 
-    private RecyclerView postsRecyclerView;
+    private RecyclerView recyclerViewProfile;
     private post_adapter postAdapter;
     private DatabaseReference databaseRef;
 
@@ -45,6 +49,9 @@ public class profile_ssg extends AppCompatActivity {
         setContentView(R.layout.profile_ssg);
 
         profile_name = findViewById(R.id.profile_name);
+        profile_year_user = findViewById(R.id.profile_year);
+        profile_section_user = findViewById(R.id.profile_section);
+        profile_rate_user = findViewById(R.id.profile_rate);
 
         Button logoutButton = findViewById(R.id.logout_btn);
         Button notif = findViewById(R.id.notif_btn_profile);
@@ -56,7 +63,7 @@ public class profile_ssg extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent edited = new Intent(profile_ssg.this, edit_profile.class);
-                startActivity(edited);
+                startActivityForResult(edited, EDIT_PROFILE_REQUEST_CODE);
             }
         });
 
@@ -78,7 +85,7 @@ public class profile_ssg extends AppCompatActivity {
         meet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent meeting = new Intent(profile_ssg.this, meeting_ssg.class);
+                Intent meeting = new Intent(profile_ssg.this, meeting_user.class);
                 startActivity(meeting);
             }
         });
@@ -86,7 +93,7 @@ public class profile_ssg extends AppCompatActivity {
         feed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent home = new Intent(profile_ssg.this, home_ssg.class);
+                Intent home = new Intent(profile_ssg.this, home_user.class);
                 startActivity(home);
             }
         });
@@ -94,29 +101,167 @@ public class profile_ssg extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = auth.getCurrentUser();
 
+
         if (currentUser != null) {
             String uid = currentUser.getUid();
 
             // Access the user's name from SharedPreferences
             sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-            String savedName = sharedPreferences.getString("userName", "");
+            savedName = sharedPreferences.getString("userName", "");
             profile_name.setText(savedName);
 
             // Initialize the RecyclerView and adapter for posts
-            postsRecyclerView = findViewById(R.id.profile_rv);
-            postsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+            recyclerViewProfile = findViewById(R.id.profile_rv);
+            recyclerViewProfile.setLayoutManager(new LinearLayoutManager(this));
             postAdapter = new post_adapter(new ArrayList<>(), "", new ArrayList<>());
-            postsRecyclerView.setAdapter(postAdapter);
+            recyclerViewProfile.setAdapter(postAdapter);
 
             // Initialize the Firebase Realtime Database reference
             databaseRef = FirebaseDatabase.getInstance().getReference("Channels");
 
             // Fetch and display posts from all channels
             fetchPostsFromAllChannels(savedName);
+
+            // Fetch and display profile information from Firebase
+            fetchProfileData(savedName);
+
+            // Fetch and display ratings
+            fetchAndDisplayRatings(savedName);
         } else {
             // Handle the case where the user is not logged in
             Log.e("ProfileError", "User is not logged in");
         }
+    }
+
+    private static final int EDIT_PROFILE_REQUEST_CODE = 1; // Choose any unique request code
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == EDIT_PROFILE_REQUEST_CODE && resultCode == RESULT_OK) {
+            // Handle the updated data from edit_profile activity
+            String updatedYear = data.getStringExtra("updatedYear");
+            String updatedSection = data.getStringExtra("updatedSection");
+
+            // Update UI with the new data
+            profile_year_user.setText("Year: " + updatedYear);
+            profile_section_user.setText("Section: " + updatedSection);
+
+            // Save the updated data locally (SharedPreferences)
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("userYear", updatedYear);
+            editor.putString("userSection", updatedSection);
+            editor.apply();
+        }
+    }
+
+    // Add this method to fetch profile data either from SharedPreferences or Firebase
+    private void fetchProfileDataLocallyOrFirebase(String userName) {
+        String savedYear = sharedPreferences.getString("userYear", "");
+        String savedSection = sharedPreferences.getString("userSection", "");
+
+        if (!savedYear.isEmpty() && !savedSection.isEmpty()) {
+            // Data exists in SharedPreferences, use it
+            profile_year_user.setText("Year: " + savedYear);
+            profile_section_user.setText("Section: " + savedSection);
+        } else {
+            // Data doesn't exist in SharedPreferences, fetch from Firebase
+            DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("SSG Students");
+            userRef.orderByChild("name").equalTo(userName).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                            String userYear = userSnapshot.child("year").getValue(String.class);
+                            String userSection = userSnapshot.child("section").getValue(String.class);
+
+                            if (userYear != null && userSection != null) {
+                                profile_year_user.setText("Year: " + userYear);
+                                profile_section_user.setText("Section: " + userSection);
+
+                                // Fetch and display ratings
+                                fetchAndDisplayRatings(userName);
+
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.putString("userYear", userYear);
+                                editor.putString("userSection", userSection);
+                                editor.apply();
+                            } else {
+                                Log.e("ProfileUser", "Year or section is null");
+                            }
+                        }
+                    } else {
+                        Log.e("ProfileUser", "DataSnapshot does not exist");
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    Log.e("ProfileUser", "Error in database operation: " + databaseError.getMessage());
+                }
+            });
+        }
+    }
+
+    private void fetchProfileData(String userName) {
+        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("SSG Students");
+        userRef.orderByChild("name").equalTo(userName).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                        String userYear = userSnapshot.child("year").getValue(String.class);
+                        String userSection = userSnapshot.child("section").getValue(String.class);
+
+                        if (userYear != null && userSection != null) {
+                            profile_year_user.setText("Year: " + userYear);
+                            profile_section_user.setText("Section: " + userSection);
+
+                            // Fetch and display ratings
+                            fetchAndDisplayRatings(userName);
+
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.putString("userYear", userYear);
+                            editor.putString("userSection", userSection);
+                            editor.apply();
+                        } else {
+                            Log.e("ProfileUser", "Year or section is null");
+                        }
+                    }
+                } else {
+                    Log.e("ProfileUser", "DataSnapshot does not exist");
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.e("ProfileUser", "Error in database operation: " + databaseError.getMessage());
+            }
+        });
+    }
+
+    private void fetchAndDisplayRatings(String userName) {
+        Log.d("RatingDebug", "User Name: " + userName);
+        DatabaseReference ratingsRef = FirebaseDatabase.getInstance().getReference("Ratings").child(userName);
+        ratingsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    // Assuming your rating is stored as a float
+                    float userRating = dataSnapshot.getValue(Float.class);
+                    profile_rate_user.setText("Ratings: " + userRating);
+                } else {
+                    // Handle the case where ratings data doesn't exist for the user
+                    profile_rate_user.setText("Ratings: N/A");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.e("RatingsError", "Error fetching ratings: " + databaseError.getMessage());
+            }
+        });
     }
 
     private void showLogoutConfirmationDialog() {
@@ -145,7 +290,7 @@ public class profile_ssg extends AppCompatActivity {
         // You can add your logout logic here, like signing out the user
 
         // Redirect to the login activity
-        Intent intent = new Intent(profile_ssg.this, login_ssg.class);
+        Intent intent = new Intent(profile_ssg.this, role.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
         finish(); // Finish the current activity
@@ -164,6 +309,7 @@ public class profile_ssg extends AppCompatActivity {
                     // Fetch posts for the user from the current channel
                     fetchPostsForUserInChannel(userName, channelName);
                 }
+
                 // Sort posts after fetching from all channels
                 sortAndDisplayPosts();
             }
@@ -214,10 +360,13 @@ public class profile_ssg extends AppCompatActivity {
             }
         });
     }
+
     private void sortAndDisplayPosts() {
         // Sort posts by date
         postAdapter.sortPostsByDate();
         // Notify the adapter that the data set has changed
         postAdapter.notifyDataSetChanged();
     }
+
 }
+

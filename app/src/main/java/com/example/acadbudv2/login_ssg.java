@@ -30,6 +30,7 @@ public class login_ssg extends AppCompatActivity {
 
     private EditText ssgPositionEditText, lrnEditText, passwordEditText;
     private FirebaseAuth auth;
+    private DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,9 @@ public class login_ssg extends AppCompatActivity {
         Button loginButton = findViewById(R.id.Login_Btn_ssg);
         Button forgotPasswordButton = findViewById(R.id.ForgotPassword_ssg);
         auth = FirebaseAuth.getInstance();
+
+        // Initialize the DatabaseReference
+        databaseReference = FirebaseDatabase.getInstance().getReference("SSG Students");
 
         // ToggleButton for showing/hiding password
         ToggleButton showPasswordToggle = findViewById(R.id.showPasswordeye_ssg);
@@ -71,30 +75,50 @@ public class login_ssg extends AppCompatActivity {
                 validateSSGPositionAndLRN(ssgPosition, lrn, password);
             }
         });
+
         forgotPasswordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String email = lrnEditText.getText().toString();
-                if (!TextUtils.isEmpty(email)) {
-                    auth.sendPasswordResetEmail(email)
-                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if (task.isSuccessful()) {
-                                        Toast.makeText(login_ssg.this, "Password reset email sent.", Toast.LENGTH_SHORT).show();
-                                    } else {
-                                        Toast.makeText(login_ssg.this, "Failed to send password reset email: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                                    }
-                                }
-                            });
-                } else {
+                String lrn = lrnEditText.getText().toString().trim();
+
+                if (TextUtils.isEmpty(lrn)) {
                     Toast.makeText(login_ssg.this, "Please enter your LRN to reset the password.", Toast.LENGTH_LONG).show();
+                } else {
+                    // Retrieve the user's email from the Realtime Database using the LRN
+                    databaseReference.child(lrn).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.exists()) {
+                                String email = dataSnapshot.child("email").getValue(String.class);
+
+                                auth.sendPasswordResetEmail(email)
+                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if (task.isSuccessful()) {
+                                                    Toast.makeText(login_ssg.this, "Password reset email sent.", Toast.LENGTH_SHORT).show();
+                                                } else {
+                                                    Toast.makeText(login_ssg.this, "Failed to send password reset email: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                                                }
+                                            }
+                                        });
+                            } else {
+                                Toast.makeText(login_ssg.this, "User with this LRN does not exist.", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+                            // Handle any database errors
+                            Toast.makeText(login_ssg.this, "Database Error: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }
             }
         });
     }
 
-    private void validateSSGPositionAndLRN(String ssgPosition, String lrn, String password) {
+        private void validateSSGPositionAndLRN(String ssgPosition, String lrn, String password) {
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("SSG Students");
         databaseReference.child(lrn).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

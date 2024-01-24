@@ -2,7 +2,6 @@ package com.example.acadbudv2;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -32,6 +31,9 @@ public class meeting_adapter_ssg extends RecyclerView.Adapter<meeting_adapter_ss
     private List<meetings> meetingsList;
     private DatabaseReference mdatabaseReference;
     private String channelName;
+
+    // Add a member variable to store the maximum participants limit
+    private static final int MAX_PARTICIPANTS = 10;
     private int currentSessionNumber;
 
     // List of valid students to check if a student is valid during participant addition
@@ -107,6 +109,8 @@ public class meeting_adapter_ssg extends RecyclerView.Adapter<meeting_adapter_ss
             topicTextView.setText(meeting.getTopic());
             String dateTime = meeting.getDate() + " " + meeting.getTime();
             dateTimeTextView.setText(dateTime);
+
+
         }
         private void showSearchBar(int sessionNumber) {
             if (selectedStudentNames.size() < 10) {
@@ -189,14 +193,30 @@ public class meeting_adapter_ssg extends RecyclerView.Adapter<meeting_adapter_ss
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if (!dataSnapshot.hasChild(selectedStudentName)) {
-                        participantsReference.child(selectedStudentName).setValue(true);
+                        long currentParticipantsCount = dataSnapshot.getChildrenCount();
 
-                        // Notify the user
-                        Toast.makeText(context, "You added: " + selectedStudentName, Toast.LENGTH_LONG).show();
+                        if (currentParticipantsCount < MAX_PARTICIPANTS) {
+                            // User is not already added and the limit is not reached, proceed to add
+                            participantsReference.child(selectedStudentName).setValue(true);
 
-                        // Add the code to send a notification here
-                        sendNotification(selectedStudentName, sessionNumber);
+                            // Notify the user
+                            Toast.makeText(context, "You added: " + selectedStudentName, Toast.LENGTH_LONG).show();
+
+                            // Update the UI
+                            notifyDataSetChanged();
+
+                            // Check if the maximum number of participants (10) has been reached after addition
+                            if (currentParticipantsCount + 1 == MAX_PARTICIPANTS) {
+                                // Disable the add button
+                                addButton.setEnabled(false);
+                                Toast.makeText(context, "Maximum number of participants reached (10)", Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            // Maximum participants reached, show a message
+                            Toast.makeText(context, "Maximum number of participants reached (10)", Toast.LENGTH_SHORT).show();
+                        }
                     } else {
+                        // User is already added, show a message
                         Toast.makeText(context, "User already added to this session", Toast.LENGTH_LONG).show();
                     }
                 }
@@ -208,12 +228,7 @@ public class meeting_adapter_ssg extends RecyclerView.Adapter<meeting_adapter_ss
             });
         }
 
-        private void sendNotification(String userName, int sessionNumber) {
-            Intent intent = new Intent(context, notif.class);
-            String notificationMessage = "You have been added to the meeting in Session " + sessionNumber;
-            intent.putExtra("notification_message", notificationMessage);
-            context.startActivity(intent);
-        }
+
         private void showParticipants(int sessionNumber) {
             DatabaseReference currentSessionReference = mdatabaseReference.child("Session " + sessionNumber).child("Participants");
 

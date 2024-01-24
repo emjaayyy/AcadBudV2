@@ -47,7 +47,7 @@ public class post_content {
     }
 
     public boolean isCurrentUser(String currentUserId) {
-        // Check if the post's userId is equal to the current user's id
         return this.userId != null && this.userId.equals(currentUserId);
     }
+
 }

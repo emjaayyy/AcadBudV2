@@ -1,5 +1,5 @@
 package com.example.acadbudv2;
-import java.util.Collections;
+
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -101,6 +101,7 @@ public class profile_user extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = auth.getCurrentUser();
 
+
         if (currentUser != null) {
             String uid = currentUser.getUid();
 
@@ -115,19 +116,14 @@ public class profile_user extends AppCompatActivity {
             postAdapter = new post_adapter(new ArrayList<>(), "", new ArrayList<>());
             recyclerViewProfile.setAdapter(postAdapter);
 
-
-
-
             // Initialize the Firebase Realtime Database reference
             databaseRef = FirebaseDatabase.getInstance().getReference("Channels");
 
             // Fetch and display posts from all channels
             fetchPostsFromAllChannels(savedName);
 
-            // Fetch and display profile information
-            fetchProfileData(uid);
-            // Fetch and display profile information
-            fetchProfileDataLocallyOrFirebase(uid);
+            // Fetch and display profile information from Firebase
+            fetchProfileData(savedName);
 
             // Fetch and display ratings
             fetchAndDisplayRatings(savedName);
@@ -137,7 +133,7 @@ public class profile_user extends AppCompatActivity {
         }
     }
 
-    private static final int EDIT_PROFILE_REQUEST_CODE = 1; // Choose any unique request code
+        private static final int EDIT_PROFILE_REQUEST_CODE = 1; // Choose any unique request code
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -161,7 +157,7 @@ public class profile_user extends AppCompatActivity {
     }
 
     // Add this method to fetch profile data either from SharedPreferences or Firebase
-    private void fetchProfileDataLocallyOrFirebase(String uid) {
+    private void fetchProfileDataLocallyOrFirebase(String userName) {
         String savedYear = sharedPreferences.getString("userYear", "");
         String savedSection = sharedPreferences.getString("userSection", "");
 
@@ -171,32 +167,67 @@ public class profile_user extends AppCompatActivity {
             profile_section_user.setText("Section: " + savedSection);
         } else {
             // Data doesn't exist in SharedPreferences, fetch from Firebase
-            fetchProfileData(uid);
+            DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("Students");
+            userRef.orderByChild("name").equalTo(userName).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                            String userYear = userSnapshot.child("year").getValue(String.class);
+                            String userSection = userSnapshot.child("section").getValue(String.class);
+
+                            if (userYear != null && userSection != null) {
+                                profile_year_user.setText("Year: " + userYear);
+                                profile_section_user.setText("Section: " + userSection);
+
+                                // Fetch and display ratings
+                                fetchAndDisplayRatings(userName);
+
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.putString("userYear", userYear);
+                                editor.putString("userSection", userSection);
+                                editor.apply();
+                            } else {
+                                Log.e("ProfileUser", "Year or section is null");
+                            }
+                        }
+                    } else {
+                        Log.e("ProfileUser", "DataSnapshot does not exist");
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    Log.e("ProfileUser", "Error in database operation: " + databaseError.getMessage());
+                }
+            });
         }
     }
 
-    private void fetchProfileData(String uid) {
+    private void fetchProfileData(String userName) {
         DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("Students");
-        userRef.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+        userRef.orderByChild("name").equalTo(userName).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    String userYear = dataSnapshot.child("year").getValue(String.class);
-                    String userSection = dataSnapshot.child("section").getValue(String.class);
+                    for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                        String userYear = userSnapshot.child("year").getValue(String.class);
+                        String userSection = userSnapshot.child("section").getValue(String.class);
 
-                    if (userYear != null && userSection != null) {
-                        profile_year_user.setText("Year: " + userYear);
-                        profile_section_user.setText("Section: " + userSection);
+                        if (userYear != null && userSection != null) {
+                            profile_year_user.setText("Year: " + userYear);
+                            profile_section_user.setText("Section: " + userSection);
+
                             // Fetch and display ratings
+                            fetchAndDisplayRatings(userName);
 
-                        fetchAndDisplayRatings(savedName); // Add this line
-
-                        SharedPreferences.Editor editor = sharedPreferences.edit();
-                        editor.putString("userYear", userYear);
-                        editor.putString("userSection", userSection);
-                        editor.apply();
-                    } else {
-                        Log.e("ProfileUser", "Year or section is null");
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.putString("userYear", userYear);
+                            editor.putString("userSection", userSection);
+                            editor.apply();
+                        } else {
+                            Log.e("ProfileUser", "Year or section is null");
+                        }
                     }
                 } else {
                     Log.e("ProfileUser", "DataSnapshot does not exist");

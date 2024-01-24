@@ -19,14 +19,14 @@
         android:paddingLeft="13dp"
         android:text="Meeting"
         android:textColor="#004AAD"
-        android:textSize="35sp" />
+        android:textSize="@dimen/_30ssp" />
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView_meeting_user"
         android:layout_width="match_parent"
         android:layout_height="628dp"
-        android:layout_above="@+id/math_vw"
+        android:layout_above="@+id/meeting_user_vw"
         android:layout_below="@+id/Meeting_tv_ssg"
         android:layout_marginTop="-3dp"
         android:layout_marginBottom="0dp" />
@@ -40,51 +40,51 @@
         android:background="#DBDEE3"/>
 
     <Button
-        android:id="@+id/home_btn_english"
+        android:id="@+id/meeting_btn_home"
         android:layout_width="52dp"
         android:layout_height="46dp"
-        android:layout_alignTop="@+id/math_vw"
+        android:layout_alignTop="@+id/meeting_user_vw"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="9dp"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="0dp"
         android:layout_marginBottom="5dp"
         android:background="@drawable/home_btn__1_" />
 
     <Button
-        android:id="@+id/meeting_btn_math"
+        android:id="@+id/meeting_btn_meeting"
         android:layout_width="52dp"
         android:layout_height="46dp"
-        android:layout_alignTop="@+id/home_btn_english"
+        android:layout_alignTop="@+id/meeting_btn_home"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="62dp"
+        android:layout_marginStart="54dp"
         android:layout_marginTop="0dp"
         android:layout_marginBottom="5dp"
-        android:layout_toEndOf="@+id/home_btn_english"
+        android:layout_toEndOf="@+id/meeting_btn_home"
         android:background="@drawable/meeting_btn" />
 
     <Button
-        android:id="@+id/notif_btn_math"
+        android:id="@+id/meeting_btn_notif"
         android:layout_width="52dp"
         android:layout_height="46dp"
-        android:layout_alignTop="@+id/meeting_btn_math"
+        android:layout_alignTop="@+id/meeting_btn_meeting"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="62dp"
+        android:layout_marginStart="55dp"
         android:layout_marginTop="0dp"
         android:layout_marginBottom="5dp"
-        android:layout_toEndOf="@+id/meeting_btn_math"
+        android:layout_toEndOf="@+id/meeting_btn_meeting"
         android:background="@drawable/notification_button" />
 
     <Button
-        android:id="@+id/profile_btn_math"
+        android:id="@+id/meeting_btn_profile"
         android:layout_width="52dp"
         android:layout_height="46dp"
-        android:layout_alignTop="@+id/notif_btn_math"
+        android:layout_alignTop="@+id/meeting_btn_notif"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="49dp"
+        android:layout_marginStart="38dp"
         android:layout_marginTop="0dp"
         android:layout_marginBottom="5dp"
-        android:layout_toEndOf="@+id/notif_btn_math"
+        android:layout_toEndOf="@+id/meeting_btn_notif"
         android:background="@drawable/profile_button" />
 
-  </RelativeLayout>
+</RelativeLayout>

@@ -178,7 +178,7 @@
         android:background="@drawable/meeting_button" />
 
     <Button
-        android:id="@+id/notif_btn_home"
+        android:id="@+id/notif_btn_profile"
         android:layout_width="52dp"
         android:layout_height="46dp"
         android:layout_alignTop="@+id/meeting_btn_profile"
@@ -193,12 +193,12 @@
         android:id="@+id/profile_btn_home"
         android:layout_width="52dp"
         android:layout_height="46dp"
-        android:layout_alignTop="@+id/notif_btn_home"
+        android:layout_alignTop="@+id/notif_btn_profile"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="38dp"
         android:layout_marginTop="0dp"
         android:layout_marginBottom="5dp"
-        android:layout_toEndOf="@+id/notif_btn_home"
+        android:layout_toEndOf="@+id/notif_btn_profile"
         android:background="@drawable/profile_btn__1_" />
 
     <Button

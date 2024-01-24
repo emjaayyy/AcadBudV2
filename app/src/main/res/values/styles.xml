@@ -8,6 +8,12 @@
     </style>
 
     <style name="AppTheme">style</style>
+    <style name="CustomAlertDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:background">@android:color/white</item>
+        <item name="android:textColorPrimary">@android:color/black</item>
+        <!-- Add any other style attributes you want to customize -->
+    </style>
+
 
 
 
