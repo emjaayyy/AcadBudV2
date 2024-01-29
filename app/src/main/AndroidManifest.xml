@@ -138,7 +138,7 @@
             android:name=".login_ssg"
             android:exported="false" />
         <activity
-            android:name=".role"
+            android:name=".splash"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

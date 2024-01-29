@@ -1,5 +1,7 @@
 package com.example.acadbudv2;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -71,9 +73,34 @@ public class edit_profile extends AppCompatActivity {
     }
 
     private void updateProfile() {
+        // Retrieve the new values from the EditText fields
         String newSection = sectionEditText.getText().toString();
         String newYear = yearEditText.getText().toString();
 
+        // Create a dialog box to confirm the update
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Confirm Update");
+        builder.setMessage("Are you sure you want to update your profile?");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // User clicked "Yes," proceed with the update
+                performProfileUpdate(newYear, newSection);
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // User clicked "No," do nothing
+                dialog.dismiss();
+            }
+        });
+
+        // Display the dialog
+        builder.show();
+    }
+
+    private void performProfileUpdate(String newYear, String newSection) {
         // Retrieve the user's name from SharedPreferences
         SharedPreferences sharedPreferences = getSharedPreferences("MyPrefsFile", MODE_PRIVATE);
         String userName = sharedPreferences.getString("userName", "");
@@ -104,6 +131,8 @@ public class edit_profile extends AppCompatActivity {
                 Toast.makeText(edit_profile.this, "Error updating profile data: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+
+        // Set the result for the calling activity
         Intent resultIntent = new Intent();
         resultIntent.putExtra("updatedYear", newYear);
         resultIntent.putExtra("updatedSection", newSection);
@@ -112,5 +141,6 @@ public class edit_profile extends AppCompatActivity {
         // Finish the activity
         finish();
     }
+
 }
 

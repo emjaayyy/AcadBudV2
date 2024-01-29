@@ -1,42 +1,31 @@
 package com.example.acadbudv2;
 
 public class ssg {
+    private String position;
     private String lrn;
     private String name;
     private String email;
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
     private String password;
 
-    public String getYear() {
-        return year;
-    }
-
-    public void setYear(String year) {
-        this.year = year;
-    }
-
-    public String getSection() {
-        return section;
-    }
-
-    public void setSection(String section) {
-        this.section = section;
-    }
-
-    private String year;
-
-    private String section;
     public ssg() {
         // Default constructor required for Firebase
     }
 
-    public ssg(String lrn, String name, String email, String password) {
+    public ssg(String position, String lrn, String name, String email, String password) {
+        this.position = position;
         this.lrn = lrn;
         this.name = name;
         this.email = email;
         this.password = password;
-    }
-
-    public ssg(String position, String lrn, String name, String email, String password) {
     }
 
     public String getLrn() {

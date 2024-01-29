@@ -77,23 +77,6 @@ public class post_adapter extends RecyclerView.Adapter<post_adapter.PostViewHold
     public void onBindViewHolder(@NonNull PostViewHolder holder, int position) {
         post_content post = posts.get(position);
         holder.bind(post);
-        holder.editButton.setVisibility(post.getName().equals(currentUser) ? View.VISIBLE : View.GONE);
-        holder.deleteButton.setVisibility(post.getName().equals(currentUser) ? View.VISIBLE : View.GONE);
-
-        // Set onClickListeners for edit and delete buttons if needed
-        holder.editButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Handle edit button click
-            }
-        });
-
-        holder.deleteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Handle delete button click
-            }
-        });
     }
 
 
@@ -121,16 +104,12 @@ public class post_adapter extends RecyclerView.Adapter<post_adapter.PostViewHold
         TextView nameTextView;
         TextView dateTextView;
         TextView contentTextView;
-        Button editButton;
-        Button deleteButton;
 
         public PostViewHolder(@NonNull View itemView) {
             super(itemView);
             nameTextView = itemView.findViewById(R.id.nameTextView);
             dateTextView = itemView.findViewById(R.id.dateTextView);
             contentTextView = itemView.findViewById(R.id.contentTextView);
-            editButton = itemView.findViewById(R.id.edit_btn_post_adapter);
-            deleteButton = itemView.findViewById(R.id.delete_btn_post_adapter);
         }
 
         public void bind(post_content post) {
@@ -138,31 +117,6 @@ public class post_adapter extends RecyclerView.Adapter<post_adapter.PostViewHold
             dateTextView.setText(post.getDate());
             contentTextView.setText(post.getPosts());
 
-            if (post.isCurrentUser(currentUserId)) {
-                editButton.setVisibility(View.VISIBLE);
-                deleteButton.setVisibility(View.VISIBLE);
-
-                // Set click listeners for edit and delete buttons
-                editButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        // Handle edit button click
-                        // Add your logic to open an edit activity or perform the edit action
-                        // You can pass the post details to the edit activity if needed
-                    }
-                });
-
-                deleteButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        // Handle delete button click
-                        // Add your logic to confirm the deletion and delete the post from the database
-                    }
-                });
-            } else {
-                editButton.setVisibility(View.GONE);
-                deleteButton.setVisibility(View.GONE);
-            }
         }
     }
 }

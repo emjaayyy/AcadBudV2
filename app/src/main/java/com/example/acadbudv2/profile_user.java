@@ -156,54 +156,6 @@ public class profile_user extends AppCompatActivity {
         }
     }
 
-    // Add this method to fetch profile data either from SharedPreferences or Firebase
-    private void fetchProfileDataLocallyOrFirebase(String userName) {
-        String savedYear = sharedPreferences.getString("userYear", "");
-        String savedSection = sharedPreferences.getString("userSection", "");
-
-        if (!savedYear.isEmpty() && !savedSection.isEmpty()) {
-            // Data exists in SharedPreferences, use it
-            profile_year_user.setText("Year: " + savedYear);
-            profile_section_user.setText("Section: " + savedSection);
-        } else {
-            // Data doesn't exist in SharedPreferences, fetch from Firebase
-            DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("Students");
-            userRef.orderByChild("name").equalTo(userName).addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    if (dataSnapshot.exists()) {
-                        for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
-                            String userYear = userSnapshot.child("year").getValue(String.class);
-                            String userSection = userSnapshot.child("section").getValue(String.class);
-
-                            if (userYear != null && userSection != null) {
-                                profile_year_user.setText("Year: " + userYear);
-                                profile_section_user.setText("Section: " + userSection);
-
-                                // Fetch and display ratings
-                                fetchAndDisplayRatings(userName);
-
-                                SharedPreferences.Editor editor = sharedPreferences.edit();
-                                editor.putString("userYear", userYear);
-                                editor.putString("userSection", userSection);
-                                editor.apply();
-                            } else {
-                                Log.e("ProfileUser", "Year or section is null");
-                            }
-                        }
-                    } else {
-                        Log.e("ProfileUser", "DataSnapshot does not exist");
-                    }
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                    Log.e("ProfileUser", "Error in database operation: " + databaseError.getMessage());
-                }
-            });
-        }
-    }
-
     private void fetchProfileData(String userName) {
         DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("Students");
         userRef.orderByChild("name").equalTo(userName).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -253,7 +205,7 @@ public class profile_user extends AppCompatActivity {
                     profile_rate_user.setText("Ratings: " + userRating);
                 } else {
                     // Handle the case where ratings data doesn't exist for the user
-                    profile_rate_user.setText("Ratings: N/A");
+                    profile_rate_user.setText("Ratings: ");
                 }
             }
 
@@ -290,7 +242,7 @@ public class profile_user extends AppCompatActivity {
         // You can add your logout logic here, like signing out the user
 
         // Redirect to the login activity
-        Intent intent = new Intent(profile_user.this, role.class);
+        Intent intent = new Intent(profile_user.this, signup_user.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
         finish(); // Finish the current activity

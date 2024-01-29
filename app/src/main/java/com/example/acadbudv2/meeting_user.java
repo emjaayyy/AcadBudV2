@@ -1,12 +1,9 @@
 package com.example.acadbudv2;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -27,48 +24,13 @@ public class meeting_user extends AppCompatActivity {
 
     private DatabaseReference mdatabaseReference;
     private meeting_adapter_user adapter;
-    private List<String> participantsList;
     private String currentUser;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.meeting_user);
-
-
-        Button home = findViewById(R.id.meeting_btn_home);
-        Button notif = findViewById(R.id.meeting_btn_notif);
-        Button me = findViewById(R.id.meeting_btn_profile);
-
-        me.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent m1 = new Intent(meeting_user.this, profile_user.class);
-                startActivity(m1);
-            }
-        });
-
-        notif.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // When the "notif" button is clicked, fetch meeting data and start notif activity
-                fetchMeetingsData();
-            }
-        });
-        home.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent user = new Intent(meeting_user.this, home_user.class);
-                startActivity(user);
-            }
-        });
-        notif.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent nn = new Intent(meeting_user.this, com.example.acadbudv2.notif.class);
-                startActivity(nn);
-            }
-        });
 
         mdatabaseReference = FirebaseDatabase.getInstance().getReference("Meetings");
 
@@ -133,7 +95,6 @@ public class meeting_user extends AppCompatActivity {
     }
 
 
-
     private void updateRecyclerView(List<meetings> meetingsList) {
         // Corrected instantiation of meeting_adapter_user
         adapter = new meeting_adapter_user(meeting_user.this, meetingsList, currentUser);
@@ -141,5 +102,4 @@ public class meeting_user extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.recyclerView_meeting_user);
         recyclerView.setAdapter(adapter);
     }
-
 }

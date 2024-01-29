@@ -1,0 +1,49 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_signup"
+    tools:context=".splash">
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_300sdp"
+        android:layout_marginTop="@dimen/_50sdp"
+        android:background="@drawable/remove" />
+
+    <TextView
+        android:id="@+id/tagline"
+        android:layout_width="@dimen/_312sdp"
+        android:layout_height="@dimen/_44sdp"
+        android:layout_marginTop="@dimen/_270sdp"
+        android:layout_marginLeft="@dimen/_40sdp"
+        android:paddingLeft="@dimen/_40sdp"
+        android:text="You are not alone."
+        android:textColor="#ffffff"
+        android:textSize="@dimen/_22ssp" />
+
+    <TextView
+        android:id="@+id/from"
+        android:layout_width="@dimen/_174sdp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_65sdp"
+        android:layout_marginTop="@dimen/_560sdp"
+        android:paddingLeft="@dimen/_80sdp"
+        android:text="from"
+        android:textColor="#ffffff"
+        android:textSize="@dimen/_15ssp" />
+
+    <TextView
+        android:id="@+id/misfits"
+        android:layout_width="135dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_580sdp"
+        android:layout_marginLeft="@dimen/_120sdp"
+        android:fontFamily="@font/poppins"
+        android:text="The Misfits"
+        android:textColor="#ffffff"
+        android:textSize="@dimen/_17ssp" />
+
+</RelativeLayout>
