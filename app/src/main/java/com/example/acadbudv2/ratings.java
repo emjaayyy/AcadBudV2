@@ -82,7 +82,7 @@ public class ratings extends AppCompatActivity {
             rating_item ratingItem = ratingItems.get(i);
 
             nameTextView.setText(ratingItem.getStudentName());
-            ratingTextView.setText(String.valueOf(ratingItem.getRating()));
+            ratingTextView.setText(String.valueOf(ratingItem.getRating() / 10));
 
             topRatingsLayout.addView(ratingView);
         }

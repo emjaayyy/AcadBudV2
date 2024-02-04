@@ -1,9 +1,12 @@
 package com.example.acadbudv2;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -31,6 +34,34 @@ public class meeting_user extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.meeting_user);
+
+        Button me = findViewById(R.id.meeting_btn_profile);
+        Button notif = findViewById(R.id.meeting_btn_notif);
+        Button feed = findViewById(R.id.meeting_btn_home);
+
+        me.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent m1 = new Intent(meeting_user.this, profile_user.class);
+                startActivity(m1);
+            }
+        });
+
+        notif.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent n1 = new Intent(meeting_user.this, notif.class);
+                startActivity(n1);
+            }
+        });
+
+        feed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent f1 =new Intent(meeting_user.this, home_user.class);
+                startActivity(f1);
+            }
+        });
 
         mdatabaseReference = FirebaseDatabase.getInstance().getReference("Meetings");
 

@@ -202,7 +202,7 @@ public class profile_user extends AppCompatActivity {
                 if (dataSnapshot.exists()) {
                     // Assuming your rating is stored as a float
                     float userRating = dataSnapshot.getValue(Float.class);
-                    profile_rate_user.setText("Ratings: " + userRating);
+                    profile_rate_user.setText("Ratings: " + userRating / 10);
                 } else {
                     // Handle the case where ratings data doesn't exist for the user
                     profile_rate_user.setText("Ratings: ");
